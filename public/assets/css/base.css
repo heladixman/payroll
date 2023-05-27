@@ -1,0 +1,64 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+  }
+
+  *{
+    text-decoration: none!important;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+  .m-20 {
+    margin: 40px;
+  }
+
+  .btn.btn-toggle::before{
+    content: "+";
+    margin-right: 4px;
+  }
+
+  .btn.btn-toggle::after{
+    content: "^";
+    float: right;
+  }
+
+  .btn.btn-toggle {
+    font-weight: 600;
+    width: 100%;
+    text-align: left;
+  }
+
+  .btn.btn-toggle:hover{
+    background-color: #0d6efd;
+    color: white;
+  }
+
+  .btn.btn-toggle:focus{
+    background-color: #0d6efd;
+    color: white;
+  }
+
+  a.nav-link{
+    margin-left: 24px;
+    padding: 5px;
+  }
+
+  a.nav-link:hover{
+    color: gray;
+    margin-left: 24px;
+    padding: 5px;
+  }
+  .default-blue{
+    color: #0d6efd;
+  }
