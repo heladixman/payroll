@@ -8,15 +8,12 @@ class LoginController extends BaseController
 {
     public function index()
     {
-        $base_url   = base_url();
-        $uri        = 'login';
-        
-        $Login = [
-            'title'     => $uri,
-            'data'      => '',
-            'content'   => 'Pages/auth/'.$uri.'/index'
-        ];
+        $mythAuthConfig = config('Myth\Auth\Config\Auth');
+        $mythAuthConfig->views['login'] = 'Pages/auth/login'; // Replace 'login' with the view you want to customize
 
-        return view('Pages/auth/index', $Login);
+        // You can add more customized views by repeating the line above with different view names
+
+        $mythAuth = new Myth\Auth\Auth($mythAuthConfig);
+
     }
 }
