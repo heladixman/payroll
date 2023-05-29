@@ -18,18 +18,22 @@
 
   body {
     font-family: 'Poppins', sans-serif;
+    border: 0;
   }
   .m-20 {
     margin: 40px;
   }
-
-  .btn.btn-toggle::before{
-    content: "+";
+  .mr-2 {
     margin-right: 4px;
+  }
+ button{
+    text-decoration: none;
   }
 
   .btn.btn-toggle::after{
-    content: "^";
+    content: '\f3d1';
+    font-family: 'Ionicons';
+    font-size: 20px;
     float: right;
   }
 

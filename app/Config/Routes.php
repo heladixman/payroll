@@ -76,7 +76,7 @@ $routes->group('/', static function ($routes) {
     $routes->post('/save', 'Admin\UserController::save');
     $routes->delete('/delete/(:num)', 'Admin\UserController::delete/$1');
     });
-    $routes->group('settings', ['filter' => 'role:admin'], function ($routes) {
+    $routes->group('settings', function ($routes) {
         $routes->group('allowance', static function ($routes) {
             $routes->get('/', 'Admin\AllowanceController::index');
             $routes->get('/add', 'Admin\AllowanceController::add');

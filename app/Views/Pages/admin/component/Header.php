@@ -15,4 +15,4 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/js/all.min.js"></script>
 </head>
 
-<body class="m-20">
+<body class="">

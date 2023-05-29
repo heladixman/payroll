@@ -3,9 +3,13 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Models\Allowance;
 
 class AllowanceController extends BaseController
 {
+    public function __construct(){
+        $this->allowance = new Allowance;
+    }
     public function index()
     {
         $base_url   = base_url();
@@ -15,7 +19,7 @@ class AllowanceController extends BaseController
         $Allowance = [
             'title'     => $uri,
             'parent'    => ['name' => $parent, 'url' => $base_url.$parent],
-            'data'      => '',
+            'data'      => $this->allowance->findAll(),
             'content'   => 'Pages/admin/'.$parent.'/'.$uri.'/index'
         ];
 

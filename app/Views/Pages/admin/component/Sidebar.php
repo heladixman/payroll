@@ -1,6 +1,6 @@
 <div class="layout-wrapper layout-content-navbar">
   <div class="d-flex h-100">
-    <div class="flex-shrink-0 p-3 shadow-lg border border-right-2 rounded d-none d-sm-block" style="width: 280px;">
+    <div class="flex-shrink-0 p-3 shadow-lg border border-right-2 rounded d-none d-sm-block" style="width: 280px;" id="sidebar">
       <a href="/dashboard" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
         <svg class="bi me-2" width="30" height="24">
           <use xlink:href="#bootstrap"></use>
@@ -27,7 +27,7 @@
           </button>
           <div class="collapse" id="settings-collapse" style="">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-              <li><a href="<?php echo base_url() ?>settings/allowance" class="nav-link rounded">Allowance</a></li>
+              <li><a href="<?php echo base_url() ?>settings/allowance" class="nav-link rounded"><ion-icon name="menu-outline"></ion-icon>Allowance</a></li>
               <li><a href="<?php echo base_url() ?>settings/bonus" class="nav-link rounded">Bonus</a></li>
               <li><a href="<?php echo base_url() ?>settings/deduction" class="nav-link rounded">Deduction</a></li>
               <li><a href="<?php echo base_url() ?>settings/department" class="nav-link rounded">Departments</a></li>
@@ -38,10 +38,6 @@
             </ul>
           </div>
         </li>
-        <li class="mb-1">
-          <a href="<?php echo base_url() ?>payroll">
-            <button class="btn btn-toggle rounded">Payroll</button>
-          </a>
-        </li>
+        <button class="btn">Payroll</button>
       </ul>
     </div>
