@@ -1,0 +1,1 @@
+<?php echo view('Pages/admin/settings/department/index.php');?>

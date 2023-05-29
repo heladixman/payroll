@@ -7,11 +7,8 @@ use App\Models\Departments;
 
 class DepartmentController extends BaseController
 {
-    protected $departments;
-
-    public function __construct()
-    {
-        $this->departments = new Departments();
+    public function __construct(){
+        $this->departments = new Departments;
     }
 
     public function index()
@@ -20,13 +17,13 @@ class DepartmentController extends BaseController
         $uri        = 'department';
         $parent     = 'settings';
         
-        $Deduction = [
+        $Department = [
             'title'     => $uri,
             'parent'    => ['name' => $parent, 'url' => $base_url.$parent],
-            'data'      => '',
+            'data'      => $this->departments->findAll(),
             'content'   => 'Pages/admin/'.$parent.'/'.$uri.'/index'
         ];
 
-        return view('Pages/admin/index', $Deduction);
+        return view('Pages/admin/index', $Department);
     }
 }

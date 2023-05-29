@@ -30,8 +30,6 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-$routes->get('/test', 'Auth\AuthController::login');
-
 $routes->group('/', function ($routes) {
     $routes->get('', 'Auth\AuthController::login');
     $routes->get('register', 'Auth\AuthController::register');
@@ -42,18 +40,18 @@ $routes->group('/', function ($routes) {
         $routes->get('/profile', 'User\ProfileController::index');
         $routes->get('/settings', 'User\SettingsController::index');
     });
-    $routes->group('dashboard', ['filter' => 'role:admin'], static function ($routes) {
+    $routes->group('dashboard', static function ($routes) {
         $routes->get('/', 'Admin\DashboardController::index');
     });
-    $routes->group('employee', ['filter' => 'role:admin'], function ($routes) {
-        $routes->group('attandance', static function ($routes) {
-            $routes->get('/', 'Admin\AttendanceController::index');
+    $routes->group('employee', function ($routes) {
+        $routes->group('/attandance', static function ($routes) {
+            $routes->get('', 'Admin\AttendanceController::index');
             $routes->get('/add', 'Admin\AttendanceController::add');
             $routes->post('/save', 'Admin\AttendanceController::save');
             $routes->delete('/delete/(:num)', 'Admin\AttendanceController::delete/$1');
         });
         $routes->group('allowance', static function ($routes) {
-            $routes->get('/', 'Admin\UserAllowanceController::index');
+            $routes->get('', 'Admin\UserAllowanceController::index');
             $routes->get('/add', 'Admin\UserAllowanceController::add');
             $routes->post('/save', 'Admin\UserAllowanceController::save');
             $routes->delete('/delete/(:num)', 'Admin\UserAllowanceController::delete/$1');
@@ -81,27 +79,27 @@ $routes->group('/', function ($routes) {
         $routes->post('/save', 'Admin\UserController::save');
         $routes->delete('/delete/(:num)', 'Admin\UserController::delete/$1');
     });
-    $routes->group('settings', ['filter' => 'role:admin'], function ($routes) {
+    $routes->group('settings', function ($routes) {
         $routes->group('allowance', static function ($routes) {
-            $routes->get('/', 'Admin\AllowanceController::index');
-            $routes->get('/add', 'Admin\AllowanceController::add');
-            $routes->post('/save', 'Admin\AllowanceController::save');
-            $routes->delete('/delete/(:num)', 'Admin\AllowanceController::delete/$1');
+            $routes->get('', 'Admin\AllowanceController::index');
+            $routes->get('add', 'Admin\AllowanceController::add');
+            $routes->post('save', 'Admin\AllowanceController::save');
+            $routes->delete('delete/(:num)', 'Admin\AllowanceController::delete/$1');
         });
         $routes->group('bonus', static function ($routes) {
-            $routes->get('/', 'Admin\BonusController::index');
+            $routes->get('', 'Admin\BonusController::index');
             $routes->get('/add', 'Admin\BonusController::add');
             $routes->post('/save', 'Admin\BonusController::save');
             $routes->delete('/delete/(:num)', 'Admin\BonusController::delete/$1');
         });
         $routes->group('deduction', static function ($routes) {
-            $routes->get('/', 'Admin\DeductionController::index');
+            $routes->get('', 'Admin\DeductionController::index');
             $routes->get('/add', 'Admin\DeductionController::add');
             $routes->post('/save', 'Admin\DeductionController::save');
             $routes->delete('/delete/(:num)', 'Admin\DeductionController::delete/$1');
         });
         $routes->group('department', static function ($routes) {
-            $routes->get('/', 'Admin\DepartmentController::index');
+            $routes->get('', 'Admin\DepartmentController::index');
             $routes->get('/add', 'Admin\DepartmentController::add');
             $routes->post('/save', 'Admin\DepartmentController::save');
             $routes->delete('/delete/(:num)', 'Admin\DepartmentController::delete/$1');

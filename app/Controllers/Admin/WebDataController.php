@@ -3,9 +3,13 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Models\WebData;
 
 class WebDataController extends BaseController
 {
+    public function __construct(){
+        $this->webdata = new WebData();
+    }
     public function index()
     {
         $base_url   = base_url();
@@ -15,7 +19,7 @@ class WebDataController extends BaseController
         $WebData = [
             'title'     => $uri,
             'parent'    => ['name' => $parent, 'url' => $base_url.$parent],
-            'data'      => '',
+            'data'      => $this->webdata->findAll(),
             'content'   => 'Pages/admin/'.$parent.'/'.$uri.'/index'
         ];
 

@@ -3,9 +3,13 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Models\PaymentMethod;
 
 class PaymentMethodController extends BaseController
 {
+    public function __construct(){
+        $this->paymentmethod = new PaymentMethod();
+    }
     public function index()
     {
         $base_url   = base_url();
@@ -15,7 +19,7 @@ class PaymentMethodController extends BaseController
         $PaymentMethod = [
             'title'     => $uri,
             'parent'    => ['name' => $parent, 'url' => $base_url.$parent],
-            'data'      => '',
+            'data'      => $this->paymentmethod->findAll(),
             'content'   => 'Pages/admin/'.$parent.'/'.$uri.'/index'
         ];
 

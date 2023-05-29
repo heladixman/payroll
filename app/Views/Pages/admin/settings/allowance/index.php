@@ -17,7 +17,7 @@
                     ?>
                     <tr>
                         <td><?php echo $no++ ?></td>
-                        <td><div class="fw-bold fs-bold"><?= $d['name'] ?></div><div><?= $d['description'] ?></div></td>
+                        <td><div class="fw-bold fs-bold"><?= $d['name'] ?></div><div><p>description: <?= $d['description'] ?></p></div></td>
                         <td>
                               <button type="button" class='btn btn-icon btn-success' id="editAllowance" data-id="<?= $d['id']?>">
                                 <ion-icon name="pencil-outline"></ion-icon>
