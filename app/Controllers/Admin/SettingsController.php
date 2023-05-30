@@ -6,6 +6,7 @@ use App\Models\Departments;
 use App\Models\Positions;
 use App\Models\PaymentMethod;
 use App\Models\Salaries;
+use App\Models\WebData;
 
 use App\Controllers\BaseController;
 
@@ -17,6 +18,7 @@ class SettingsController extends BaseController
         $this->position = new Positions();
         $this->paymentmethod = new PaymentMethod();
         $this->salary = new Salaries();
+        $this->webdata = new WebData();
     }
     public function index()
     {
@@ -30,6 +32,7 @@ class SettingsController extends BaseController
             'position'  => $this->position->select('positions.name as position_name, departments.name as department_name, description, salary_start, salary_end, positions.id as id')->join('departments', 'positions.department_id = departments.id')->findAll(),
             'payment'   => $this->paymentmethod->findAll(),
             'salary'    => $this->salary->findAll(),
+            'webdata'    => $this->webdata->findAll(),
             'content'   => 'Pages/admin/'.$uri.'/index'
         ];
 

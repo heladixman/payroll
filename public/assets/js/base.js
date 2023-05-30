@@ -4,4 +4,8 @@ function sidebar(){
     toggle.addEventListener('click', function(event){
         sidebar.classList.toggle('d-sm-block')
     }, {once:true})
-}
+};
+
+$(document).ready(function () {
+    $('#table').DataTable();
+});

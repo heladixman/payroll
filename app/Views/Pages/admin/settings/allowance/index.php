@@ -2,11 +2,11 @@
     <div class="card">
         <div class="card-body"> 
           <div class="table-responsive text-nowrap">
-                <table class="table">
+                <table class="table" id="table">
                   <thead>
                     <tr>
                       <th>No</th>
-                      <th>Allowance Information</th>
+                      <th>Allowance</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -25,7 +25,7 @@
                               <button type="button" class="btn btn-icon btn-outline-danger" id="deleteAllowance" data-id="<?= $d['id']?>">
                                 <ion-icon name="trash-outline"></ion-icon>
                               </button>
-                        </td>                             
+                        </td>                              
                     </tr>
                   <?php }?>
                   </tbody>

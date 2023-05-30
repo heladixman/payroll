@@ -8,18 +8,22 @@
                       <th>No</th>
                       <th>Name</th>
                       <th>Value</th>
+                      <th>Create At</th>
+                      <th>Update At</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
                   <?php if (isset($content))
                     $no = 1;
-                    foreach($data as $d) { 
+                    foreach($webdata as $d) { 
                     ?>
                     <tr>
                         <td><?php echo $no++ ?></td>
                         <td><?= $d['name'] ?></td>
                         <td><?= $d['value'] ?></td>
+                        <td><?= $d['create_At'] ?></td>
+                        <td><?= $d['update_At'] ?></td>
                         <td>
                               <button type="button" class='btn btn-icon btn-success' id="editAllowance" data-id="<?= $d['id']?>">
                                 <ion-icon name="pencil-outline"></ion-icon>
