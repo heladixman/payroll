@@ -23,23 +23,31 @@
     margin: 40px;
   }
 
-  .btn.btn-toggle::before{
-    content: "+";
-    margin-right: 4px;
-  }
-
   .btn.btn-toggle::after{
-    content: "^";
+    font-family: "Font Awesome 5 Free";
+    content: "\f105";
     float: right;
+    transform: rotate(90deg);
+    transition: transform 0.3s ease;
+  }
+  
+  .btn.btn-toggle.collapsed::after{
+    transform: none;
+    transition: transform 0.3s ease;
   }
 
-  .btn.btn-toggle {
+  .btn.btn-toggle, .btn.btn-light{
+    font-weight: 600;
+    width: 100%;
+    text-align: left;
+  }
+  .btn.btn-toggle, .btn.btn-light{
     font-weight: 600;
     width: 100%;
     text-align: left;
   }
 
-  .btn.btn-toggle:hover{
+  .btn.btn-toggle:hover, .btn.btn-light:hover{
     background-color: #0d6efd;
     color: white;
   }
@@ -49,15 +57,20 @@
     color: white;
   }
 
-  a.nav-link{
-    margin-left: 24px;
-    padding: 5px;
+
+  .btn-toggle-nav li a.nav-link{
+    margin-left: 40px;
+    padding: 7px;
   }
 
-  a.nav-link:hover{
-    color: gray;
-    margin-left: 24px;
-    padding: 5px;
+  .btn-toggle-nav li a.nav-link:hover{
+    color: #0d6efd;
+  }
+
+  .btn-toggle-nav li a.nav-link::before{
+    font-family: "Font Awesome 5 Free";
+    content: "-";
+    margin-right: 10px;
   }
   .default-blue{
     color: #0d6efd;

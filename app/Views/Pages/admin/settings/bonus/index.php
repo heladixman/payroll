@@ -13,7 +13,7 @@
                   <tbody>
                   <?php if (isset($content))
                     $no = 1;
-                    foreach($data as $d) { 
+                    foreach($bonus as $d) { 
                     ?>
                     <tr>
                         <td><?php echo $no++ ?></td>

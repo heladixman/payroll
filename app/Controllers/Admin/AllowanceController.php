@@ -19,7 +19,7 @@ class AllowanceController extends BaseController
         $Allowance = [
             'title'     => $uri,
             'parent'    => ['name' => $parent, 'url' => $base_url.$parent],
-            'data'      => $this->allowance->findAll(),
+            'allowance'      => $this->allowance->findAll(),
             'content'   => 'Pages/admin/'.$parent.'/'.$uri.'/index'
         ];
 

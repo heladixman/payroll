@@ -22,8 +22,8 @@
                         <td><?php echo $no++ ?></td>
                         <td><?= $d['name'] ?></td>
                         <td><?= $d['value'] ?></td>
-                        <td><?= $d['create_At'] ?></td>
-                        <td><?= $d['update_At'] ?></td>
+                        <td><?= $d['createAt'] ?></td>
+                        <td><?= $d['updateAt'] ?></td>
                         <td>
                               <button type="button" class='btn btn-icon btn-success' id="editAllowance" data-id="<?= $d['id']?>">
                                 <ion-icon name="pencil-outline"></ion-icon>
