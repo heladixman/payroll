@@ -44,11 +44,11 @@ class Leave extends Migration
 
         $this->forge->addKey('id', TRUE);
         $this->forge->addForeignKey('user_id', 'users', 'id');
-        $this->forge->createTable('leaves', TRUE);
+        $this->forge->createTable('leave', TRUE);
     }
 
     public function down()
     {
-        $this->forge->dropTable('leaves');
+        $this->forge->dropTable('leave');
     }
 }

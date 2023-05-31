@@ -8,9 +8,9 @@ use App\Models\Bonus;
 use App\Models\Deduction;
 use App\Models\Departments;
 use App\Models\Positions;
-use App\Models\PaymentMethod;
-use App\Models\Salaries;
-use App\Models\WebData;
+use App\Models\Attendance;
+use App\Models\Users;
+use App\Models\Leave;
 
 class DashboardController extends BaseController
 {
@@ -20,25 +20,30 @@ class DashboardController extends BaseController
         $this->deduction = new Deduction();
         $this->departments = new Departments();
         $this->position = new Positions();
-        $this->paymentmethod = new PaymentMethod();
-        $this->salary = new Salaries();
-        $this->webdata = new WebData();
+        $this->attendance = new Attendance();
+        $this->users = new Users();
+        $this->leave = new Leave();
     }
 
     public function index()
     {
-        $base_url   = base_url();
-        $uri        = 'dashboard';
-        
+        $base_url       = base_url();
+        $uri            = 'dashboard';
+        date_default_timezone_set('Asia/Jakarta');
+        $current_date   = date('Y-m-d');
+
         $Dashboard = [
             'title'     => $uri,
-            'allowance' => $this->allowance->countAll(),
-            'bonus'     => $this->bonus->countAll(),
-            'deduction' => $this->deduction->countAll(),
-            'department'=> $this->departments->countAll(),
-            'position'  => $this->position->select('positions.name as position_name, departments.name as department_name, description, salary_start, salary_end, positions.id as id')->join('departments', 'positions.department_id = departments.id')->countAll(),
-            'payment'   => $this->paymentmethod->countAll(),
-            'salary'    => $this->salary->countAll(),
+            'this_date' => $current_date,
+            'present'   => $this->attendance->select('*')->where('DATE(datetime_log)', $current_date)->where('log_type', '1')->countAll(),
+            'absent'    => $this->users->countAll() - $this->attendance->select('*')->where('DATE(datetime_log)', $current_date)->where('log_type', '1')->countAll(),
+            'leave'     => $this->leave->select('*')->where("leave_start BETWEEN '{$current_date}' AND '{$current_date}'")->orwhere("leave_end BETWEEN '{$current_date}' AND '{$current_date}'")->orwhere("leave_start <= '{$current_date}' AND leave_end>= '{$current_date}'")->countAll(),
+            'total'     => $this->users->countAll(),
+            'data'      => [['name' => 'Allowance',   'count' => $this->allowance->countAll()],
+                            ['name' => 'Bonus',       'count' => $this->bonus->countAll()],
+                            ['name' => 'Deduction',   'count' => $this->deduction->countAll()],
+                            ['name' => 'Department',  'count' => $this->departments->countAll()],
+                            ['name' => 'Position',    'count' => $this->position->select('positions.name as position_name, departments.name as department_name, description, salary_start, salary_end, positions.id as id')->join('departments', 'positions.department_id = departments.id')->countAll()]],
             'content'   => 'Pages/admin/'.$uri.'/index'
         ];
 

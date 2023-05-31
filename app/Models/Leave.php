@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class Leave extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'leaves';
+    protected $table            = 'leave';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';

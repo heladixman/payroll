@@ -1,6 +1,7 @@
 <section class="content mt-3">
     <div class="card">
-    <button type="button" class="btn btn-sm btn-primary w-100 h-75" data-bs-toggle="modal" data-bs-target="#insert">Tambah</button>
+    <div type="button" class="btn btn-primary w-100 p-2">Allowance</div>
+    <button type="button" class="btn btn-primary align-items-center w-25 p-2 my-2" data-bs-toggle="modal" data-bs-target="#insert">New Data</button>
         <div class="card-body"> 
           <div class="table-responsive text-nowrap">
                 <table class="table" id="table">

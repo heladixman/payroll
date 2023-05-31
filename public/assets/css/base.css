@@ -30,6 +30,23 @@
     transform: rotate(90deg);
     transition: transform 0.3s ease;
   }
+
+  .bg-first{
+    background-color: #ffffff;
+  }
+
+  .bg-second{
+    background-color: #f1f4f5;
+  }
+
+  .bg-third{
+    background-color: #f1f4f5;
+  }
+  
+  .btn-first{
+    color: white!important;
+    background-color: #0d6efd!important;
+  }
   
   .btn.btn-toggle.collapsed::after{
     transform: none;
@@ -72,6 +89,87 @@
     content: "-";
     margin-right: 10px;
   }
-  .default-blue{
-    color: #0d6efd;
+
+  .col.card.text-center{
+    margin-right: 10px;
+    border: none;
   }
+
+  .col.card.text-center:last-child{
+    margin-right: 0px;
+    border: none;
+  }
+
+  .col.card.text-left{
+    margin-right: 10px;
+    border: none;
+  }
+
+  .col.card.text-left:last-child{
+    margin-right: 0px;
+    border: none;
+  }
+
+  .dataTables_wrapper{
+    margin-bottom: 50px;
+  }
+  
+  .dataTables_wrapper .dataTables_length{
+    width: 40%;
+    display: inline-table!important;
+    float: left;
+  }
+
+  .dataTables_wrapper .dataTables_filter{
+    width: 40%;
+    display: inline-table!important;
+    float: right;
+    text-align: right;
+  }
+
+  
+  .dataTables_wrapper .dataTables_info{
+    width: 40%;
+    display: inline-table!important;
+    float: left;
+    text-align: left;
+  }
+  
+  .dataTables_wrapper .dataTables_paginate{
+    width: 40%;
+    display: inline-table!important;
+    float: right;
+    text-align: right;
+  }
+
+  .dataTables_wrapper .dataTables_paginate .paginate_button.previous{
+    color: white;
+    background-color: #ffffff;
+    border-radius: 5px 0 0 5px;
+    border: 1px solid #aeaeae;
+    padding: 7px 10px;
+  }
+  
+  .dataTables_wrapper .dataTables_paginate .paginate_button.previous.disabled{
+    color: #aeaeae;
+  }
+  
+  .dataTables_wrapper .dataTables_paginate span a{
+    color: white;
+    background-color: #0d6efd;
+    padding: 8px 12px;
+  }
+
+  .dataTables_wrapper .dataTables_paginate .paginate_button.next{
+    color: black;
+    background-color: #ffffff;
+    border-radius: 0 5px 5px 0;
+    border: 1px solid #aeaeae;
+    padding: 7px 10px;
+  }
+
+  .table-striped>tbody>tr:nth-of-type(odd)>*{
+    background-color: rgba(33, 137, 255, 0.038);
+  }
+  
+

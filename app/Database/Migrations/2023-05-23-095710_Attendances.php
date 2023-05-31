@@ -21,9 +21,7 @@ class Attendances extends Migration
                 'type' => 'TINYINT',
                 'comment' => '1= Morning In, 2= Morning Out, 3= Afternoon In, 4= Afternoon Out, 5= Overtime In, 6= Overtime Out',
             ],
-            'datetime_log' => [
-                'type' => 'DATETIME',
-            ],
+            'datetime_log DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL',
             'createAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP',
             'updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP',
         ]);

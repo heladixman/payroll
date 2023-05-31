@@ -1,5 +1,4 @@
-<div class="layout-page w-100 p-3 my-0">
-  <div class="shadow-lg">
+  <div class="bg-first rounded">
     <nav class="layout-navbar p-3" id="layout-navbar">
       <div class="navbar-nav-right d-flex align-items-center justify-content-between" id="navbar-collapse">
         <div class="navbar-nav align-items-center">

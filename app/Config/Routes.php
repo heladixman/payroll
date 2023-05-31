@@ -32,7 +32,7 @@ $routes->set404Override();
 
 $routes->group('/', function ($routes) {
     $routes->get('', 'Auth\AuthController::login');
-    $routes->get('register', 'Auth\AuthController::register');
+    $routes->get('daftar', 'Auth\AuthController::register');
     $routes->get('forgot-password', 'Auth\AuthController::forgot_password');
     $routes->get('verification', 'Auth\AuthController::verification');
     $routes->group('user', ['filter' => 'role:admin'], static function ($routes) {
@@ -44,7 +44,7 @@ $routes->group('/', function ($routes) {
         $routes->get('/', 'Admin\DashboardController::index');
     });
     $routes->group('employee', function ($routes) {
-        $routes->group('/attandance', static function ($routes) {
+        $routes->group('attendance', static function ($routes) {
             $routes->get('', 'Admin\AttendanceController::index');
             $routes->get('/add', 'Admin\AttendanceController::add');
             $routes->post('/save', 'Admin\AttendanceController::save');

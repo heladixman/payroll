@@ -1,6 +1,6 @@
 <div class="layout-wrapper layout-content-navbar">
   <div class="d-flex h-100">
-    <div class="flex-shrink-0 p-3 shadow-lg border border-right-2 rounded d-none d-sm-block" style="width: 280px;" id="sidebar">
+    <div class="flex-shrink-0 p-3 border-end d-none d-sm-block" style="width: 280px;" id="sidebar">
       <a href="/dashboard" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
         <svg class="bi me-2" width="30" height="24">
           <use xlink:href="#bootstrap"></use>
@@ -23,7 +23,7 @@
           </button>
             <div class="collapse" id="employee-collapse" style="">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="<?php echo base_url() ?>employee/attandance" class="nav-link">Attandance</a></li>
+                <li><a href="<?php echo base_url() ?>employee/attendance" class="nav-link">Attandance</a></li>
                 <li><a href="<?php echo base_url() ?>employee/allowance" class="nav-link">Allowance</a></li>
                 <li><a href="<?php echo base_url() ?>employee/bonus" class="nav-link">Bonus</a></li>
                 <li><a href="<?php echo base_url() ?>employee/deduction" class="nav-link">Deduction</a></li>

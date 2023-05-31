@@ -26,7 +26,7 @@
     </li>
   </ul>
   <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade show active" id="allowance" role="tabpanel" aria-labelledby="allowance-tab">
+      <div class="tab-pane fade active show" id="allowance" role="tabpanel" aria-labelledby="allowance-tab">
           <?php echo view('Pages/admin/settings/allowance/index.php');?>
       </div>
       <div class="tab-pane fade" id="bonus" role="tabpanel" aria-labelledby="bonus-tab">
