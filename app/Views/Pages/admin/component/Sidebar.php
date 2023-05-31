@@ -35,7 +35,7 @@
         <li>
           <a href="/settings">
             <button class="btn btn-light rounded p-2">
-              <span class="m-2"><i class="fa-solid fa-house"></i></span>
+              <span class="m-2"><i class="fa-solid fa-gear"></i></span>
               <span class="fw-normal">Settings</span>
             </button>
           </a>
@@ -43,7 +43,7 @@
         <li>
           <a href="/payroll">
             <button class="btn btn-light rounded p-2">
-              <span class="m-2"><i class="fa-solid fa-house"></i></span>
+              <span class="m-2"><i class="fa-solid fa-receipt"></i></span>
               <span class="fw-normal">Payroll</span>
             </button>
           </a>

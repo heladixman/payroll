@@ -49,16 +49,16 @@
         </div>
     </div>
 </div>
-<section class="content mt-3">
-    <div class="card">
-    <div class="btn btn-primary w-100 p-2">Data Information</div>
-        <div class="card-body"> 
+<section class="content mt-4">
+    <div class="card border-0">
+    <div class="bg-third rounded-se text-center w-100 p-3 text-light">Data Information</div>
+        <div class="card-body rounded"> 
           <div class="table-responsive text-nowrap">
                 <table class="table table-striped" id="table">
                   <thead>
                     <tr>
                       <th>No</th>
-                      <th>Allowance</th>
+                      <th>Data Name</th>
                       <th class="text-center">Action</th>
                     </tr>
                   </thead>
