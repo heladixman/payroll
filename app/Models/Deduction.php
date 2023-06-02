@@ -38,4 +38,16 @@ class Deduction extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function insertDeduction($data){
+        $this->db->table('deductions')->insert($data);
+    }
+
+    public function updateDeduction($data, $id){
+        $this->db->table('deductions')->update($data, array('id' => $id));
+    }
+
+    public function deleteDeduction($id){
+        $this->db->table('deductions')->delete(array('id' => $id));
+    }
 }

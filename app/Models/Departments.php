@@ -38,4 +38,20 @@ class Departments extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    // public function listDepartment(){
+    //     return $this->db->table('departments')->get();
+    // }
+
+    public function insertDepartment($data){
+        $this->db->table('departments')->insert($data);
+    }
+
+    public function updateDepartment($data, $id){
+        $this->db->table('departments')->update($data, array('id' => $id));
+    }
+
+    public function deleteDepartment($id){
+        $this->db->table('departments')->delete(array('id' => $id));
+    }
 }

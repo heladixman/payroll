@@ -26,6 +26,7 @@ class Payroll extends Migration
             'total' => [
                 'type' => 'FLOAT',
                 'constraint' => '11,2',
+                'null' => true
             ],
             'payment_method_id' => [
                 'type' => 'INT',
@@ -36,6 +37,7 @@ class Payroll extends Migration
             ],
             'comment' => [
                 'type' => 'TEXT',
+                'null' => true
             ],
             'createAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP',
         ]);

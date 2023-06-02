@@ -38,4 +38,20 @@ class Positions extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function listDepartment(){
+        return $this->db->table('departments')->get();
+    }
+
+    public function insertPosition($data){
+        $this->db->table('positions')->insert($data);
+    }
+
+    public function updatePosition($data, $id){
+        $this->db->table('positions')->update($data, array('id' => $id));
+    }
+
+    public function deletePosition($id){
+        $this->db->table('positions')->delete(array('id' => $id));
+    }
 }

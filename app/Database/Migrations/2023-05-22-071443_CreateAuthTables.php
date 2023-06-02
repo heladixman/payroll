@@ -11,12 +11,12 @@ class CreateAuthTables extends Migration
         // Users
         $this->forge->addField([
             'id'               => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
-            'position_id'      => ['type' => 'int', 'constraint' => 11],
-            'user_number'      => ['type' => 'varchar', 'constraint' => 20],
-            'name'             => ['type' => 'varchar', 'constraint' => 100],
-            'phone_number'     => ['type' => 'varchar', 'constraint' => 15],
-            'user_address'     => ['type' => 'varchar', 'constraint' => 200],
-            'sex'              => ['type' => 'varchar', 'constraint' => 15],
+            'position_id'      => ['type' => 'int', 'constraint' => 11, 'null' => true],
+            'user_number'      => ['type' => 'varchar', 'constraint' => 20, 'null' => true],
+            'name'             => ['type' => 'varchar', 'constraint' => 100, 'null' => true],
+            'phone_number'     => ['type' => 'varchar', 'constraint' => 15, 'null' => true],
+            'user_address'     => ['type' => 'varchar', 'constraint' => 200, 'null' => true],
+            'sex'              => ['type' => 'varchar', 'constraint' => 15, 'null' => true],
             'email'            => ['type' => 'varchar', 'constraint' => 255],
             'user_role'        => ['type' => 'varchar', 'constraint' => 20, 'default' => 'user'],
             'username'         => ['type' => 'varchar', 'constraint' => 30, 'null' => true],

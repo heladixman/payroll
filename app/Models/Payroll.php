@@ -38,4 +38,20 @@ class Payroll extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function listPayment(){
+        return $this->db->table('payment_methods')->get();
+    }
+
+    public function insertPayroll($data){
+        $this->db->table('payroll')->insert($data);
+    }
+
+    public function updatePayroll($data, $id){
+        $this->db->table('payroll')->update($data, array('id' => $id));
+    }
+
+    public function deletePayroll($id){
+        $this->db->table('payroll')->delete(array('id' => $id));
+    }
 }

@@ -39,7 +39,7 @@ class Positions extends Migration
         ]);
 
         $this->forge->addKey('id', TRUE);
-        $this->forge->addForeignKey('department_id', 'departments', 'id');
+        $this->forge->addForeignKey('department_id', 'departments', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('positions', TRUE);
     }
 

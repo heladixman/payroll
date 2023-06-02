@@ -38,4 +38,16 @@ class PaymentMethod extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function insertPaymentMethod($data){
+        $this->db->table('payment_methods')->insert($data);
+    }
+
+    public function updatePaymentMethod($data, $id){
+        $this->db->table('payment_methods')->update($data, array('id' => $id));
+    }
+
+    public function deletePaymentMethod($id){
+        $this->db->table('payment_methods')->delete(array('id' => $id));
+    }
 }

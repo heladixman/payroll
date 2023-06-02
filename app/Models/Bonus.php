@@ -38,4 +38,16 @@ class Bonus extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function insertBonus($data){
+        $this->db->table('bonus')->insert($data);
+    }
+
+    public function updateBonus($data, $id){
+        $this->db->table('bonus')->update($data, array('id' => $id));
+    }
+
+    public function deleteBonus($id){
+        $this->db->table('bonus')->delete(array('id' => $id));
+    }
 }

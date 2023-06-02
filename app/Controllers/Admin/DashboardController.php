@@ -32,12 +32,15 @@ class DashboardController extends BaseController
         date_default_timezone_set('Asia/Jakarta');
         $current_date   = date('Y-m-d');
 
+        $leave = $this->leave->select('*')->where("leave_start BETWEEN '{$current_date}' AND '{$current_date}'")->orwhere("leave_end BETWEEN '{$current_date}' AND '{$current_date}'")->orwhere("leave_start <= '{$current_date}' AND leave_end>= '{$current_date}'")->countAllResults() - $this->leave->count;
+        $absent = $this->users->countAll() - $this->attendance->select('*')->where('DATE(datetime_log)', $current_date)->where('log_type', '1')->countAllResults();
+
         $Dashboard = [
             'title'     => $uri,
             'this_date' => $current_date,
-            'present'   => $this->attendance->select('*')->where('DATE(datetime_log)', $current_date)->where('log_type', '1')->countAll(),
-            'absent'    => $this->users->countAll() - $this->attendance->select('*')->where('DATE(datetime_log)', $current_date)->where('log_type', '1')->countAll(),
-            'leave'     => $this->leave->select('*')->where("leave_start BETWEEN '{$current_date}' AND '{$current_date}'")->orwhere("leave_end BETWEEN '{$current_date}' AND '{$current_date}'")->orwhere("leave_start <= '{$current_date}' AND leave_end>= '{$current_date}'")->countAll(),
+            'present'   => $this->attendance->select('*')->where('DATE(datetime_log)', $current_date)->where('log_type', '1')->countAllResults(),
+            'absent'    => $absent - $leave,
+            'leave'     => $leave,
             'total'     => $this->users->countAll(),
             'data'      => [['name' => 'Allowance',   'count' => $this->allowance->countAll()],
                             ['name' => 'Bonus',       'count' => $this->bonus->countAll()],

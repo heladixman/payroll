@@ -31,113 +31,99 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 
 $routes->group('/', function ($routes) {
-    $routes->get('', 'Auth\AuthController::login');
-    $routes->get('daftar', 'Auth\AuthController::register');
-    $routes->get('forgot-password', 'Auth\AuthController::forgot_password');
-    $routes->get('verification', 'Auth\AuthController::verification');
-    $routes->group('user', ['filter' => 'role:admin'], static function ($routes) {
-        $routes->get('/', 'User\HomeController::index');
-        $routes->get('/profile', 'User\ProfileController::index');
-        $routes->get('/settings', 'User\SettingsController::index');
+    $routes->get('', 'User\IndexController::indexUser');
+    $routes->get('dashboard', 'Admin\DashboardController::index');
+    // $routes->get('signin', 'Auth\AuthController::login');
+    // $routes->get('signup', 'Auth\AuthController::register');
+    $routes->group('user', static function ($routes) {
+        $routes->get('', 'User\HomeController::index');
+        $routes->get('profile', 'User\ProfileController::index');
+        $routes->get('settings', 'User\SettingsController::index');
     });
-    $routes->group('dashboard', static function ($routes) {
-        $routes->get('/', 'Admin\DashboardController::index');
+    $routes->group('payroll', static function ($routes) {
+        $routes->get('', 'Admin\PayrollController::indexPayroll');
+        $routes->post('add', 'Admin\PayrollController::insertPayroll');
+        $routes->post('update', 'Admin\PayrollController::updatePayroll');
+        $routes->post('delete', 'Admin\PayrollController::deletePayroll');
     });
     $routes->group('employee', function ($routes) {
         $routes->group('attendance', static function ($routes) {
-            $routes->get('', 'Admin\AttendanceController::index');
-            $routes->get('/add', 'Admin\AttendanceController::add');
-            $routes->post('/save', 'Admin\AttendanceController::save');
-            $routes->delete('/delete/(:num)', 'Admin\AttendanceController::delete/$1');
+            $routes->get('', 'Admin\AttendanceController::indexAttendance');
+            $routes->get('add', 'Admin\AttendanceController::add');
+            $routes->post('update', 'Admin\AttendanceController::update');
+            $routes->delete('delete/(:num)', 'Admin\AttendanceController::delete/$1');
         });
         $routes->group('allowance', static function ($routes) {
-            $routes->get('', 'Admin\UserAllowanceController::index');
-            $routes->get('/add', 'Admin\UserAllowanceController::add');
-            $routes->post('/save', 'Admin\UserAllowanceController::save');
-            $routes->delete('/delete/(:num)', 'Admin\UserAllowanceController::delete/$1');
+            $routes->get('', 'Admin\UserAllowanceController::indexAllowance');
+            $routes->get('add', 'Admin\UserAllowanceController::add');
+            $routes->post('update', 'Admin\UserAllowanceController::update');
+            $routes->delete('delete/(:num)', 'Admin\UserAllowanceController::delete/$1');
         });
         $routes->group('bonus', static function ($routes) {
-            $routes->get('/', 'Admin\UserBonusController::index');
-            $routes->get('/add', 'Admin\UserBonusController::add');
-            $routes->post('/save', 'Admin\UserBonusController::save');
-            $routes->delete('/delete/(:num)', 'Admin\UserBonusController::delete/$1');
+            $routes->get('', 'Admin\UserBonusController::indexBonus');
+            $routes->get('add', 'Admin\UserBonusController::add');
+            $routes->post('update', 'Admin\UserBonusController::update');
+            $routes->delete('delete/(:num)', 'Admin\UserBonusController::delete/$1');
         });
         $routes->group('deduction', static function ($routes) {
-            $routes->get('/', 'Admin\UserDeductionController::index');
-            $routes->get('/add', 'Admin\UserDeductionController::add');
-            $routes->post('/save', 'Admin\UserDeductionController::save');
-            $routes->delete('/delete/(:num)', 'Admin\UserDeductionController::delete/$1');
+            $routes->get('', 'Admin\UserDeductionController::indexDeduction');
+            $routes->get('add', 'Admin\UserDeductionController::add');
+            $routes->post('update', 'Admin\UserDeductionController::update');
+            $routes->delete('delete/(:num)', 'Admin\UserDeductionController::delete/$1');
         });
         $routes->group('leave', static function ($routes) {
-            $routes->get('/', 'Admin\LeaveController::index');
-            $routes->get('/add', 'Admin\LeaveController::add');
-            $routes->post('/save', 'Admin\LeaveController::save');
-            $routes->delete('/delete/(:num)', 'Admin\LeaveController::delete/$1');
-        });
-        $routes->get('/', 'Admin\UserController::index');
-        $routes->get('/add', 'Admin\UserController::add');
-        $routes->post('/save', 'Admin\UserController::save');
-        $routes->delete('/delete/(:num)', 'Admin\UserController::delete/$1');
+            $routes->get('', 'Admin\LeaveController::indexLeave');
+            $routes->get('add', 'Admin\LeaveController::add');
+            $routes->post('update', 'Admin\LeaveController::update');
+            $routes->delete('delete/(:num)', 'Admin\LeaveController::delete/$1');
+            });
+        $routes->get('', 'Admin\UserController::indexUser');
+        $routes->get('add', 'Admin\UserController::add');
+        $routes->post('update', 'Admin\UserController::update');
+        $routes->delete('delete/(:num)', 'Admin\UserController::delete/$1');
     });
     $routes->group('settings', function ($routes) {
         $routes->group('allowance', static function ($routes) {
-            $routes->get('', 'Admin\AllowanceController::index');
-            $routes->get('add', 'Admin\AllowanceController::add');
-            $routes->post('save', 'Admin\AllowanceController::save');
-            $routes->delete('delete/(:num)', 'Admin\AllowanceController::delete/$1');
+            $routes->post('add', 'Admin\SettingsController::insertAllowance');
+            $routes->post('update', 'Admin\SettingsController::updateAllowance');
+            $routes->post('delete', 'Admin\SettingsController::deleteAllowance');
         });
         $routes->group('bonus', static function ($routes) {
-            $routes->get('', 'Admin\BonusController::index');
-            $routes->get('/add', 'Admin\BonusController::add');
-            $routes->post('/save', 'Admin\BonusController::save');
-            $routes->delete('/delete/(:num)', 'Admin\BonusController::delete/$1');
+            $routes->post('add', 'Admin\SettingsController::insertBonus');
+            $routes->post('update', 'Admin\SettingsController::updateBonus');
+            $routes->post('delete', 'Admin\SettingsController::deleteBonus');
         });
         $routes->group('deduction', static function ($routes) {
-            $routes->get('', 'Admin\DeductionController::index');
-            $routes->get('/add', 'Admin\DeductionController::add');
-            $routes->post('/save', 'Admin\DeductionController::save');
-            $routes->delete('/delete/(:num)', 'Admin\DeductionController::delete/$1');
+            $routes->post('add', 'Admin\SettingsController::insertDeduction');
+            $routes->post('update', 'Admin\SettingsController::updateDeduction');
+            $routes->post('delete', 'Admin\SettingsController::deleteDeduction');
         });
         $routes->group('department', static function ($routes) {
-            $routes->get('', 'Admin\DepartmentController::index');
-            $routes->get('/add', 'Admin\DepartmentController::add');
-            $routes->post('/save', 'Admin\DepartmentController::save');
-            $routes->delete('/delete/(:num)', 'Admin\DepartmentController::delete/$1');
+            $routes->post('add', 'Admin\SettingsController::insertDepartment');
+            $routes->post('update', 'Admin\SettingsController::updateDepartment');
+            $routes->post('delete', 'Admin\SettingsController::deleteDepartment');
         });
         $routes->group('payment-method', static function ($routes) {
-            $routes->get('/', 'Admin\PaymentMethodController::index');
-            $routes->get('/add', 'Admin\PaymentMethodController::add');
-            $routes->post('/save', 'Admin\PaymentMethodController::save');
-            $routes->delete('/delete/(:num)', 'Admin\PaymentMethodController::delete/$1');
+            $routes->post('add', 'Admin\SettingsController::insertPaymentMethod');
+            $routes->post('update', 'Admin\SettingsController::updatePaymentMethod');
+            $routes->post('delete', 'Admin\SettingsController::deletePaymentMethod');
         });
         $routes->group('position', static function ($routes) {
-            $routes->get('/', 'Admin\PositionController::index');
-            $routes->get('/add', 'Admin\PositionController::add');
-            $routes->post('/save', 'Admin\PositionController::save');
-            $routes->delete('/delete/(:num)', 'Admin\PositionController::delete/$1');
+            $routes->post('add', 'Admin\SettingsController::insertPosition');
+            $routes->post('update', 'Admin\SettingsController::updatePosition');
+            $routes->post('delete', 'Admin\SettingsController::deletePosition');
         });
         $routes->group('salary', static function ($routes) {
-            $routes->get('/', 'Admin\SalaryController::index');
-            $routes->get('/add', 'Admin\SalaryController::add');
-            $routes->post('/save', 'Admin\SalaryController::save');
-            $routes->delete('/delete/(:num)', 'Admin\SalaryController::delete/$1');
+            $routes->post('add', 'Admin\SettingsController::insertSalary');
+            $routes->post('update', 'Admin\SettingsController::updateSalary');
+            $routes->post('delete', 'Admin\SettingsController::deleteSalary');
         });
         $routes->group('web-data', static function ($routes) {
-            $routes->get('/', 'Admin\WebDataController::index');
-            $routes->get('/add', 'Admin\WebDataController::add');
-            $routes->post('/save', 'Admin\WebDataController::save');
-            $routes->delete('/delete/(:num)', 'Admin\WebDataController::delete/$1');
+            $routes->post('update', 'Admin\SettingsController::updateWebData');
         });
-        $routes->get('/', 'Admin\SettingsController::index');
-        $routes->get('/add', 'Admin\SettingsController::add');
-        $routes->post('/save', 'Admin\SettingsController::save');
-        $routes->delete('/delete/(:num)', 'Admin\SettingsController::delete/$1');
+    $routes->get('', 'Admin\SettingsController::index');
     });
 });
-
-// payroll
-$routes->get('/payroll', 'Admin\Employee::index');
-$routes->get('/payroll/add', 'Admin\Employee::Add');
 
 /*
  * --------------------------------------------------------------------

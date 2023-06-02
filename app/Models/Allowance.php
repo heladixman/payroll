@@ -38,4 +38,16 @@ class Allowance extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function insertAllowance($data){
+        $this->db->table('allowances')->insert($data);
+    }
+
+    public function updateAllowance($data, $id){
+        $this->db->table('allowances')->update($data, array('id' => $id));
+    }
+
+    public function deleteAllowance($id){
+        $this->db->table('allowances')->delete(array('id' => $id));
+    }
 }

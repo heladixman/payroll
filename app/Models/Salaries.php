@@ -38,4 +38,20 @@ class Salaries extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function listPosition(){
+        return $this->db->table('positions')->get();
+    }
+
+    public function insertSalary($data){
+        $this->db->table('salaries')->insert($data);
+    }
+
+    public function updateSalary($data, $id){
+        $this->db->table('salaries')->update($data, array('id' => $id));
+    }
+
+    public function deleteSalary($id){
+        $this->db->table('salaries')->delete(array('id' => $id));
+    }
 }

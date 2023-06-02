@@ -1,15 +1,15 @@
 <section class="content mt-3">
     <div class="card">
+    <div class="btn-first rounded-se w-100 p-2">Web Data</div>
         <div class="card-body"> 
           <div class="table-responsive text-nowrap">
-                <table class="table">
+                <table class="table" id="webdata_table">
                   <thead>
                     <tr>
                       <th>No</th>
                       <th>Name</th>
                       <th>Value</th>
-                      <th>Create At</th>
-                      <th>Update At</th>
+                      <th>Last Updated</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -22,14 +22,13 @@
                         <td><?php echo $no++ ?></td>
                         <td><?= $d['name'] ?></td>
                         <td><?= $d['value'] ?></td>
-                        <td><?= $d['createAt'] ?></td>
-                        <td><?= $d['updateAt'] ?></td>
+                        <td><?= date('Y-m-d', strtotime($d['updateAt']))  ?></td>
                         <td>
-                              <button type="button" class='btn btn-icon btn-success' id="editAllowance" data-id="<?= $d['id']?>">
-                                <ion-icon name="pencil-outline"></ion-icon>
+                              <button type="button" class='btn-second' id="editAllowance" data-id="<?= $d['id']?>">
+                              <i class="fa-solid fa-pencil fa-xs"></i><span class="ms-1">Edit</span>
                               </button>
-                              <button type="button" class="btn btn-icon btn-outline-danger" id="deleteAllowance" data-id="<?= $d['id']?>">
-                                <ion-icon name="trash-outline"></ion-icon>
+                              <button type="button" class="btn-third" id="deleteAllowance" data-id="<?= $d['id']?>">
+                              <i class="fa-regular fa-trash-can"></i><span class="ms-1">Delete</span>
                               </button>
                         </td>                             
                     </tr>
