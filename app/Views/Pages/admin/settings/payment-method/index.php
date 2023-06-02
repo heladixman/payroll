@@ -1,7 +1,7 @@
-<button type="button" class="btn btn-default w-25 my-3" data-bs-toggle="modal" data-bs-target="#insertPaymentMethod">New Data</button>
+<button type="button" class="btn btn-default w-25 my-3" data-bs-toggle="modal" data-bs-target="#insertPaymentMethod">New Payment Method</button>
 <section class="content mt-3">
     <div class="card">
-    <div type="button" class="btn btn-primary w-100 p-2">Payment Method</div>
+    <div class="btn-first rounded-se w-100 p-2">Payment Method</div>
         <div class="card-body"> 
           <div class="table-responsive text-nowrap">
                 <table class="table" id="payment_table">
@@ -27,11 +27,11 @@
                             <td><?= $d['number'] ?></td>
                         <?php endif; ?>
                         <td>
-                          <button type="button" class='btn btn-icon btn-success updatePaymentMethod' data-bs-toggle="modal" data-bs-target="#editPaymentMethod" data-id="<?= $d['id']?>" data-name="<?= $d['name']?>" data-number="<?= $d['number']?>" data-description="<?= $d['description']?>" >
-                            <ion-icon name="pencil-outline"></ion-icon>
+                          <button type="button" class='btn btn-second updatePaymentMethod' data-bs-toggle="modal" data-bs-target="#editPaymentMethod" data-id="<?= $d['id']?>" data-name="<?= $d['name']?>" data-number="<?= $d['number']?>" data-description="<?= $d['description']?>" >
+                            <span class="align-items-center me-1"><i class="fa-solid fa-pencil fa-xs"></i></span><span>Edit</span>
                           </button>
-                          <button type="button" class="btn btn-icon btn-outline-danger deletePaymentMethod" data-bs-toggle="modal" data-bs-target="#deletePaymentMethod" data-id="<?= $d['id']?>">
-                            <ion-icon name="trash-outline"></ion-icon>
+                          <button type="button" class="btn btn-third deletePaymentMethod" data-bs-toggle="modal" data-bs-target="#deletePaymentMethod" data-id="<?= $d['id']?>">
+                            <span class="align-items-center me-1"><i class="fa-solid fa-trash-can"></i></span><span>Delete</span>
                           </button>
                         </td>                             
                     </tr>

@@ -24,11 +24,8 @@
                         <td><?= $d['value'] ?></td>
                         <td><?= date('Y-m-d', strtotime($d['updateAt']))  ?></td>
                         <td>
-                              <button type="button" class='btn-second' id="editAllowance" data-id="<?= $d['id']?>">
-                              <i class="fa-solid fa-pencil fa-xs"></i><span class="ms-1">Edit</span>
-                              </button>
-                              <button type="button" class="btn-third" id="deleteAllowance" data-id="<?= $d['id']?>">
-                              <i class="fa-regular fa-trash-can"></i><span class="ms-1">Delete</span>
+                              <button type="button" class='btn btn-second' id="editAllowance" data-id="<?= $d['id']?>">
+                              <span class="align-items-center me-1"><i class="fa-solid fa-pencil fa-xs"></i></span><span>Edit</span>
                               </button>
                         </td>                             
                     </tr>

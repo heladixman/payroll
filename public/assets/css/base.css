@@ -148,6 +148,14 @@
     content: "-";
     margin-right: 10px;
   }
+  .navbar-nav .dropdown-menu{
+    position: fixed!important;
+    float: right;
+  }
+
+  .dropdown-menu.show{
+    display: block!important;
+  }
 
   .nav-tabs .nav-link:not(.active){
     border-bottom: 1px #0d6efd!important;

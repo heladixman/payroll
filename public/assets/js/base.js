@@ -13,6 +13,14 @@ function annualCount() {
     document.getElementById('salaryAnnual').value = values
   }
 
+  function profileDropdown(){
+    var button1 = document.getElementById('profile-picture')
+    var buttonDrop = document.getElementById('profile-dropdown')
+    button1.addEventListener('click', function(e){
+        buttonDrop.classList.toggle('show')
+    }, {once: true})
+  }
+
 $(document).ready(function () {
     // For datatables in settings
     $('#allowance_table').DataTable();

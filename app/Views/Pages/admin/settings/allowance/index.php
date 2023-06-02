@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-default w-25 my-3" data-bs-toggle="modal" data-bs-target="#insertAllowance">New Data</button>
+<button type="button" class="btn btn-default w-25 my-3" data-bs-toggle="modal" data-bs-target="#insertAllowance">New Allowance</button>
 <section class="content mt-2">
   <div class="card">
   <div class="btn-first rounded-se w-100 p-2">Allowance</div>
@@ -21,11 +21,11 @@
                         <td><?php echo $no++ ?></td>
                         <td><div class="fw-bold fs-bold"><?= $d['name'] ?></div><div><p>Description: <?= $d['description'] ?></p></div></td>
                         <td>
-                              <button type="button" class='btn btn-icon btn-success updateAllowance' data-bs-toggle="modal" data-bs-target="#editAllowance" data-id="<?= $d['id']?>" data-name="<?= $d['name']?>" data-description="<?= $d['description']?>">
-                                <ion-icon name="pencil-outline"></ion-icon>
+                              <button type="button" class='btn btn-second updateAllowance' data-bs-toggle="modal" data-bs-target="#editAllowance" data-id="<?= $d['id']?>" data-name="<?= $d['name']?>" data-description="<?= $d['description']?>">
+                                <span class="align-items-center me-1"><i class="fa-solid fa-pencil fa-xs"></i></span><span>Edit</span>
                               </button>
-                              <button type="button" class="btn btn-icon btn-outline-danger deleteAllowance" data-bs-toggle="modal" data-bs-target="#deleteAllowance" data-id="<?= $d['id']?>">
-                                <ion-icon name="trash-outline"></ion-icon>
+                              <button type="button" class="btn btn-third deleteAllowance" data-bs-toggle="modal" data-bs-target="#deleteAllowance" data-id="<?= $d['id']?>">
+                                <span class="align-items-center me-1"><i class="fa-solid fa-trash-can"></i></span><span>Delete</span>
                               </button>
                         </td>                              
                     </tr>

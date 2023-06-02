@@ -7,6 +7,7 @@ use CodeIgniter\Session\Session;
 use Myth\Auth\Config\Auth as AuthConfig;
 use Myth\Auth\Entities\User;
 use Myth\Auth\Models\UserModel;
+use App\Models\Users;
 
 class AuthController extends Controller
 {
@@ -93,10 +94,20 @@ class AuthController extends Controller
             return redirect()->to(route_to('reset-password') . '?token=' . $this->auth->user()->reset_hash)->withCookies();
         }
 
-        $redirectURL = session('redirect_url') ?? site_url('/');
-        unset($_SESSION['redirect_url']);
+        $userRole = $user->role;
+        switch ($userRole) {
+            case 'admin':
+                return redirect()->to(bash_url('/dashboard')); // Redirect to the admin dashboard
+            case 'user':
+                return redirect()->to(bash_url('/')); // Redirect to the user profile page
+            default:
+                return redirect()->to(bash_url('/dashboard')); // Redirect to a default page or show an error message
+        }
 
-        return redirect()->to($redirectURL)->withCookies()->with('message', lang('Auth.loginSuccess'));
+        // $redirectURL = session('redirect_url') ?? site_url('/');
+        // unset($_SESSION['redirect_url']);
+
+        // return redirect()->to($redirectURL)->withCookies()->with('message', lang('Auth.loginSuccess'));
     }
 
     /**

@@ -29,7 +29,7 @@ class Salary extends Migration
         ]);
 
         $this->forge->addKey('id', TRUE);
-        $this->forge->addForeignKey('position_id', 'positions', 'id');
+        $this->forge->addForeignKey('position_id', 'positions', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('salaries', TRUE);
     }
 

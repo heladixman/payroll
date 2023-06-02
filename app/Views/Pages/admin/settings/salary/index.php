@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-default w-25 my-3" data-bs-toggle="modal" data-bs-target="#insertSalary">New Data</button>
+<button type="button" class="btn btn-default w-25 my-3" data-bs-toggle="modal" data-bs-target="#insertSalary">New Salary</button>
 <section class="content mt-3">
     <div class="card">
     <div class="btn-first rounded-se w-100 p-2">Salary</div>
@@ -22,14 +22,14 @@
                     <tr>
                         <td><?php echo $no++ ?></td>
                         <td><div class="fw-bold fs-bold"><?= $d['position_name'] ?></div><div><p>from: <?= $d['department_name'] ?></p></div></td>
-                        <td><?= $d['amount'] ?></td>
-                        <td><?= $d['annual'] ?></td>
+                        <td><span>Rp<?= number_format($d['amount'], 0, '', '.') ?></span></td>
+                        <td><span>Rp<?= number_format($d['annual'], 0, '', '.') ?></span></td>
                         <td>
-                              <button type="button" class='btn btn-icon btn-success updateSalary' data-bs-toggle="modal" data-bs-target="#editSalary" data-id="<?= $d['id']?>" data-name="<?= $d['position_id']?>" data-amount="<?= $d['amount']?>" data-annual="<?= $d['annual']?>">
-                                <ion-icon name="pencil-outline"></ion-icon>
+                              <button type="button" class='btn btn-second updateSalary' data-bs-toggle="modal" data-bs-target="#editSalary" data-id="<?= $d['id']?>" data-name="<?= $d['position_id']?>" data-amount="<?= $d['amount']?>" data-annual="<?= $d['annual']?>">
+                                <span class="align-items-center me-1"><i class="fa-solid fa-pencil fa-xs"></i></span><span>Edit</span>
                               </button>
-                              <button type="button" class="btn btn-icon btn-outline-danger deleteSalary" data-bs-toggle="modal" data-bs-target="#deleteSalary" data-id="<?= $d['id']?>">
-                                <ion-icon name="trash-outline"></ion-icon>
+                              <button type="button" class="btn btn-third deleteSalary" data-bs-toggle="modal" data-bs-target="#deleteSalary" data-id="<?= $d['id']?>">
+                                <span class="align-items-center me-1"><i class="fa-solid fa-trash-can"></i></span><span>Delete</span>
                               </button>
                         </td>                             
                     </tr>

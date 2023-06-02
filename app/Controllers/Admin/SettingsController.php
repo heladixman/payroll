@@ -256,10 +256,12 @@ class SettingsController extends BaseController
     // Function for Salary
 
     public function insertSalary(){
+        $amount = $this->request->getPost('salaryAmount');
+
         $data = array(
             'position_id'   => $this->request->getPost('salaryPositionId'),
-            'amount'        => $this->request->getPost('salaryAmount'),
-            'annual'        => $this->request->getPost('salaryAnnual')
+            'amount'        => $amount,
+            'annual'        => $amount * 12
         );
 
         $this->salary->insertSalary($data);

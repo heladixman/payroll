@@ -21,11 +21,8 @@
               <div class="d-flex justify-content-between mb-3">
                 <label class="form-label align-self-center mb-0 w-50">Amount Salary</label>
                 <input type="number" class="form-control w-65 salaryFormat" name="salaryAmount" id="salaryAmount" oninput="annualCount()">
+                <input type="hidden" class="form-control w-65 salaryFormat" name="salaryAnnual" id="salaryAnnual">
               </div>
-              <div class="d-flex justify-content-between mb-3">
-               <label class="form-label align-self-center mb-0 w-50">Amount Salary</label>
-               <input type="number" class="form-control w-65 salaryFormat" name="salaryAnnual" id="salaryAnnual">
-            </div>
             </div>
           </div>
         </div>
@@ -49,22 +46,19 @@
         <div class="modal-body">
           <div class="row">
             <div class="col mb-3">
-            <div class="d-flex justify-content-between mb-3">
-                <label class="form-label align-self-center mb-0 w-50">Position</label>
-                <select name="salaryPositionId" id="salaryPositionId" class="form-select w-65" required>
-                  <?php foreach($listPosition as $data){ ?>
-                    <option value="<?= $data->id?>"><?= $data->name ?></option>
-                  <?php }?>
-                </select>
-            </div>
-            <div class="d-flex justify-content-between mb-3">
-               <label class="form-label align-self-center mb-0 w-50">Amount Salary</label>
-               <input type="number" class="form-control w-65 salaryFormat" name="salaryAmount" id="salaryAmount" oninput="annualCount()">
-            </div>
-            <div class="d-flex justify-content-between mb-3">
-               <label class="form-label align-self-center mb-0 w-50">Amount Salary</label>
-               <input type="number" class="form-control w-65 salaryFormat" name="salaryAnnual" id="salaryAnnual">
-            </div>
+              <div class="d-flex justify-content-between mb-3">
+                  <label class="form-label align-self-center mb-0 w-50">Position</label>
+                  <select name="salaryPositionId" id="salaryPositionId" class="form-select w-65" required>
+                    <?php foreach($listPosition as $data){ ?>
+                      <option value="<?= $data->id?>"><?= $data->name ?></option>
+                    <?php }?>
+                  </select>
+              </div>
+              <div class="d-flex justify-content-between mb-3">
+                <label class="form-label align-self-center mb-0 w-50">Amount Salary</label>
+                <input type="number" class="form-control w-65 salaryFormat" name="salaryAmount" id="salaryAmount" oninput="annualCount()">
+                <input type="hidden" class="form-control w-65 salaryFormat" name="salaryAnnual" id="salaryAnnual">
+              </div>
             </div>
           </div>
         </div>

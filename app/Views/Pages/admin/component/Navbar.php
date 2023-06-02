@@ -16,48 +16,31 @@
         </div>
       </div>
       <ul class="navbar-nav flex-row align-items-center ms-auto">
-        <li class="nav-item lh-1 me-3">
-          <span></span>
-        </li>
         <li class="nav-item navbar-dropdown dropdown-user dropdown">
-          <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-            <div class="avatar avatar-online">
-              <img src="<?php echo base_url() ?>/assets/img/avatars/Profile.jpg" alt="" class="w-px-40 h-auto rounded-circle">
+          <a class="nav-link d-flex hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+            <div class="avatar avatar-online align-items-center d-flex text-end justify-content-end" id="profile-picture">
+              <img src="<?php echo base_url() ?>assets/image/defaultprofile.jpg" alt="" class="w-25 rounded-circle">
+              <div class="text-start ms-3">
+                <h5 class="mb-0">nama</h5>
+                <div>role</div>
+              </div>
             </div>
           </a>
-          <ul class="dropdown-menu dropdown-menu-end">
+          <ul class="dropdown-menu dropdown-menu-end" id="profile-dropdown">
             <li>
-              <a class="dropdown-item" href="#">
-                <div class="d-flex">
-                  <div class="flex-shrink-0 me-3">
-                    <div class="avatar avatar-online">
-                      <img src="<?php echo base_url() ?>/assets/img/avatars/Profile.jpg" alt="" class="w-px-40 h-auto rounded-circle">
-                    </div>
-                  </div>
-                  <div class="flex-grow-1">
-                    <span class="fw-semibold d-block">John Doe</span>
-                    <small class="text-muted">Admin</small>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li>
-              <div class="dropdown-divider"></div>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="/profile/settings">
                 <i class="bx bx-user me-2"></i>
                 <span class="align-middle">My Profile</span>
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="/settings">
                 <i class="bx bx-cog me-2"></i>
                 <span class="align-middle">Settings</span>
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="auth-login-basic.html">
+              <a class="dropdown-item" href="/logout">
                 <i class="bx bx-power-off me-2"></i>
                 <span class="align-middle">Log Out</span>
               </a>

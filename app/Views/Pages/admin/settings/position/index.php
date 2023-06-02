@@ -1,7 +1,7 @@
-<button type="button" class="btn btn-default w-25 my-3" data-bs-toggle="modal" data-bs-target="#insertPosition">New Data</button>
+<button type="button" class="btn btn-default w-25 my-3" data-bs-toggle="modal" data-bs-target="#insertPosition">New Position</button>
 <section class="content mt-3">
     <div class="card">
-    <div type="button" class="btn btn-primary w-100 p-2">Position</div>
+    <div class="btn-first rounded-se w-100 p-2">Position</div>
         <div class="card-body"> 
           <div class="table-responsive text-nowrap">
                 <table class="table" id="position_table">
@@ -25,11 +25,11 @@
                         <td><?= $d['description'] ?></td>
                         <td><span>Rp<?= number_format($d['salary_start'], 0, '', '.') ?></span> - <span>Rp<?= number_format($d['salary_end'], 0, '', '.') ?></span></td>
                         <td>
-                              <button type="button" class='btn btn-icon btn-success updatePosition' data-bs-toggle="modal" data-bs-target="#editPosition" data-id="<?= $d['id']?>" data-name="<?= $d['position_name']?>" data-department="<?= $d['position_department']?>" data-description="<?= $d['description']?>" data-start="<?= $d['salary_start']?>" data-end="<?= $d['salary_end']?>">
-                                <ion-icon name="pencil-outline"></ion-icon>
+                              <button type="button" class='btn btn-second updatePosition' data-bs-toggle="modal" data-bs-target="#editPosition" data-id="<?= $d['id']?>" data-name="<?= $d['position_name']?>" data-department="<?= $d['position_department']?>" data-description="<?= $d['description']?>" data-start="<?= $d['salary_start']?>" data-end="<?= $d['salary_end']?>">
+                                <span class="align-items-center me-1"><i class="fa-solid fa-pencil fa-xs"></i></span><span>Edit</span>
                               </button>
-                              <button type="button" class="btn btn-icon btn-outline-danger deletePosition" data-bs-toggle="modal" data-bs-target="#deletePosition" data-id="<?= $d['id']?>">
-                                <ion-icon name="trash-outline"></ion-icon>
+                              <button type="button" class="btn btn-third deletePosition" data-bs-toggle="modal" data-bs-target="#deletePosition" data-id="<?= $d['id']?>">
+                                <span class="align-items-center me-1"><i class="fa-solid fa-trash-can"></i></span><span>Delete</span>
                               </button>
                         </td>                             
                     </tr>
