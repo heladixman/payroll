@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-default w-25 my-3" data-bs-toggle="modal" data-bs-target="#insertDeduction">New Deduction</button>
+<button type="button" class="btn btn-default w-25 my-3" data-bs-toggle="modal" data-bs-target="#insertUserDeduction">New Deduction</button>
 <section class="content mt-3">
     <div class="card">
     <div class="btn-first rounded-se w-100 p-2">Deduction</div>
@@ -6,7 +6,7 @@
           <div class="table-responsive text-nowrap">
                 <table class="table" id="salary_table">
                   <thead>
-                    <tr>
+                    <tr class="text-center">
                       <th>No</th>
                       <th>Employee Name</th>
                       <th>Allowance Name</th>
@@ -19,11 +19,11 @@
                   <tbody>
                   <?php
                     $no = 1;
-                    $types = [0=> "Monthly", 1=> "Once"];
+                    $types = [1=> "Monthly", 0=> "Once"];
                     foreach($deduction as $d) {
                         $deductionType =  isset($types[$d['type']]) ? $types[$d['type']]: "Unknown"; 
                     ?>
-                    <tr>
+                    <tr class="text-center">
                         <td><?php echo $no++ ?></td>
                         <td><?= $d['user_name'] ?></td>
                         <td><?= $d['deduction_name'] ?></td>
@@ -31,16 +31,13 @@
                         <?php if($deductionType === "Monthly"):?>
                             <td><?= $deductionType ?></td>
                             <td>-</td>
-                        <?php else :?>
+                        <?php else:?>
                             <td><?= $deductionType ?></td>
-                            <td><? $d['effective_date']?></td>
+                            <td><?= $d['effective_date'] ?></td>
                         <?php endif ?>
                         <td>
-                            <button type="button" class='btn btn-icon btn-success updateDeduction' data-bs-toggle="modal" data-bs-target="#editDeduction" data-id="<?= $d['id']?>">
-                                <i class="fa-solid fa-pencil"></i>
-                            </button>
-                            <button type="button" class="btn btn-icon btn-outline-danger deleteDeduction" data-bs-toggle="modal" data-bs-target="#deleteDeduction" data-id="<?= $d['id']?>">
-                                <i class="fa-solid fa-trash"></i>
+                            <button type="button" class="btn btn-third deleteDeduction" data-bs-toggle="modal" data-bs-target="#deleteUserDeduction" data-id="<?= $d['id']?>">
+                            <span class="align-items-center me-1"><i class="fa-solid fa-trash-can"></i></span><span>Delete</span>
                             </button>
                         </td>
                     </tr>
@@ -51,3 +48,4 @@
         </div>
     </div>
 </section>
+<?php echo view('Pages/modals/userdeduction.php');?>

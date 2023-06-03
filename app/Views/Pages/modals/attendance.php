@@ -60,7 +60,7 @@
                     <label class="form-label align-self-center mb-0 w-50">User</label>
                     <select name="attendanceUser" id="attendanceUser" class="form-select w-65" required>
                     <?php foreach($listuser as $data){ ?>
-                        <option value="<?= $data->id?>"><?= $data->name ?></option>
+                        <option value="<?= $data->id?>"><?= $data->name ?> - <?= $data->email ?></option>
                     <?php }?>
                     </select>
                 </div>

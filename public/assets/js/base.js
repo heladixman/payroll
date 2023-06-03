@@ -170,24 +170,50 @@ $(document).ready(function () {
         $('#allowanceAmount').val(allowance_amount);
     });
 
-    // $('#allowanceType').change(function() {
-    //     var selectedOption = $(this).val();
-    //     console.log(selectedOption);
-    // });
+    $('.deleteUserAllowance').on('click', function(){
+        var allowance_id = $(this).data('id')
+        console.log(allowance_id)
+        $('#allowanceid').val(allowance_id);
+    });
 
     $('#allowanceType').on('change',function(){
         var datebutton = document.getElementById("effectiveDate")
-        if($(this).val() == 2){
-            console.log(2)
+        if($(this).val() == 0){
             datebutton.classList.remove("d-none")
         } else{
             datebutton.classList.add("d-none")
         }
     })
 
-    $('.deleteUserAllowance').on('change', function(){
+    $('.updateUserAllowance').on('click', function(){
         var allowance_id = $(this).data('id')
-        $('#allowanceid').val(allowance_id);
+        var allowance_user = $(this).data('name')
+        var allowance_aid = $(this).data('aid');
+        var allowance_type = $(this).data('type');
+        var allowance_date = $(this).data('date');
+        var allowance_amount = $(this).data('amount');
+        $('#allowanceId').val(allowance_id);
+        $('#allowanceUser').val(allowance_user);
+        $('#allowanceAid').val(allowance_aid);
+        $('#allowanceType').val(allowance_type);
+        $('#allowanceDate').val(allowance_date);
+        $('#allowanceAmount').val(allowance_amount);
     });
+
+    $('.deleteBonus').on('click', function(){
+        var bonus_id = $(this).data('id')
+        console.log(bonus_id)
+        $('#bonusid').val(bonus_id);
+    });
+
+    $('#deductionType').on('change',function(){
+        var datebutton = document.getElementById("deductionEffectiveDate")
+        if($(this).val() == 0){
+            datebutton.classList.remove("d-none")
+        } else{
+            datebutton.classList.add("d-none")
+        }
+    })
+
 });
 

@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-default w-25 my-3" data-bs-toggle="modal" data-bs-target="#insertAllowance">New Bonus</button>
+<button type="button" class="btn btn-default w-25 my-3" data-bs-toggle="modal" data-bs-target="#insertUserBonus">New Bonus</button>
 <section class="content mt-3">
     <div class="card">
     <div class="btn-first rounded-se w-100 p-2">Bonus</div>
@@ -6,7 +6,7 @@
           <div class="table-responsive text-nowrap">
                 <table class="table" id="salary_table">
                   <thead>
-                    <tr>
+                    <tr class="text-center">
                       <th>No</th>
                       <th>Employee Name</th>
                       <th>Bonus Name</th>
@@ -18,20 +18,17 @@
                   <tbody>
                   <?php
                     $no = 1;
-                    foreach($attendance as $d) {
+                    foreach($bonus as $d) {
                     ?>
-                    <tr>
+                    <tr class="text-center">
                         <td><?php echo $no++ ?></td>
                         <td><?= $d['user_name'] ?></td>
                         <td><?= $d['bonus_name'] ?></td>
                         <td><?= $d['amount'] ?></td>
                         <td><?= $d['effective_date'] ?></td>
                         <td>
-                            <button type="button" class='btn btn-icon btn-success updateAllowance' data-bs-toggle="modal" data-bs-target="#editAllowance" data-id="<?= $d['id']?>">
-                                <i class="fa-solid fa-pencil"></i>
-                            </button>
-                            <button type="button" class="btn btn-icon btn-outline-danger deleteAllowance" data-bs-toggle="modal" data-bs-target="#deleteAllowance" data-id="<?= $d['id']?>">
-                                <i class="fa-solid fa-trash"></i>
+                            <button type="button" class="btn btn-third deleteBonus" data-bs-toggle="modal" data-bs-target="#deleteUserBonus" data-id="<?= $d['id']?>">
+                            <span class="align-items-center me-1"><i class="fa-solid fa-trash-can"></i></span><span>Delete</span>
                             </button>
                         </td>
                     </tr>
@@ -42,3 +39,4 @@
         </div>
     </div>
 </section>
+<?php echo view('Pages/modals/userbonus.php');?>

@@ -71,8 +71,8 @@ class PayrollDetails extends Migration
         ]);
 
         $this->forge->addKey('id', TRUE);
-        $this->forge->addForeignKey('user_id', 'users', 'id');
-        $this->forge->addForeignKey('payroll_id', 'payrolls', 'id');
+        $this->forge->addForeignKey('user_id', 'users', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('payroll_id', 'payrolls', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('payroll_details', TRUE);
     }
 

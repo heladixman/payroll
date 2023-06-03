@@ -37,7 +37,7 @@ class CreateAuthTables extends Migration
         $this->forge->addKey('id', true);
         $this->forge->addUniqueKey('email');
         $this->forge->addUniqueKey('username');
-        $this->forge->addForeignKey('position_id', 'positions', 'id');
+        $this->forge->addForeignKey('position_id', 'positions', 'id', 'CASCADE', 'SET NULL');
         $this->forge->createTable('users', true);
 
         // Auth Login Attempts

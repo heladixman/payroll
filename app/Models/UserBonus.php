@@ -38,4 +38,24 @@ class UserBonus extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function listUser(){
+        return $this->db->table('users')->where('user_role', 'user')->get();
+    }
+
+    public function listBonus(){
+        return $this->db->table('bonus')->get();
+    }
+
+    public function insertBonus($data){
+        $this->db->table('user_bonus')->insert($data);
+    }
+
+    public function updateBonus($data, $id){
+        $this->db->table('user_bonus')->update($data, array('id' => $id));
+    }
+
+    public function deleteBonus($id){
+        $this->db->table('user_bonus')->delete(array('id' => $id));
+    }
 }

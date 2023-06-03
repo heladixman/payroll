@@ -6,7 +6,7 @@
           <div class="table-responsive text-nowrap">
                 <table class="table" id="salary_table">
                   <thead>
-                    <tr>
+                    <tr class="text-center">
                       <th>No</th>
                       <th>Employee Name</th>
                       <th>Allowance Name</th>
@@ -19,28 +19,25 @@
                   <tbody>
                   <?php
                     $no = 1;
-                    $types = [0=> "Monthly", 1=> "Once"];
-                    foreach($attendance as $d) {
+                    $types = [1=> "Monthly", 0=> "Once"];
+                    foreach($allowance as $d) {
                         $allowanceType =  isset($types[$d['type']]) ? $types[$d['type']]: "Unknown"; 
                     ?>
-                    <tr>
+                    <tr class="text-center">
                         <td><?php echo $no++ ?></td>
                         <td><?= $d['user_name'] ?></td>
                         <td><?= $d['allowance_name'] ?></td>
                         <td><?= $d['amount'] ?></td>
-                        <?php if($allowanceType === "Monthly"):?>
+                        <?php if($allowanceType == "Monthly"):?>
                             <td><?= $allowanceType ?></td>
                             <td>-</td>
                         <?php else :?>
                             <td><?= $allowanceType ?></td>
-                            <td><? $d['effective_date']?></td>
+                            <td><?= $d['effective_date'] ?></td>
                         <?php endif ?>
                         <td>
-                            <button type="button" class='btn btn-icon btn-success updateUserAllowance' data-bs-toggle="modal" data-bs-target="#editAllowance" data-id="<?= $d['id']?>">
-                                <i class="fa-solid fa-pencil"></i>
-                            </button>
-                            <button type="button" class="btn btn-icon btn-outline-danger deleteUserAllowance" data-bs-toggle="modal" data-bs-target="#deleteAllowance" data-id="<?= $d['id']?>">
-                                <i class="fa-solid fa-trash"></i>
+                            <button type="button" class="btn btn-third deleteUserAllowance" data-bs-toggle="modal" data-bs-target="#deleteAllowance" data-id="<?= $d['id']?>" data-nama="<?= $d['user_name']?>">
+                            <span class="align-items-center me-1"><i class="fa-solid fa-trash-can"></i></span><span>Delete</span>
                             </button>
                         </td>
                     </tr>

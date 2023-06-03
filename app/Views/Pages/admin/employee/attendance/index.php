@@ -6,7 +6,7 @@
           <div class="table-responsive text-nowrap">
                 <table class="table" id="salary_table">
                   <thead>
-                    <tr>
+                    <tr class="text-center">
                       <th>No</th>
                       <th>Employee Name</th>
                       <th>Date</th>
@@ -24,18 +24,18 @@
                         $time = date("H-i-s", strtotime($d['datetime_log']));
                         $log_type = isset($lt_arr[$d['log_type']])? $lt_arr[$d['log_type']]: 'Unknown';
                     ?>
-                    <tr>
+                    <tr class="text-center">
                         <td><?php echo $no++ ?></td>
                         <td><?= $d['user_name'] ?></td>
                         <td><?= $date ?></td>
                         <td><?= $log_type ?></td>
                         <td><?= $time ?></td>
                         <td>
-                            <button type="button" class='btn btn-icon btn-success updateAttendance' data-bs-toggle="modal" data-bs-target="#editAttendance" data-id="<?= $d['id']?>" data-user="<?= $d['user_id']?>" data-type="<?= $d['log_type']?>" data-time="<?= $d['datetime_log']?>">
-                                <i class="fa-solid fa-pencil"></i>
+                            <button type="button" class='btn btn-second updateAttendance' data-bs-toggle="modal" data-bs-target="#editAttendance" data-id="<?= $d['id']?>" data-user="<?= $d['user_id']?>" data-type="<?= $d['log_type']?>" data-time="<?= $d['datetime_log']?>">
+                              <span class="align-items-center me-1"><i class="fa-solid fa-pencil fa-xs"></i></span><span>Edit</span>
                             </button>
-                            <button type="button" class="btn btn-icon btn-outline-danger deleteAttendance" data-bs-toggle="modal" data-bs-target="#deleteAttendance" data-id="<?= $d['id']?>">
-                                <i class="fa-solid fa-trash"></i>
+                            <button type="button" class="btn btn-third deleteAttendance" data-bs-toggle="modal" data-bs-target="#deleteAttendance" data-id="<?= $d['id']?>">
+                              <span class="align-items-center me-1"><i class="fa-solid fa-trash-can"></i></span><span>Delete</span>
                             </button>
                         </td>
                     </tr>

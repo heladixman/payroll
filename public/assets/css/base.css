@@ -66,7 +66,7 @@
   .bg-third{
     background-color: #2886ff;
   }
-
+  
   .sidebar{
     overflow-y: auto;
     height: 100%;
@@ -110,6 +110,19 @@
   .btn-third:hover{
     color: white!important;
     background-color: #fd3d0d!important;
+  }
+
+  .btn-forth{
+    color: #fd590d!important;
+    background-color: rgb(255, 220, 194)!important;
+    border: none!important;
+    border-radius: 20px;
+    padding: 8px 20px;
+  }
+
+  .btn-forth:hover{
+    color: white!important;
+    background-color: #fd590d!important;
   }
   
   .btn.btn-toggle.collapsed::after{

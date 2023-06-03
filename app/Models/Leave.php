@@ -38,4 +38,20 @@ class Leave extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function listUser(){
+        return $this->db->table('users')->where('user_role', 'user')->get();
+    }
+
+    public function insertLeave($data){
+        $this->db->table('leave')->insert($data);
+    }
+
+    public function updateLeave($data, $id){
+        $this->db->table('leave')->update($data, array('id' => $id));
+    }
+
+    public function deleteLeave($id){
+        $this->db->table('leave')->delete(array('id' => $id));
+    }
 }

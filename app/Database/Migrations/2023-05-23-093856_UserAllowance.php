@@ -22,7 +22,7 @@ class UserAllowance extends Migration
             ],
             'type' => [
                 'type' => 'BOOLEAN',
-                'comment' => '0 = Monthly, 1 = Once'
+                'comment' => '1 = Monthly, 0 = Once'
             ],
             'effective_date' => [
                 'type' => 'DATE',
@@ -36,8 +36,8 @@ class UserAllowance extends Migration
         ]);
 
         $this->forge->addKey('id', TRUE);
-        $this->forge->addForeignKey('allowance_id', 'allowances', 'id');
-        $this->forge->addForeignKey('user_id', 'users', 'id');
+        $this->forge->addForeignKey('allowance_id', 'allowances', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('user_id', 'users', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('user_allowances', TRUE);
     }
 

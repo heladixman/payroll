@@ -38,4 +38,24 @@ class UserDeduction extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function listUser(){
+        return $this->db->table('users')->where('user_role', 'user')->get();
+    }
+
+    public function listDeduction(){
+        return $this->db->table('deductions')->get();
+    }
+
+    public function insertDeduction($data){
+        $this->db->table('user_deductions')->insert($data);
+    }
+
+    public function updateDeduction($data, $id){
+        $this->db->table('user_deductions')->update($data, array('id' => $id));
+    }
+
+    public function deleteDeduction($id){
+        $this->db->table('user_deductions')->delete(array('id' => $id));
+    }
 }

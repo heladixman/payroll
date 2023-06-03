@@ -30,6 +30,8 @@ class Payroll extends Migration
             ],
             'payment_method_id' => [
                 'type' => 'INT',
+                'null' => true,
+                'default' => 1
             ],
             'status' => [
                 'type' => 'VARCHAR',
@@ -43,7 +45,7 @@ class Payroll extends Migration
         ]);
 
         $this->forge->addKey('id', TRUE);
-        $this->forge->addForeignKey('payment_method_id', 'payment_methods', 'id');
+        $this->forge->addForeignKey('payment_method_id', 'payment_methods', 'id', 'CASCADE', 'SET NULL');
         $this->forge->createTable('payrolls', TRUE);
     }
 

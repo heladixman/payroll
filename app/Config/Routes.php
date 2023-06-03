@@ -55,32 +55,32 @@ $routes->group('/', function ($routes) {
         });
         $routes->group('allowance', static function ($routes) {
             $routes->get('', 'Admin\UserAllowanceController::indexAllowance');
-            $routes->post('add', 'Admin\UserAllowanceController::add');
-            $routes->post('update', 'Admin\UserAllowanceController::update');
-            $routes->post('delete/(:num)', 'Admin\UserAllowanceController::delete/$1');
+            $routes->post('add', 'Admin\UserAllowanceController::insertAllowance');
+            $routes->post('update', 'Admin\UserAllowanceController::updateAllowance');
+            $routes->post('delete', 'Admin\UserAllowanceController::deleteAllowance');
         });
         $routes->group('bonus', static function ($routes) {
             $routes->get('', 'Admin\UserBonusController::indexBonus');
-            $routes->post('add', 'Admin\UserBonusController::add');
-            $routes->post('update', 'Admin\UserBonusController::update');
-            $routes->post('delete/(:num)', 'Admin\UserBonusController::delete/$1');
+            $routes->post('add', 'Admin\UserBonusController::insertBonus');
+            $routes->post('update', 'Admin\UserBonusController::updateBonus');
+            $routes->post('delete', 'Admin\UserBonusController::deleteBonus');
         });
         $routes->group('deduction', static function ($routes) {
             $routes->get('', 'Admin\UserDeductionController::indexDeduction');
-            $routes->post('add', 'Admin\UserDeductionController::add');
-            $routes->post('update', 'Admin\UserDeductionController::update');
-            $routes->post('delete/(:num)', 'Admin\UserDeductionController::delete/$1');
+            $routes->post('add', 'Admin\UserDeductionController::insertDeduction');
+            $routes->post('update', 'Admin\UserDeductionController::updateDeduction');
+            $routes->post('delete', 'Admin\UserDeductionController::deleteDeduction');
         });
         $routes->group('leave', static function ($routes) {
             $routes->get('', 'Admin\LeaveController::indexLeave');
-            $routes->post('add', 'Admin\LeaveController::add');
-            $routes->post('update', 'Admin\LeaveController::update');
-            $routes->post('delete/(:num)', 'Admin\LeaveController::delete/$1');
+            $routes->post('add', 'Admin\LeaveController::insertLeave');
+            $routes->post('update', 'Admin\LeaveController::updateLeave');
+            $routes->post('delete', 'Admin\LeaveController::deleteLeave');
             });
         $routes->get('', 'Admin\UserController::indexUser');
-        $routes->get('add', 'Admin\UserController::add');
-        $routes->post('update', 'Admin\UserController::update');
-        $routes->post('delete/(:num)', 'Admin\UserController::delete/$1');
+        $routes->post('add', 'Admin\UserController::addUser');
+        $routes->post('update', 'Admin\UserController::updateUser');
+        $routes->post('delete', 'Admin\UserController::deleteUser');
     });
     $routes->group('settings', function ($routes) {
         $routes->group('allowance', static function ($routes) {

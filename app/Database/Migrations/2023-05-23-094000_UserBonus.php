@@ -32,8 +32,8 @@ class UserBonus extends Migration
         ]);
 
         $this->forge->addKey('id', TRUE);
-        $this->forge->addForeignKey('bonus_id', 'bonus', 'id');
-        $this->forge->addForeignKey('user_id', 'users', 'id');
+        $this->forge->addForeignKey('bonus_id', 'bonus', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('user_id', 'users', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('user_bonus', TRUE);
     }
 

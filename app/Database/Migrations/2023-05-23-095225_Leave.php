@@ -43,7 +43,7 @@ class Leave extends Migration
         ]);
 
         $this->forge->addKey('id', TRUE);
-        $this->forge->addForeignKey('user_id', 'users', 'id');
+        $this->forge->addForeignKey('user_id', 'users', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('leave', TRUE);
     }
 

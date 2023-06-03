@@ -38,4 +38,20 @@ class Users extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function listPosition(){
+        return $this->db->table('positions')->get();
+    }
+
+    public function insertUser($data){
+        $this->db->table('users')->insert($data);
+    }
+
+    public function updateUser($data, $id){
+        $this->db->table('users')->update($data, array('id' => $id));
+    }
+
+    public function deleteUser($id){
+        $this->db->table('users')->delete(array('id' => $id));
+    }
 }

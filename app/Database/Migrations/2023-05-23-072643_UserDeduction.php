@@ -22,7 +22,7 @@ class UserDeduction extends Migration
             ],
             'type' => [
                 'type' => 'BOOLEAN',
-                'comment' => '0 = Monthly, 1 = Once'
+                'comment' => '1 = Monthly, 0 = Once'
             ],
             'effective_date' => [
                 'type' => 'DATE',
@@ -36,8 +36,8 @@ class UserDeduction extends Migration
         ]);
 
         $this->forge->addKey('id', TRUE);
-        $this->forge->addForeignKey('deduction_id', 'deductions', 'id');
-        $this->forge->addForeignKey('user_id', 'users', 'id');
+        $this->forge->addForeignKey('deduction_id', 'deductions', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('user_id', 'users', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('user_deductions', TRUE);
     }
 
