@@ -138,4 +138,56 @@ $(document).ready(function () {
         var salary_id = $(this).data('id')
         $('#salaryid').val(salary_id);
     });
+
+    // not fixed yet
+    $('.updateAttendance').on('click', function(){
+        var attendance_id = $(this).data('id')
+        var attendance_user = $(this).data('user');
+        var attendance_type = $(this).data('type');
+        var attendance_time = $(this).data('time');
+        $('#attendanceId').val(attendance_id);
+        $('#attendanceUser').val(attendance_user);
+        $('#attendanceAmount').val(attendance_type);
+        $('#attendanceAnnual').val(attendance_time);
+    });
+    $('.deleteAttendance').on('click', function(){
+        var attendance_id = $(this).data('id')
+        $('#attendanceid').val(attendance_id);
+    });
+
+    $('.updateUserAllowance').on('click', function(){
+        var allowance_id = $(this).data('id')
+        var allowance_user = $(this).data('name')
+        var allowance_aid = $(this).data('aid');
+        var allowance_type = $(this).data('type');
+        var allowance_date = $(this).data('date');
+        var allowance_amount = $(this).data('amount');
+        $('#allowanceId').val(allowance_id);
+        $('#allowanceUser').val(allowance_user);
+        $('#allowanceAid').val(allowance_aid);
+        $('#allowanceType').val(allowance_type);
+        $('#allowanceDate').val(allowance_date);
+        $('#allowanceAmount').val(allowance_amount);
+    });
+
+    // $('#allowanceType').change(function() {
+    //     var selectedOption = $(this).val();
+    //     console.log(selectedOption);
+    // });
+
+    $('#allowanceType').on('change',function(){
+        var datebutton = document.getElementById("effectiveDate")
+        if($(this).val() == 2){
+            console.log(2)
+            datebutton.classList.remove("d-none")
+        } else{
+            datebutton.classList.add("d-none")
+        }
+    })
+
+    $('.deleteUserAllowance').on('change', function(){
+        var allowance_id = $(this).data('id')
+        $('#allowanceid').val(allowance_id);
+    });
 });
+

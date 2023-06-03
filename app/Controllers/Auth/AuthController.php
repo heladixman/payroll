@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Auth;
 
 use CodeIgniter\Controller;
 use CodeIgniter\Session\Session;
@@ -86,6 +86,11 @@ class AuthController extends Controller
 
         // Try to log them in...
         if (! $this->auth->attempt([$type => $login, 'password' => $password], $remember)) {
+            if ($this->auth->getUser()->user_role === "admin") {
+                return redirect()->to(route_to('/dashboard'))->with('message', lang('Auth.loginSuccess'));
+            } else {
+                return redirect()->to(route_to('/'))->with('message', lang('Auth.loginSuccess'));
+            }
             return redirect()->back()->withInput()->with('error', $this->auth->error() ?? lang('Auth.badAttempt'));
         }
 
@@ -94,20 +99,10 @@ class AuthController extends Controller
             return redirect()->to(route_to('reset-password') . '?token=' . $this->auth->user()->reset_hash)->withCookies();
         }
 
-        $userRole = $user->role;
-        switch ($userRole) {
-            case 'admin':
-                return redirect()->to(bash_url('/dashboard')); // Redirect to the admin dashboard
-            case 'user':
-                return redirect()->to(bash_url('/')); // Redirect to the user profile page
-            default:
-                return redirect()->to(bash_url('/dashboard')); // Redirect to a default page or show an error message
-        }
+        $redirectURL = session('redirect_url') ?? site_url('/');
+        unset($_SESSION['redirect_url']);
 
-        // $redirectURL = session('redirect_url') ?? site_url('/');
-        // unset($_SESSION['redirect_url']);
-
-        // return redirect()->to($redirectURL)->withCookies()->with('message', lang('Auth.loginSuccess'));
+        return redirect()->to($redirectURL)->withCookies()->with('message', lang('Auth.loginSuccess'));
     }
 
     /**
@@ -119,7 +114,7 @@ class AuthController extends Controller
             $this->auth->logout();
         }
 
-        return redirect()->to(site_url('/'));
+        return redirect()->to(site_url('login'));
     }
 
     //--------------------------------------------------------------------

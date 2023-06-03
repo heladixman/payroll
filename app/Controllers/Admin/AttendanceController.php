@@ -8,7 +8,6 @@ use App\Models\Attendance;
 class AttendanceController extends BaseController
 {
     public function __construct(){
-        helper('form');
         $this->attendance = new Attendance();
     }
 
@@ -21,10 +20,42 @@ class AttendanceController extends BaseController
         $Attendance = [
             'title'     => $uri,
             'parent'    => ['name' => $parent, 'url' => $base_url.$parent],
+            'listuser'  => $this->attendance->listUser()->getResult(),
             'attendance'=> $this->attendance->select('attendances.id as id, users.user_number as user_number, users.name as user_name, user_id, log_type, datetime_log')->join('users', 'attendances.user_id = users.id')->findAll(),
             'content'   => 'Pages/admin/'.$parent.'/'.$uri.'/index'
         ];
 
         return view('Pages/admin/index', $Attendance);
+    }
+
+    public function insertAttendance(){
+        $data = array(
+            'user_id'   => $this->request->getPost('attendanceUser'),
+            'log_type'   => $this->request->getPost('attendanceType'),
+            'datetime_log'   => $this->request->getPost('attendanceTime')
+        );
+
+        $this->attendance->insertAttendance($data);
+        session()->setFlashData('message', 'Data berhasil diinput');
+        return redirect()->to(base_url().'employee/attendance');
+    }
+    public function updateAttendance(){
+        $id = $this->request->getPost('attendanceId');
+        $data = array(
+            'user_id'   => $this->request->getPost('attendanceUser'),
+            'log_type'   => $this->request->getPost('attendanceType'),
+            'datetime_log'   => $this->request->getPost('attendanceTime')
+        );
+
+        $this->attendance->updateAttendance($data, $id);
+        session()->setFlashData('message', 'Data berhasil diperbarui');
+        return redirect()->to(base_url().'employee/attendance');
+    }
+    public function deleteAttendance(){
+        $id = $this->request->getPost('attendanceId');
+
+        $this->attendance->deleteAttendance($id);
+        session()->setFlashData('message', 'Data berhasil dihapus');
+        return redirect()->to(base_url().'employee/attendance');
     }
 }

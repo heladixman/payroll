@@ -21,14 +21,16 @@
             <div class="avatar avatar-online align-items-center d-flex text-end justify-content-end" id="profile-picture">
               <img src="<?php echo base_url() ?>assets/image/defaultprofile.jpg" alt="" class="w-25 rounded-circle">
               <div class="text-start ms-3">
-                <h5 class="mb-0">nama</h5>
-                <div>role</div>
+                <?php if (user() !== null): ?>
+                <h5 class="mb-0"><?= user()->name; ?></h5>
+                <div><?= user()->user_role; ?></div>
+                <?php endif ?>
               </div>
             </div>
           </a>
           <ul class="dropdown-menu dropdown-menu-end" id="profile-dropdown">
             <li>
-              <a class="dropdown-item" href="/profile/settings">
+              <a class="dropdown-item" href="/profile">
                 <i class="bx bx-user me-2"></i>
                 <span class="align-middle">My Profile</span>
               </a>

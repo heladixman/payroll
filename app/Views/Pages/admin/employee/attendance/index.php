@@ -31,7 +31,7 @@
                         <td><?= $log_type ?></td>
                         <td><?= $time ?></td>
                         <td>
-                            <button type="button" class='btn btn-icon btn-success updateAttendance' data-bs-toggle="modal" data-bs-target="#editAttendance" data-id="<?= $d['id']?>">
+                            <button type="button" class='btn btn-icon btn-success updateAttendance' data-bs-toggle="modal" data-bs-target="#editAttendance" data-id="<?= $d['id']?>" data-user="<?= $d['user_id']?>" data-type="<?= $d['log_type']?>" data-time="<?= $d['datetime_log']?>">
                                 <i class="fa-solid fa-pencil"></i>
                             </button>
                             <button type="button" class="btn btn-icon btn-outline-danger deleteAttendance" data-bs-toggle="modal" data-bs-target="#deleteAttendance" data-id="<?= $d['id']?>">
@@ -46,3 +46,4 @@
         </div>
     </div>
 </section>
+<?php echo view('Pages/modals/attendance.php');?>

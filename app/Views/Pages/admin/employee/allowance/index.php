@@ -36,10 +36,10 @@
                             <td><? $d['effective_date']?></td>
                         <?php endif ?>
                         <td>
-                            <button type="button" class='btn btn-icon btn-success updateAllowance' data-bs-toggle="modal" data-bs-target="#editAllowance" data-id="<?= $d['id']?>">
+                            <button type="button" class='btn btn-icon btn-success updateUserAllowance' data-bs-toggle="modal" data-bs-target="#editAllowance" data-id="<?= $d['id']?>">
                                 <i class="fa-solid fa-pencil"></i>
                             </button>
-                            <button type="button" class="btn btn-icon btn-outline-danger deleteAllowance" data-bs-toggle="modal" data-bs-target="#deleteAllowance" data-id="<?= $d['id']?>">
+                            <button type="button" class="btn btn-icon btn-outline-danger deleteUserAllowance" data-bs-toggle="modal" data-bs-target="#deleteAllowance" data-id="<?= $d['id']?>">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </td>
@@ -51,3 +51,4 @@
         </div>
     </div>
 </section>
+<?php echo view('Pages/modals/userallowance.php');?>

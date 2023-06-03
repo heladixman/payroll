@@ -9,13 +9,13 @@ use App\Models\Positions;
 use App\Models\PaymentMethod;
 use App\Models\Salaries;
 use App\Models\WebData;
+use Myth\Auth\Config\Auth;
 
 use App\Controllers\BaseController;
 
 class SettingsController extends BaseController
 {
     public function __construct(){
-        helper('form');
         $base_url= base_url();
         $session = session();
 

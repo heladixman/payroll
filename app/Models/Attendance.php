@@ -38,4 +38,20 @@ class Attendance extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function listUser(){
+        return $this->db->table('users')->where('user_role', 'user')->get();
+    }
+
+    public function insertAttendance($data){
+        $this->db->table('attendances')->insert($data);
+    }
+
+    public function updateAttendance($data, $id){
+        $this->db->table('attendances')->update($data, array('id' => $id));
+    }
+
+    public function deleteAttendance($id){
+        $this->db->table('attendances')->delete(array('id' => $id));
+    }
 }

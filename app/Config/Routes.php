@@ -32,7 +32,6 @@ $routes->set404Override();
 
 $routes->group('/', function ($routes) {
     $routes->get('', 'User\IndexController::indexUser');
-    $routes->get('dashboard', 'Admin\DashboardController::index');
     // $routes->get('signin', 'Auth\AuthController::login');
     // $routes->get('signup', 'Auth\AuthController::register');
     $routes->group('user', static function ($routes) {
@@ -40,6 +39,7 @@ $routes->group('/', function ($routes) {
         $routes->get('profile', 'User\ProfileController::index');
         $routes->get('settings', 'User\SettingsController::index');
     });
+    $routes->get('dashboard', 'Admin\DashboardController::index');
     $routes->group('payroll', static function ($routes) {
         $routes->get('', 'Admin\PayrollController::indexPayroll');
         $routes->post('add', 'Admin\PayrollController::insertPayroll');
@@ -49,38 +49,38 @@ $routes->group('/', function ($routes) {
     $routes->group('employee', function ($routes) {
         $routes->group('attendance', static function ($routes) {
             $routes->get('', 'Admin\AttendanceController::indexAttendance');
-            $routes->get('add', 'Admin\AttendanceController::add');
-            $routes->post('update', 'Admin\AttendanceController::update');
-            $routes->delete('delete/(:num)', 'Admin\AttendanceController::delete/$1');
+            $routes->post('add', 'Admin\AttendanceController::insertAttendance');
+            $routes->post('update', 'Admin\AttendanceController::updateAttendance');
+            $routes->post('delete', 'Admin\AttendanceController::deleteAttendance');
         });
         $routes->group('allowance', static function ($routes) {
             $routes->get('', 'Admin\UserAllowanceController::indexAllowance');
-            $routes->get('add', 'Admin\UserAllowanceController::add');
+            $routes->post('add', 'Admin\UserAllowanceController::add');
             $routes->post('update', 'Admin\UserAllowanceController::update');
-            $routes->delete('delete/(:num)', 'Admin\UserAllowanceController::delete/$1');
+            $routes->post('delete/(:num)', 'Admin\UserAllowanceController::delete/$1');
         });
         $routes->group('bonus', static function ($routes) {
             $routes->get('', 'Admin\UserBonusController::indexBonus');
-            $routes->get('add', 'Admin\UserBonusController::add');
+            $routes->post('add', 'Admin\UserBonusController::add');
             $routes->post('update', 'Admin\UserBonusController::update');
-            $routes->delete('delete/(:num)', 'Admin\UserBonusController::delete/$1');
+            $routes->post('delete/(:num)', 'Admin\UserBonusController::delete/$1');
         });
         $routes->group('deduction', static function ($routes) {
             $routes->get('', 'Admin\UserDeductionController::indexDeduction');
-            $routes->get('add', 'Admin\UserDeductionController::add');
+            $routes->post('add', 'Admin\UserDeductionController::add');
             $routes->post('update', 'Admin\UserDeductionController::update');
-            $routes->delete('delete/(:num)', 'Admin\UserDeductionController::delete/$1');
+            $routes->post('delete/(:num)', 'Admin\UserDeductionController::delete/$1');
         });
         $routes->group('leave', static function ($routes) {
             $routes->get('', 'Admin\LeaveController::indexLeave');
-            $routes->get('add', 'Admin\LeaveController::add');
+            $routes->post('add', 'Admin\LeaveController::add');
             $routes->post('update', 'Admin\LeaveController::update');
-            $routes->delete('delete/(:num)', 'Admin\LeaveController::delete/$1');
+            $routes->post('delete/(:num)', 'Admin\LeaveController::delete/$1');
             });
         $routes->get('', 'Admin\UserController::indexUser');
         $routes->get('add', 'Admin\UserController::add');
         $routes->post('update', 'Admin\UserController::update');
-        $routes->delete('delete/(:num)', 'Admin\UserController::delete/$1');
+        $routes->post('delete/(:num)', 'Admin\UserController::delete/$1');
     });
     $routes->group('settings', function ($routes) {
         $routes->group('allowance', static function ($routes) {
