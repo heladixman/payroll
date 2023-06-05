@@ -8,7 +8,7 @@
                   <thead>
                     <tr class="text-center">
                       <th>No</th>
-                      <th>User</th>
+                      <th>Name</th>
                       <th>Username</th>
                       <th>Email</th>
                       <th>Status</th>
@@ -29,7 +29,7 @@
                         <td><?= $d['email'] ?></td>
                         <td><?= $status ?></td>
                         <td>
-                            <button type="button" class='btn btn-forth infoUser' data-bs-toggle="modal" data-bs-target="#editUser" data-id="<?= $d['id']?>">
+                            <button type="button" class='btn btn-forth infoUser' data-bs-toggle="modal" data-bs-target="#infoUser" data-id="<?= $d['id']?>">
                               <span class="align-items-center me-1"><i class="fa-solid fa-eye"></i></span><span>Info</span>
                             </button>
                             <button type="button" class='btn btn-second updateUser' data-bs-toggle="modal" data-bs-target="#editUser" data-id="<?= $d['id']?>">
