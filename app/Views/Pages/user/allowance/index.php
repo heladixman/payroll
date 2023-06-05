@@ -8,7 +8,9 @@
                     <tr>
                       <th>No</th>
                       <th>Allowance</th>
+                      <th>Amount</th>
                       <th>Status</th>
+                      <th>Effective Date</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -18,11 +20,14 @@
                     ?>
                     <tr>
                         <td><?php echo $no++ ?></td>
-                        <td><div class="fw-bold fs-bold"><?= $d['allowance_id'] ?></div></td>                             
-                        <?php if($d['type'] == '0'): ?>
+                        <td><div class="fw-bold fs-bold"><?= $d['allowance_name'] ?></div></td>
+                        <td><div><?= $d['amount'] ?></div></td>
+                        <?php if($d['type'] == '1'): ?>
                             <td><p>Monthly</p></td>
+                            <td><p>-</p></td>
                         <?php else: ?>
                             <td><p>Once</p></td>
+                            <td><p><?= $d['effective_date']?></p></td>
                         <?php endif ?>
                     </tr>
                   <?php }?>

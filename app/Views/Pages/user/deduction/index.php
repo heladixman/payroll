@@ -7,19 +7,23 @@
                   <thead>
                     <tr>
                       <th>No</th>
-                      <th>Allowance</th>
+                      <th>Deduction</th>
+                      <th>Amount</th>
                       <th>Status</th>
+                      <th>Effective Date</th>
                     </tr>
                   </thead>
                   <tbody>
                   <?php if (isset($content))
                     $no = 1;
-                    foreach($allowance as $d) { 
+                    foreach($deduction as $d) { 
                     ?>
                     <tr>
                         <td><?php echo $no++ ?></td>
-                        <td><div class="fw-bold fs-bold"><?= $d['allowance_id'] ?></div></td>                             
-                        <?php if($d['type'] == '0'): ?>
+                        <td><div class="fw-bold fs-bold"><?= $d['deduction_name'] ?></div></td>                             
+                        <td><div><?= $d['amount'] ?></div></td>                             
+                        <td><div><?= $d['effective_date'] ?></div></td>                             
+                        <?php if($d['type'] == '1'): ?>
                             <td><p>Monthly</p></td>
                         <?php else: ?>
                             <td><p>Once</p></td>
