@@ -215,5 +215,9 @@ $(document).ready(function () {
         }
     })
 
+    $('.infoUser').on('click', function(){
+        alert('button info')
+    })
+
 });
 

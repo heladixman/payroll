@@ -78,7 +78,7 @@ $routes->group('/', function ($routes) {
             $routes->post('delete', 'Admin\LeaveController::deleteLeave');
             });
         $routes->get('', 'Admin\UserController::indexUser');
-        $routes->post('add', 'Admin\UserController::addUser');
+        $routes->post('add', 'Admin\UserController::insertUser');
         $routes->post('update', 'Admin\UserController::updateUser');
         $routes->post('delete', 'Admin\UserController::deleteUser');
     });
