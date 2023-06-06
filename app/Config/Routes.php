@@ -79,7 +79,7 @@ $routes->group('/', function ($routes) {
             });
         $routes->get('', 'Admin\UserController::indexUser');
         $routes->post('add', 'Admin\UserController::insertUser');
-        $routes->post('update', 'Admin\UserController::updateUser');
+        $routes->get('update/(:num)', 'Admin\UserController::updateUser/$1');
         $routes->post('delete', 'Admin\UserController::deleteUser');
     });
     $routes->group('settings', function ($routes) {

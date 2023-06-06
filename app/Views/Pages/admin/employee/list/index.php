@@ -48,3 +48,48 @@
     </div>
 </section>
 <?php echo view('Pages/modals/listuser.php');?>
+
+<script>
+  $(document).ready(function(){
+    
+    $('.updateUser').on('click', function(){
+      $id = $(this).attr('data-id');
+      $.ajax({
+        url: '<?= site_url('employee/update/')?>'+ $id,
+        type: 'GET',
+        success: function(hasil){
+          var $data = $.parseJSON(hasil);
+          console.log($data)
+            $('#userName').val($data.username);
+            $('#userEmail').val($data.email);
+            $('#userNumber').val($data.user_number);
+            $('#userNames').val($data.user_name);
+            $('#userPhoneNumber').val($data.phone_number);
+            $('#userAddress').val($data.user_address);
+        }
+      })
+    })
+
+    $('.infoUser').on('click', function(){
+      $id = $(this).attr('data-id');
+      $.ajax({
+        url: '<?= site_url('employee/update/')?>'+ $id,
+        type: 'GET',
+        success: function(hasil){
+          var data = $.parseJSON(hasil);
+            $('#iuserName').text(data.username);
+            $('#iuserEmail').text(data.email);
+            $('#iuserStatus').text(data.active);
+            $('#iuserRole').text(data.user_role);
+            $('#iuserNumber').text(data.user_number);
+            $('#iuserNames').text(data.user_name);
+            $('#iuserGender').text(data.sex);
+            $('#iuserPhoneNumber').text(data.phone_number);
+            $('#iuserAddress').text(data.user_address);
+            $('#iuserPosition').text(data.position_name);
+        }
+      })
+    })
+    
+  })
+</script>

@@ -50,19 +50,22 @@ class UserController extends BaseController
         session()->setFlashData('message', 'Data berhasil diinput');
         return redirect()->to(base_url().'employee');
     }
-    public function updateUser(){
-        $id = $this->request->getPost('userId');
-        $data = array(
-            'user_id'           => $this->request->getPost('userUser'),
-            'user_id'           => $this->request->getPost('userAid'),
-            'type'              => $this->request->getPost('userType'),
-            'effective_date'    => $this->request->getPost('userDate'),
-            'amount'            => $this->request->getPost('userAmount')
-        );
+    public function updateUser($id){
+        $result = $this->list->select('users.name as user_name, positions.name as position_name, email, position_id, sex, phone_number,user_number, user_address, user_role, username, active')->where('users.id', $id)->join('positions', 'users.position_id = positions.id')->find();
+        return json_encode($result[0]);
 
-        $this->list->updateUser($data, $id);
-        session()->setFlashData('message', 'Data berhasil diperbarui');
-        return redirect()->to(base_url().'employee');
+        // $id = $this->request->getPost('userId');
+        // $data = array(
+        //     'user_id'           => $this->request->getPost('userUser'),
+        //     'user_id'           => $this->request->getPost('userAid'),
+        //     'type'              => $this->request->getPost('userType'),
+        //     'effective_date'    => $this->request->getPost('userDate'),
+        //     'amount'            => $this->request->getPost('userAmount')
+        // );
+
+        // $this->list->updateUser($data, $id);
+        // session()->setFlashData('message', 'Data berhasil diperbarui');
+        // return redirect()->to(base_url().'employee');
     }
     public function deleteUser(){
         $id = $this->request->getPost('userId');

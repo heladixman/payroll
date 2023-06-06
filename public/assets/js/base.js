@@ -214,10 +214,6 @@ $(document).ready(function () {
             datebutton.classList.add("d-none")
         }
     })
-
-    $('.infoUser').on('click', function(){
-        alert('button info')
-    })
-
+    
 });
 

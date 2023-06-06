@@ -8,7 +8,7 @@
         </div>
         <div class="modal-body">
           <div class="row">
-          <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-3">
               <label class="form-label align-self-center mb-2 w-50 fw-bold fs-5">Account</label>
               <div class="d-flex justify-content-between mb-3">
                 <input type="hidden" id="userId" name="userId">
@@ -180,49 +180,51 @@
         </div>
         <div class="modal-body">
           <div class="row">
-            <div class="col mb-3">
-            <input type="hidden" id="userId" name="userId">
-              <div class="d-flex justify-content-between mb-3">
-                <label class="form-label align-self-center mb-0 w-50">Employee Number</label>
-                <input type="text" class="form-control w-65" name="userDate" id="userDate">
+            <div class="col-md-6 mb-3">
+              <label class="form-label align-self-center mb-2 w-50 fw-bold fs-5">Account</label>
+              <div class="d-flex mb-3">
+                <label class="form-label w-25">Username :</label>
+                <label class="form-label w-25 fw-bold" name="iuserName" id="iuserName"></label>
               </div>
-              <div class="d-flex justify-content-between mb-3">
-                <label class="form-label align-self-center mb-0 w-50">Employee Name</label>
-                <input type="text" class="form-control w-65" name="userDate" id="userDate">
+              <div class="d-flex mb-3">
+                <label class="form-label w-25">Email :</label>
+                <label class="form-label w-25 fw-bold" name="iuserEmail" id="iuserEmail"></label>
               </div>
-              <div class="d-flex justify-content-between mb-3">
-                <label class="form-label align-self-center mb-0 w-50">Phone Number</label>
-                <input type="text" class="form-control w-65" name="userDate" id="userDate">
+              <div class="d-flex mb-3">
+                <label class="form-label w-25">Status :</label>
+                <label class="form-label w-25 fw-bold" name="iuserStatus" id="iuserStatus"></label>
               </div>
-              <div class="d-flex justify-content-between mb-3">
-                <label class="form-label align-self-center mb-0 w-50">Gender</label>
-                <select class="form-select w-65" name="allowanceUId" id="allowanceUId" required>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </select>
+              <div class="d-flex mb-3">
+                <label class="form-label w-25">Role :</label>
+                <label class="form-label w-25 fw-bold" name="iuserRole" id="iuserRole"></label>
               </div>
-              <div class="d-flex justify-content-between mb-3">
-                <label class="form-label align-self-center mb-0 w-50">Position</label>
-                <select name="allowanceAid" id="allowanceAid" class="form-select w-65" required>
-                  <?php foreach($listposition as $data){ ?>
-                    <option value="<?= $data->id?>"><?= $data->name ?></option>
-                    <?php }?>
-                  </select>
-                </div>
-                <div class="d-flex justify-content-between mb-3">
-                  <label class="form-label align-self-center mb-0 w-50">Role</label>
-                  <select class="form-select w-65" name="allowanceUId" id="allowanceUId" required>
-                    <option value="admin">Admin</option>
-                    <option value="user">User</option>
-                  </select>
-                </div>
-              <div class="d-flex justify-content-between mb-3">
-                <label class="form-label align-self-center mb-0 w-50">Address</label>
-                <textarea class="form-control w-65" id="allowanceDescription" name="allowanceDescription" rows="5"></textarea>
+              <div class="d-flex mb-3">
+                <label class="form-label w-25">Position :</label>
+                <label class="form-label w-50 fw-bold" name="iuserPosition" id="iuserPosition"></label>
               </div>
-            <input type="hidden" class="form-control w-65" name="userTotaluser" id="userTotaluser">
-            <input type="hidden" class="form-control w-65" name="userStatus" id="userStatus">
             </div>
+            <div class="col-md-6">
+              <label class="form-label align-self-center mb-2 w-50 fw-bold fs-5">Employee</label>
+              <div class="d-flex mb-3">
+                <label class="form-label w-25">Number :</label>
+                <label class="form-label w-25 fw-bold" name="iuserNumber" id="iuserNumber"></label>
+              </div>
+              <div class="d-flex mb-3">
+                <label class="form-label w-25">Name :</label>
+                <label class="form-label w-25 fw-bold" name="iuserNames" id="iuserNames"></label>
+              </div>
+              <div class="d-flex mb-3">
+                <label class="form-label w-25">Phone Number :</label>
+                <label class="form-label w-25 fw-bold" name="iuserPhoneNumber" id="iuserPhoneNumber"></label>
+              </div>
+              <div class="d-flex mb-3">
+                <label class="form-label w-25">Gender :</label>
+                <label class="form-label w-25 fw-bold" name="iuserGender" id="iuserGender"></label>
+              </div>
+              <div class="d-flex mb-3">
+                <label class="form-label w-25">Address :</label>
+                <label class="form-label w-50 fw-bold" name="iuserAddress" id="iuserAddress"></label>
+              </div>
           </div>
         </div>
       </div>
