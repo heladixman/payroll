@@ -78,6 +78,7 @@ $routes->group('/', function ($routes) {
             $routes->post('delete', 'Admin\LeaveController::deleteLeave');
             });
         $routes->get('', 'Admin\UserController::indexUser');
+        $routes->get('data/(:num)', 'Admin\UserController::dataUser/$1');
         $routes->post('add', 'Admin\UserController::insertUser');
         $routes->get('update/(:num)', 'Admin\UserController::updateUser/$1');
         $routes->post('delete', 'Admin\UserController::deleteUser');
@@ -85,6 +86,7 @@ $routes->group('/', function ($routes) {
     $routes->group('settings', function ($routes) {
         $routes->group('allowance', static function ($routes) {
             $routes->post('add', 'Admin\SettingsController::insertAllowance');
+            $routes->get('data/(:num)', 'Admin\SettingsController::getAllowance/$1');
             $routes->post('update', 'Admin\SettingsController::updateAllowance');
             $routes->post('delete', 'Admin\SettingsController::deleteAllowance');
         });

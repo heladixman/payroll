@@ -19,7 +19,7 @@
         </div>
         <div class="col card text-left" style="width: 18rem;">
             <div class="card-body">
-                <a href="/employee/bonus" class="d-flex">
+                <a href="/employee/attendance" class="d-flex">
                     <div>
                         <span class="my-0 text-dark">Absent</span>
                         <h1 class="card-text text-left"><?= $absent ?></h1>
@@ -29,7 +29,7 @@
         </div>
         <div class="col card text-left" style="width: 18rem;">
             <div class="card-body">
-            <a href="/employee/bonus" class="d-flex">
+            <a href="/employee/attendance" class="d-flex">
                     <div>
                         <span class="my-0 text-dark">Leave</span>
                         <h1 class="card-text text-left"><?= $leave ?></h1>
@@ -39,7 +39,7 @@
         </div>
         <div class="col card text-left" style="width: 18rem;">
             <div class="card-body">
-            <a href="/employee/bonus" class="d-flex">
+            <a href="/employee/attendance" class="d-flex">
                     <div>
                         <span class="my-0 text-dark">Total</span>
                         <h1 class="card-text text-left"><?= $total ?></h1>

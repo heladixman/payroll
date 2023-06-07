@@ -63,7 +63,12 @@ class SettingsController extends BaseController
         session()->setFlashData('message', 'Data berhasil diinput');
         return redirect()->to(base_url().'settings');
     }
+    public function getAllowance($id){
+        $result = $this->allowance->find($id);
+        return json_encode($result);
+    }
     public function updateAllowance(){
+        
         $id   = $this->request->getPost('allowanceId');
         $data = array(
             'name'        => $this->request->getPost('allowanceName'),

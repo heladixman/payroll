@@ -21,7 +21,7 @@
                         <td><?php echo $no++ ?></td>
                         <td><div class="fw-bold fs-bold"><?= $d['name'] ?></div><div><p>Description: <?= $d['description'] ?></p></div></td>
                         <td>
-                              <button type="button" class='btn btn-second updateAllowance' data-bs-toggle="modal" data-bs-target="#editAllowance" data-id="<?= $d['id']?>" data-name="<?= $d['name']?>" data-description="<?= $d['description']?>">
+                              <button type="button" class='btn btn-second updateAllowance' data-bs-toggle="modal" data-bs-target="#editAllowance" data-id="<?= $d['id']?>">
                                 <span class="align-items-center me-1"><i class="fa-solid fa-pencil fa-xs"></i></span><span>Edit</span>
                               </button>
                               <button type="button" class="btn btn-third deleteAllowance" data-bs-toggle="modal" data-bs-target="#deleteAllowance" data-id="<?= $d['id']?>">
@@ -36,4 +36,35 @@
         </div>
     </div>
 </section>
-<?php echo view('Pages/modals/allowance.php');?>
+<?php echo view('Pages/modals/allowance');?>
+
+<script>
+  $(document).ready(function(){
+    let id = $('.updateAllowance').attr('data-id');
+
+    $('.updateAllowance').on('click', function(){
+      $.ajax({
+        url: '<?= site_url('settings/allowance/data/')?>'+ id,
+        type: 'GET',
+        success: function(hasil){
+          var data = $.parseJSON(hasil);
+            $('#allowanceId').val(data.id);
+            $('#allowanceName').val(data.name);
+            $('#allowanceDescription').val(data.description);
+        }
+      })
+    })
+
+    $('.deleteAllowance').on('click', function(){
+      $.ajax({
+        url: '<?= site_url('settings/allowance/data/')?>'+ id,
+        type: 'GET',
+        success: function(hasil){
+          var data = $.parseJSON(hasil);
+            $('#allowanceid').val(data.id);
+        }
+      })
+    })
+    
+  })
+</script>

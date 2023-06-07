@@ -32,19 +32,6 @@ $(document).ready(function () {
     $('#salary_table').DataTable();
     $('#webdata_table').DataTable();
 
-    $('.updateAllowance').on('click', function(){
-        var allowance_id = $(this).data('id')
-        var allowance_name = $(this).data('name')
-        var allowance_description = $(this).data('description');
-        $('#allowanceId').val(allowance_id);
-        $('#allowanceName').val(allowance_name);
-        $('#allowanceDescription').val(allowance_description);
-    });
-    $('.deleteAllowance').on('click', function(){
-        var allowance_id = $(this).data('id')
-        $('#allowanceid').val(allowance_id);
-    });
-
     $('.updateBonus').on('click', function(){
         var bonus_id = $(this).data('id')
         var bonus_name = $(this).data('name')

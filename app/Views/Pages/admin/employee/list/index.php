@@ -55,11 +55,10 @@
     $('.updateUser').on('click', function(){
       $id = $(this).attr('data-id');
       $.ajax({
-        url: '<?= site_url('employee/update/')?>'+ $id,
+        url: '<?= site_url('employee/data/')?>'+ $id,
         type: 'GET',
         success: function(hasil){
           var $data = $.parseJSON(hasil);
-          console.log($data)
             $('#userName').val($data.username);
             $('#userEmail').val($data.email);
             $('#userNumber').val($data.user_number);
@@ -73,7 +72,7 @@
     $('.infoUser').on('click', function(){
       $id = $(this).attr('data-id');
       $.ajax({
-        url: '<?= site_url('employee/update/')?>'+ $id,
+        url: '<?= site_url('employee/data/')?>'+ $id,
         type: 'GET',
         success: function(hasil){
           var data = $.parseJSON(hasil);
