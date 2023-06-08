@@ -37,12 +37,11 @@
     </div>
 </section>
 <?php echo view('Pages/modals/allowance');?>
-
 <script>
   $(document).ready(function(){
-    let id = $('.updateAllowance').attr('data-id');
 
     $('.updateAllowance').on('click', function(){
+      id = $(this).attr('data-id');
       $.ajax({
         url: '<?= site_url('settings/allowance/data/')?>'+ id,
         type: 'GET',
@@ -56,6 +55,7 @@
     })
 
     $('.deleteAllowance').on('click', function(){
+      id = $(this).attr('data-id');
       $.ajax({
         url: '<?= site_url('settings/allowance/data/')?>'+ id,
         type: 'GET',

@@ -23,6 +23,8 @@
                         $date = date("Y-m-d", strtotime($d['datetime_log']));
                         $time = date("H-i-s", strtotime($d['datetime_log']));
                         $log_type = isset($lt_arr[$d['log_type']])? $lt_arr[$d['log_type']]: 'Unknown';
+                        $sample[$d['user_id']."_".$date]['details'] = array("eid"=>$d['user_id'],"name"=>$d['user_name'],"eno"=>$d['user_number'],"date"=>$date);
+                        die(var_dump($sample[$d['user_id']."_".$date]['details']))
                     ?>
                     <tr class="text-center">
                         <td><?php echo $no++ ?></td>
@@ -46,4 +48,4 @@
         </div>
     </div>
 </section>
-<?php echo view('Pages/modals/attendance.php');?>
+<?php echo view('Pages/modals/attendance');?>

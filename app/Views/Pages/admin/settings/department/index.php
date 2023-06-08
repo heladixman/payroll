@@ -25,7 +25,7 @@
                         <td><?= $d['vision'] ?></td>
                         <td><?= $d['mission'] ?></td>
                         <td>
-                              <button type="button" class='btn btn-second updateDepartment' data-bs-toggle="modal" data-bs-target="#editDepartment" data-id="<?= $d['id']?>" data-name="<?= $d['name']?>" data-contact="<?= $d['contact']?>" data-vision="<?= $d['vision']?>" data-mission="<?= $d['mission']?>">
+                              <button type="button" class='btn btn-second updateDepartment' data-bs-toggle="modal" data-bs-target="#editDepartment" data-id="<?= $d['id']?>">
                                 <span class="align-items-center me-1"><i class="fa-solid fa-pencil fa-xs"></i></span><span>Edit</span>
                               </button>
                               <button type="button" class="btn btn-third deleteDepartment" data-bs-toggle="modal" data-bs-target="#deleteDepartment" data-id="<?= $d['id']?>">
@@ -40,4 +40,37 @@
         </div>
     </div>
 </section>
-<?php echo view('Pages/modals/department.php');?>
+<?php echo view('Pages/modals/department');?>
+<script>
+  $(document).ready(function(){
+
+    $('.updateDepartment').on('click', function(){
+      id = $(this).attr('data-id');
+      $.ajax({
+        url: '<?= site_url('settings/department/data/')?>'+ id,
+        type: 'GET',
+        success: function(hasil){
+          var data = $.parseJSON(hasil);
+              $('#departmentId').val(data.id);
+              $('#departmentName').val(data.name);
+              $('#departmentContact').val(data.contact);
+              $('#departmentVision').val(data.vision);
+              $('#departmentMission').val(data.mission);
+        }
+      })
+    })
+
+    $('.deleteDepartment').on('click', function(){
+      id = $(this).attr('data-id');
+      $.ajax({
+        url: '<?= site_url('settings/department/data/')?>'+ id,
+        type: 'GET',
+        success: function(hasil){
+          var data = $.parseJSON(hasil);
+            $('#departmentid').val(data.id);
+        }
+      })
+    })
+    
+  })
+</script>

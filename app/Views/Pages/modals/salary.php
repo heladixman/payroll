@@ -21,7 +21,6 @@
               <div class="d-flex justify-content-between mb-3">
                 <label class="form-label align-self-center mb-0 w-50">Amount Salary</label>
                 <input type="number" class="form-control w-65 salaryFormat" name="salaryAmount" id="salaryAmount" oninput="annualCount()">
-                <input type="hidden" class="form-control w-65 salaryFormat" name="salaryAnnual" id="salaryAnnual">
               </div>
             </div>
           </div>

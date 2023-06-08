@@ -25,7 +25,7 @@
                         <td><?= $d['description'] ?></td>
                         <td><span>Rp<?= number_format($d['salary_start'], 0, '', '.') ?></span> - <span>Rp<?= number_format($d['salary_end'], 0, '', '.') ?></span></td>
                         <td>
-                              <button type="button" class='btn btn-second updatePosition' data-bs-toggle="modal" data-bs-target="#editPosition" data-id="<?= $d['id']?>" data-name="<?= $d['position_name']?>" data-department="<?= $d['position_department']?>" data-description="<?= $d['description']?>" data-start="<?= $d['salary_start']?>" data-end="<?= $d['salary_end']?>">
+                              <button type="button" class='btn btn-second updatePosition' data-bs-toggle="modal" data-bs-target="#editPosition" data-id="<?= $d['id']?>">
                                 <span class="align-items-center me-1"><i class="fa-solid fa-pencil fa-xs"></i></span><span>Edit</span>
                               </button>
                               <button type="button" class="btn btn-third deletePosition" data-bs-toggle="modal" data-bs-target="#deletePosition" data-id="<?= $d['id']?>">
@@ -40,4 +40,38 @@
         </div>
     </div>
 </section>
-<?php echo view('Pages/modals/position.php');?>
+<?php echo view('Pages/modals/position');?>
+<script>
+  $(document).ready(function(){
+
+    $('.updatePosition').on('click', function(){
+      id = $(this).attr('data-id');
+      $.ajax({
+        url: '<?= site_url('settings/position/data/')?>'+ id,
+        type: 'GET',
+        success: function(hasil){
+          var data = $.parseJSON(hasil);
+              $('#positionId').val(data.id);
+              $('#positionName').val(data.name);
+              $('#positionDepartment').val(data.department_id);
+              $('#positionDescription').val(data.description);
+              $('#positionSalaryStart').val(data.salary_start);
+              $('#positionSalaryEnd').val(data.salary_end);
+        }
+      })
+    })
+
+    $('.deletePosition').on('click', function(){
+      id = $(this).attr('data-id');
+      $.ajax({
+        url: '<?= site_url('settings/position/data/')?>'+ id,
+        type: 'GET',
+        success: function(hasil){
+          var data = $.parseJSON(hasil);
+            $('#positionid').val(data.id);
+        }
+      })
+    })
+    
+  })
+</script>

@@ -38,4 +38,8 @@ class WebData extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function updateWebData($data, $id){
+        $this->db->table('webdatas')->update(array('value' => $data), array('id' => $id));
+    }
 }

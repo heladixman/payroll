@@ -49,6 +49,7 @@ $routes->group('/', function ($routes) {
     $routes->group('employee', function ($routes) {
         $routes->group('attendance', static function ($routes) {
             $routes->get('', 'Admin\AttendanceController::indexAttendance');
+            $routes->get('data/(:num)', 'Admin\AttendanceController::getAttendance/$1');
             $routes->post('add', 'Admin\AttendanceController::insertAttendance');
             $routes->post('update', 'Admin\AttendanceController::updateAttendance');
             $routes->post('delete', 'Admin\AttendanceController::deleteAttendance');
@@ -92,35 +93,42 @@ $routes->group('/', function ($routes) {
         });
         $routes->group('bonus', static function ($routes) {
             $routes->post('add', 'Admin\SettingsController::insertBonus');
+            $routes->get('data/(:num)', 'Admin\SettingsController::getBonus/$1');
             $routes->post('update', 'Admin\SettingsController::updateBonus');
             $routes->post('delete', 'Admin\SettingsController::deleteBonus');
         });
         $routes->group('deduction', static function ($routes) {
             $routes->post('add', 'Admin\SettingsController::insertDeduction');
+            $routes->get('data/(:num)', 'Admin\SettingsController::getDeduction/$1');
             $routes->post('update', 'Admin\SettingsController::updateDeduction');
             $routes->post('delete', 'Admin\SettingsController::deleteDeduction');
         });
         $routes->group('department', static function ($routes) {
             $routes->post('add', 'Admin\SettingsController::insertDepartment');
+            $routes->get('data/(:num)', 'Admin\SettingsController::getDepartment/$1');
             $routes->post('update', 'Admin\SettingsController::updateDepartment');
             $routes->post('delete', 'Admin\SettingsController::deleteDepartment');
         });
         $routes->group('payment-method', static function ($routes) {
             $routes->post('add', 'Admin\SettingsController::insertPaymentMethod');
+            $routes->get('data/(:num)', 'Admin\SettingsController::getPaymentMethod/$1');
             $routes->post('update', 'Admin\SettingsController::updatePaymentMethod');
             $routes->post('delete', 'Admin\SettingsController::deletePaymentMethod');
         });
         $routes->group('position', static function ($routes) {
             $routes->post('add', 'Admin\SettingsController::insertPosition');
+            $routes->get('data/(:num)', 'Admin\SettingsController::getPosition/$1');
             $routes->post('update', 'Admin\SettingsController::updatePosition');
             $routes->post('delete', 'Admin\SettingsController::deletePosition');
         });
         $routes->group('salary', static function ($routes) {
             $routes->post('add', 'Admin\SettingsController::insertSalary');
+            $routes->get('data/(:num)', 'Admin\SettingsController::getSalary/$1');
             $routes->post('update', 'Admin\SettingsController::updateSalary');
             $routes->post('delete', 'Admin\SettingsController::deleteSalary');
         });
         $routes->group('web-data', static function ($routes) {
+            $routes->get('data/(:num)', 'Admin\SettingsController::getWebData/$1');
             $routes->post('update', 'Admin\SettingsController::updateWebData');
         });
     $routes->get('', 'Admin\SettingsController::index');

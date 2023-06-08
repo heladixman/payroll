@@ -24,7 +24,7 @@
                         <td><?= $d['value'] ?></td>
                         <td><?= date('Y-m-d', strtotime($d['updateAt']))  ?></td>
                         <td>
-                              <button type="button" class='btn btn-second' id="editAllowance" data-id="<?= $d['id']?>">
+                              <button type="button" class='btn btn-second updateWebData' data-bs-toggle="modal" data-bs-target="#editWebData" data-id="<?= $d['id']?>">
                               <span class="align-items-center me-1"><i class="fa-solid fa-pencil fa-xs"></i></span><span>Edit</span>
                               </button>
                         </td>                             
@@ -36,3 +36,22 @@
         </div>
     </div>
 </section>
+<?php echo view('Pages/modals/webdatas');?>
+<script>
+  $(document).ready(function(){
+
+    $('.updateWebData').on('click', function(){
+      id = $(this).attr('data-id');
+      $.ajax({
+        url: '<?= site_url('settings/web-data/data/')?>'+ id,
+        type: 'GET',
+        success: function(hasil){
+          var data = $.parseJSON(hasil);
+              $('#webdataId').val(data.id);
+              $('#webdataValue').val(data.value);
+        }
+      })
+    })
+    
+  })
+</script>

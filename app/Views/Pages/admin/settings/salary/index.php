@@ -25,7 +25,7 @@
                         <td><span>Rp<?= number_format($d['amount'], 0, '', '.') ?></span></td>
                         <td><span>Rp<?= number_format($d['annual'], 0, '', '.') ?></span></td>
                         <td>
-                              <button type="button" class='btn btn-second updateSalary' data-bs-toggle="modal" data-bs-target="#editSalary" data-id="<?= $d['id']?>" data-name="<?= $d['position_id']?>" data-amount="<?= $d['amount']?>" data-annual="<?= $d['annual']?>">
+                              <button type="button" class='btn btn-second updateSalary' data-bs-toggle="modal" data-bs-target="#editSalary" data-id="<?= $d['id']?>">
                                 <span class="align-items-center me-1"><i class="fa-solid fa-pencil fa-xs"></i></span><span>Edit</span>
                               </button>
                               <button type="button" class="btn btn-third deleteSalary" data-bs-toggle="modal" data-bs-target="#deleteSalary" data-id="<?= $d['id']?>">
@@ -40,4 +40,36 @@
         </div>
     </div>
 </section>
-<?php echo view('Pages/modals/salary.php');?>
+<?php echo view('Pages/modals/salary');?>
+<script>
+  $(document).ready(function(){
+
+    $('.updateSalary').on('click', function(){
+      id = $(this).attr('data-id');
+      $.ajax({
+        url: '<?= site_url('settings/salary/data/')?>'+ id,
+        type: 'GET',
+        success: function(hasil){
+          var data = $.parseJSON(hasil);
+              $('#salaryId').val(data.id);
+              $('#salaryPositionId').val(data.position_id);
+              $('#salaryAmount').val(data.amount);
+              $('#salaryAnnual').val(data.annual);
+        }
+      })
+    })
+
+    $('.deleteSalary').on('click', function(){
+      id = $(this).attr('data-id');
+      $.ajax({
+        url: '<?= site_url('settings/salary/data/')?>'+ id,
+        type: 'GET',
+        success: function(hasil){
+          var data = $.parseJSON(hasil);
+            $('#salaryid').val(data.id);
+        }
+      })
+    })
+    
+  })
+</script>

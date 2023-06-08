@@ -100,6 +100,10 @@ class SettingsController extends BaseController
         session()->setFlashData('message', 'Data berhasil diinput');
         return redirect()->to(base_url().'settings');
     }
+    public function getBonus($id){
+        $result = $this->bonus->find($id);
+        return json_encode($result);
+    }
     public function updateBonus(){
         $id   = $this->request->getPost('bonusId');
         $data = array(
@@ -131,6 +135,10 @@ class SettingsController extends BaseController
         $this->deduction->insertDeduction($data);
         session()->setFlashData('message', 'Data berhasil diinput');
         return redirect()->to(base_url().'settings');
+    }
+    public function getDeduction($id){
+        $result = $this->deduction->find($id);
+        return json_encode($result);
     }
     public function updateDeduction(){
         $id   = $this->request->getPost('deductionId');
@@ -164,6 +172,10 @@ class SettingsController extends BaseController
         $this->departments->insertDepartment($data);
         session()->setFlashData('message', 'Data berhasil diinput');
         return redirect()->to(base_url().'settings');
+    }
+    public function getDepartment($id){
+        $result = $this->departments->find($id);
+        return json_encode($result);
     }
     public function updateDepartment(){
         $id   = $this->request->getPost('departmentId');
@@ -201,6 +213,10 @@ class SettingsController extends BaseController
         session()->setFlashData('message', 'Data berhasil diinput');
         return redirect()->to(base_url().'settings');
     }
+    public function getPosition($id){
+        $result = $this->position->find($id);
+        return json_encode($result);
+    }
     public function updatePosition(){
         $id   = $this->request->getPost('positionId');
         $data = array(
@@ -236,6 +252,10 @@ class SettingsController extends BaseController
         $this->paymentmethod->insertPaymentMethod($data);
         session()->setFlashData('message', 'Data berhasil diinput');
         return redirect()->to(base_url().'settings');
+    }
+    public function getPaymentMethod($id){
+        $result = $this->paymentmethod->find($id);
+        return json_encode($result);
     }
     public function updatePaymentMethod(){
         $id   = $this->request->getPost('paymentMethodId');
@@ -273,12 +293,18 @@ class SettingsController extends BaseController
         session()->setFlashData('message', 'Data berhasil diinput');
         return redirect()->to(base_url().'settings');
     }
+    public function getSalary($id){
+        $result = $this->salary->find($id);
+        return json_encode($result);
+    }
     public function updateSalary(){
         $id   = $this->request->getPost('salaryId');
+        $amount = $this->request->getPost('salaryAmount');
+
         $data = array(
             'position_id'   => $this->request->getPost('salaryPositionId'),
-            'amount'        => $this->request->getPost('salaryAmount'),
-            'annual'        => $this->request->getPost('salaryAnnual')
+            'amount'        => $amount,
+            'annual'        => $amount * 12
         );
 
         $this->salary->updateSalary($data, $id);
@@ -290,6 +316,20 @@ class SettingsController extends BaseController
 
         $this->salary->deleteSalary($id);
         session()->setFlashData('message', 'Data berhasil dihapus');
+        return redirect()->to(base_url().'settings');
+    }
+
+    // Function for Web Data
+    public function getWebData($id){
+        $result = $this->webdata->find($id);
+        return json_encode($result);
+    }
+    public function updateWebData(){
+        $id    = $this->request->getPost('webdataId');
+        $data  = $this->request->getPost('webdataValue');
+
+        $this->webdata->updateWebData($data, $id);
+        session()->setFlashData('message', 'Data berhasil diperbarui');
         return redirect()->to(base_url().'settings');
     }
 }

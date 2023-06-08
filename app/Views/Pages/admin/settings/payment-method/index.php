@@ -27,7 +27,7 @@
                             <td><?= $d['number'] ?></td>
                         <?php endif; ?>
                         <td>
-                          <button type="button" class='btn btn-second updatePaymentMethod' data-bs-toggle="modal" data-bs-target="#editPaymentMethod" data-id="<?= $d['id']?>" data-name="<?= $d['name']?>" data-number="<?= $d['number']?>" data-description="<?= $d['description']?>" >
+                          <button type="button" class='btn btn-second updatePaymentMethod' data-bs-toggle="modal" data-bs-target="#editPaymentMethod" data-id="<?= $d['id']?>">
                             <span class="align-items-center me-1"><i class="fa-solid fa-pencil fa-xs"></i></span><span>Edit</span>
                           </button>
                           <button type="button" class="btn btn-third deletePaymentMethod" data-bs-toggle="modal" data-bs-target="#deletePaymentMethod" data-id="<?= $d['id']?>">
@@ -42,4 +42,36 @@
         </div>
     </div>
 </section>
-<?php echo view('Pages/modals/paymentmethod.php');?>
+<?php echo view('Pages/modals/paymentmethod');?>
+<script>
+  $(document).ready(function(){
+
+    $('.updatePaymentMethod').on('click', function(){
+      id = $(this).attr('data-id');
+      $.ajax({
+        url: '<?= site_url('settings/payment-method/data/')?>'+ id,
+        type: 'GET',
+        success: function(hasil){
+          var data = $.parseJSON(hasil);
+              $('#paymentMethodId').val(data.id);
+              $('#paymentMethodName').val(data.name);
+              $('#paymentMethodNumber').val(data.number);
+              $('#paymentMethodDescription').val(data.description);
+        }
+      })
+    })
+
+    $('.deletePaymentMethod').on('click', function(){
+      id = $(this).attr('data-id');
+      $.ajax({
+        url: '<?= site_url('settings/payment-method/data/')?>'+ id,
+        type: 'GET',
+        success: function(hasil){
+          var data = $.parseJSON(hasil);
+            $('#paymentMethodid').val(data.id);
+        }
+      })
+    })
+    
+  })
+</script>
