@@ -33,21 +33,6 @@ $(document).ready(function () {
     $('#webdata_table').DataTable();
 
     // not fixed yet
-    $('.updateAttendance').on('click', function(){
-        var attendance_id = $(this).data('id')
-        var attendance_user = $(this).data('user');
-        var attendance_type = $(this).data('type');
-        var attendance_time = $(this).data('time');
-        $('#attendanceId').val(attendance_id);
-        $('#attendanceUser').val(attendance_user);
-        $('#attendanceAmount').val(attendance_type);
-        $('#attendanceAnnual').val(attendance_time);
-    });
-    $('.deleteAttendance').on('click', function(){
-        var attendance_id = $(this).data('id')
-        $('#attendanceid').val(attendance_id);
-    });
-
     $('.updateUserAllowance').on('click', function(){
         var allowance_id = $(this).data('id')
         var allowance_user = $(this).data('name')

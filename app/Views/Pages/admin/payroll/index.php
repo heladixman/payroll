@@ -58,4 +58,4 @@
         </div>
     </div>
 </section>
-<?php echo view('Pages/modals/payroll.php');?>
+<?php echo view('Pages/modals/payroll');?>

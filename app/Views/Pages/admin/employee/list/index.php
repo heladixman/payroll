@@ -58,13 +58,18 @@
         url: '<?= site_url('employee/data/')?>'+ $id,
         type: 'GET',
         success: function(hasil){
-          var $data = $.parseJSON(hasil);
-            $('#userName').val($data.username);
-            $('#userEmail').val($data.email);
-            $('#userNumber').val($data.user_number);
-            $('#userNames').val($data.user_name);
-            $('#userPhoneNumber').val($data.phone_number);
-            $('#userAddress').val($data.user_address);
+          var data = $.parseJSON(hasil);
+            $('#userId').val(data.id);
+            $('#userName').val(data.username);
+            $('#userEmail').val(data.email);
+            $('#userStatus').val(data.active);
+            $('#userRole').val(data.user_role);
+            $('#userNumber').val(data.user_number);
+            $('#userNames').val(data.user_name);
+            $('#userPhoneNumber').val(data.phone_number);
+            $('#userGender').val(data.sex);
+            $('#userPosition').val(data.position_id);
+            $('#userAddress').val(data.user_address);
         }
       })
     })
@@ -74,18 +79,31 @@
       $.ajax({
         url: '<?= site_url('employee/data/')?>'+ $id,
         type: 'GET',
+        dataType: 'JSON',
         success: function(hasil){
-          var data = $.parseJSON(hasil);
+          var data = hasil.user
             $('#iuserName').text(data.username);
             $('#iuserEmail').text(data.email);
-            $('#iuserStatus').text(data.active);
             $('#iuserRole').text(data.user_role);
+            $('#iuserStatus').text(data.active);
             $('#iuserNumber').text(data.user_number);
             $('#iuserNames').text(data.user_name);
             $('#iuserGender').text(data.sex);
             $('#iuserPhoneNumber').text(data.phone_number);
             $('#iuserAddress').text(data.user_address);
             $('#iuserPosition').text(data.position_name);
+        }
+      })
+    })
+
+    $('.deleteUser').on('click', function(){
+      $id = $(this).attr('data-id');
+      $.ajax({
+        url: '<?= site_url('employee/data/')?>'+ $id,
+        type: 'GET',
+        success: function(hasil){
+          var data = $.parseJSON(hasil);
+            $('#userid').val(data.id);
         }
       })
     })

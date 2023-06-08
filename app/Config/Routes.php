@@ -53,6 +53,7 @@ $routes->group('/', function ($routes) {
             $routes->post('add', 'Admin\AttendanceController::insertAttendance');
             $routes->post('update', 'Admin\AttendanceController::updateAttendance');
             $routes->post('delete', 'Admin\AttendanceController::deleteAttendance');
+            $routes->post('singledelete', 'Admin\AttendanceController::deleteSingleAttendance');
         });
         $routes->group('allowance', static function ($routes) {
             $routes->get('', 'Admin\UserAllowanceController::indexAllowance');

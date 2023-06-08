@@ -51,7 +51,10 @@ class Attendance extends Model
         $this->db->table('attendances')->update($data, array('id' => $id));
     }
 
-    public function deleteAttendance($id){
+    public function deleteAttendance($id, $date){
+        $this->db->table('attendances')->where('DATE(datetime_log)', $date)->where('user_id', $id)->delete();
+    }
+    public function deleteSingleAttendance($id){
         $this->db->table('attendances')->delete(array('id' => $id));
     }
 }

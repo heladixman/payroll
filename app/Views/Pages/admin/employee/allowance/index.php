@@ -48,4 +48,4 @@
         </div>
     </div>
 </section>
-<?php echo view('Pages/modals/userallowance.php');?>
+<?php echo view('Pages/modals/userallowance');?>

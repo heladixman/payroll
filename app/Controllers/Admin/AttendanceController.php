@@ -52,9 +52,17 @@ class AttendanceController extends BaseController
         return redirect()->to(base_url().'employee/attendance');
     }
     public function deleteAttendance(){
-        $id = $this->request->getPost('attendanceId');
+        $id  = $this->request->getPost('attendanceId');
+        $date  = $this->request->getPost('attendanceDate');
 
-        $this->attendance->deleteAttendance($id);
+        $this->attendance->deleteAttendance($id, $date);
+        session()->setFlashData('message', 'Data berhasil dihapus');
+        return redirect()->to(base_url().'employee/attendance');
+    }
+    public function deleteSingleAttendance(){
+        $id = $this->request->getPost('attendanceIdSingle');
+
+        $this->attendance->deleteSingleAttendance($id);
         session()->setFlashData('message', 'Data berhasil dihapus');
         return redirect()->to(base_url().'employee/attendance');
     }
