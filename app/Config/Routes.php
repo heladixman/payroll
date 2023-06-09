@@ -32,8 +32,9 @@ $routes->set404Override();
 
 $routes->group('/', function ($routes) {
     $routes->get('', 'User\IndexController::indexUser');
-    $routes->group('user', static function ($routes) {
-        $routes->get('', 'User\HomeController::index');
+    $routes->group('profile', static function ($routes) {
+        $routes->get('', 'User\IndexController::indexUser');
+        // $routes->get('', 'User\HomeController::index');
         $routes->get('profile', 'User\ProfileController::index');
         $routes->get('settings', 'User\SettingsController::index');
     });

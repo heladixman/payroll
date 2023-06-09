@@ -323,6 +323,10 @@ class SettingsController extends BaseController
     public function getWebData($id){
         $result = $this->webdata->find($id);
         return json_encode($result);
+
+        // // Method 2
+        // $result = $this->webdata->select('*')->where('id', $id)->get();
+        // return json_encode($result->getResultArray()[0]);
     }
     public function updateWebData(){
         $id    = $this->request->getPost('webdataId');

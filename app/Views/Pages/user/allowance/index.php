@@ -37,4 +37,4 @@
         </div>
     </div>
 </section>
-<?php echo view('Pages/modals/allowance.php');?>
+<?php echo view('Pages/modals/allowance');?>

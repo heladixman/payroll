@@ -4,7 +4,7 @@
     <div class="btn-first rounded-se w-100 p-2">Attendance</div>
         <div class="card-body"> 
           <div class="table-responsive text-nowrap">
-                <table class="table" id="salary_table">
+                <table class="table" id="attendance_table">
                   <thead>
                     <tr class="text-center">
                       <th>No</th>

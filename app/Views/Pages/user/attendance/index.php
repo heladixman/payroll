@@ -3,7 +3,7 @@
   <div class="btn-first rounded-se w-100 p-2">Allowance</div>
         <div class="card-body"> 
           <div class="table-responsive text-nowrap">
-                <table class="table" id="allowance_table">
+                <table class="table" id="attendance_table">
                   <thead>
                     <tr>
                       <th>No</th>

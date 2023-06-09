@@ -24,6 +24,7 @@ $(document).ready(function () {
     $('#payment_table').DataTable();
     $('#salary_table').DataTable();
     $('#webdata_table').DataTable();
+    $('#attendance_table').DataTable();
 
     // not fixed yet
     $('.updateUserAllowance').on('click', function(){
