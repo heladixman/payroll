@@ -197,4 +197,5 @@ class PayrollController extends BaseController
         session()->setFlashData('message', 'Data berhasil dihapus');
         return redirect()->to(base_url().'payroll');
     }
+    
 }

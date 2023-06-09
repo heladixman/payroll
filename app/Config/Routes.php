@@ -49,7 +49,6 @@ $routes->group('/', function ($routes) {
     $routes->group('employee', function ($routes) {
         $routes->group('attendance', static function ($routes) {
             $routes->get('', 'Admin\AttendanceController::indexAttendance');
-            $routes->get('data/(:num)', 'Admin\AttendanceController::getAttendance/$1');
             $routes->post('add', 'Admin\AttendanceController::insertAttendance');
             $routes->post('update', 'Admin\AttendanceController::updateAttendance');
             $routes->post('delete', 'Admin\AttendanceController::deleteAttendance');
