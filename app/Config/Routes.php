@@ -32,8 +32,6 @@ $routes->set404Override();
 
 $routes->group('/', function ($routes) {
     $routes->get('', 'User\IndexController::indexUser');
-    // $routes->get('signin', 'Auth\AuthController::login');
-    // $routes->get('signup', 'Auth\AuthController::register');
     $routes->group('user', static function ($routes) {
         $routes->get('', 'User\HomeController::index');
         $routes->get('profile', 'User\ProfileController::index');
@@ -76,8 +74,8 @@ $routes->group('/', function ($routes) {
         $routes->group('leave', static function ($routes) {
             $routes->get('', 'Admin\LeaveController::indexLeave');
             $routes->post('add', 'Admin\LeaveController::insertLeave');
-            $routes->post('update', 'Admin\LeaveController::updateLeave');
-            $routes->post('delete', 'Admin\LeaveController::deleteLeave');
+            $routes->post('approve', 'Admin\LeaveController::approveLeave');
+            $routes->post('decline', 'Admin\LeaveController::declineLeave');
             });
         $routes->get('', 'Admin\UserController::indexUser');
         $routes->get('data/(:num)', 'Admin\UserController::dataUser/$1');

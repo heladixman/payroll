@@ -9,7 +9,7 @@
                     <tr>
                       <th>No</th>
                       <th>Reff No</th>
-                      <th>Date From - Date To</th>
+                      <th>From - To</th>
                       <th>Status</th>
                       <th>Action</th>
                     </tr>

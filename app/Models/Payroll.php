@@ -44,14 +44,14 @@ class Payroll extends Model
     }
 
     public function insertPayroll($data){
-        $this->db->table('payroll')->insert($data);
+        $this->db->table('payrolls')->insert($data);
     }
 
     public function updatePayroll($data, $id){
-        $this->db->table('payroll')->update($data, array('id' => $id));
+        $this->db->table('payrolls')->update($data, array('id' => $id));
     }
 
     public function deletePayroll($id){
-        $this->db->table('payroll')->delete(array('id' => $id));
+        $this->db->table('payrolls')->delete(array('id' => $id));
     }
 }

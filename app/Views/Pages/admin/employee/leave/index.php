@@ -25,8 +25,7 @@
                         <td><?php echo $no++ ?></td>
                         <td><?= $d['user_name'] ?></td>
                         <td>
-                            <div><span>Leave Start :</span> <?= $d['leave_start'] ?></div>
-                            <div><span>Leave End :</span> <?= $d['leave_end'] ?></div>
+                            <div><?= date('d M, Y', strtotime($d['leave_start']))  ?> <span>Until</span> <?= date('d M, Y', strtotime($d['leave_end'])) ?></div>
                         </td>
                         <td><?= $d['reason'] ?></td>
                         <?php if($d['total_leave'] === '1'): ?>
@@ -34,17 +33,30 @@
                         <?php else: ?>
                             <td><?= $d['total_leave'] ?> Days</td>
                         <?php endif?>
-                        <td><?= $d['status_leave'] ?></td>
-                        <?php if($d['status_leave'] === 'pending'): ?>
+                        <?php if($d['status_leave'] === 'Pending'): ?>
+                            <td> <span class="bg-forth p-1 px-2 rounded"><?= $d['status_leave'] ?></span></td>
+                            <td>
+                                <button type="button" class='btn btn-sixth approveLeave' data-bs-toggle="modal" data-bs-target="#approveLeave" data-id="<?= $d['id']?>">
+                                    <span class="align-items-center me-1"></span><span>Prove</span>
+                                </button>
+                                <button type="button" class='btn btn-second approveLeave' data-bs-toggle="modal" data-bs-target="#approveLeave" data-id="<?= $d['id']?>">
+                                    <span class="align-items-center me-1"><i class="fa-solid fa-check"></i></span><span>Approve</span>
+                                </button>
+                                <button type="button" class="btn btn-third declineLeave" data-bs-toggle="modal" data-bs-target="#declineLeave" data-id="<?= $d['id']?>">
+                                    <span class="align-items-center me-1"><i class="fa-solid fa-xmark"></i></span><span>Decline</span>
+                                </button>
+                            </td>
+                        <?php elseif($d['status_leave'] === 'Decline'): ?>
+                            <td> <span class="bg-fifth p-1 px-2 rounded"><?= $d['status_leave'] ?></span></td>
                         <td>
-                            <button type="button" class='btn btn-second updateLeave' data-bs-toggle="modal" data-bs-target="#editLeave" data-id="<?= $d['id']?>">
-                                <span class="align-items-center me-1"><i class="fa-solid fa-pencil fa-xs"></i></span><span>Edit</span>
-                            </button>
-                            <button type="button" class="btn btn-third deleteLeave" data-bs-toggle="modal" data-bs-target="#deleteLeave" data-id="<?= $d['id']?>">
-                                <span class="align-items-center me-1"><i class="fa-solid fa-trash-can"></i></span><span>Delete</span>
-                            </button>
+                            <span>No Action</span>
                         </td>
-                        <?php endif?> 
+                        <?php else: ?>
+                            <td> <span class="bg-third p-1 px-2 rounded"><?= $d['status_leave'] ?></span></td>
+                        <td>
+                            <span>No Action</span>
+                        </td>
+                    <?php endif?> 
                     </tr>
                   <?php }?>
                   </tbody>
@@ -53,4 +65,21 @@
         </div>
     </div>
 </section>
-<?php echo view('Pages/modals/leave.php');?>
+<?php echo view('Pages/modals/leave');?>
+<script>
+  $(document).ready(function(){
+
+    $('.approveLeave').on('click', function(){
+      var id = $(this).attr('data-id');
+      console.log(id);
+      $('#leaveid').val(id);
+    })
+    
+    $('.declineLeave').on('click', function(){
+      var id = $(this).attr('data-id');
+      console.log(id)
+      $('#leaveid').val(id);
+    })
+    
+  })
+</script>

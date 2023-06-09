@@ -1,5 +1,5 @@
 <div class="modal fade" id="editPayroll" tabindex="-1" role="dialog" aria-hidden="true">
-  <?php echo form_open(site_url('settings/payroll/update'));?>
+  <?php echo form_open(site_url('payroll/update'));?>
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -39,7 +39,7 @@
 </div>
 
 <div class="modal fade" id="insertPayroll" tabindex="-1" role="dialog" aria-hidden="true">
-  <?php echo form_open(site_url('settings/payroll/add'));?>
+  <?php echo form_open(site_url('payroll/add'));?>
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -49,26 +49,26 @@
         <div class="modal-body">
           <div class="row">
             <div class="col mb-3">
-            <div class="d-flex justify-content-between mb-3">
-                <label class="form-label align-self-center mb-0 w-50">Payment</label>
-                <select name="payrollPositionId" id="payrollPositionId" class="form-select w-65" required>
-                  <?php foreach($listPayment as $data){ ?>
-                    <option value="<?= $data->id?>"><?= $data->name ?> <?= $data->number ?></option>
-                  <?php }?>
-                </select>
-            </div>
-            <div class="d-flex justify-content-between mb-3">
-               <label class="form-label align-self-center mb-0 w-50">Reff No.</label>
-               <input type="text" class="form-control w-65 salaryFormat" name="payrollAmount" id="payrollAmount" oninput="annualCount()">
-            </div>
-            <div class="d-flex justify-content-between mb-3">
-               <label class="form-label align-self-center mb-0 w-50">Date From</label>
-               <input type="date" class="form-control w-65 salaryFormat" name="payrollAmount" id="payrollAmount" oninput="annualCount()">
-            </div>
-            <div class="d-flex justify-content-between mb-3">
-               <label class="form-label align-self-center mb-0 w-50">Date To</label>
-               <input type="date" class="form-control w-65 salaryFormat" name="payrollAnnual" id="payrollAnnual">
-            </div>
+              <div class="d-flex justify-content-between mb-3">
+                <label class="form-label align-self-center mb-0 w-50">Date From</label>
+                <input type="date" class="form-control w-65 salaryFormat" name="payrollDateFrom" id="payrollDateFrom">
+              </div>
+              <div class="d-flex justify-content-between mb-3">
+                <label class="form-label align-self-center mb-0 w-50">Date To</label>
+                <input type="date" class="form-control w-65 salaryFormat" name="payrollDateTo" id="payrollDateTo">
+              </div>
+              <div class="d-flex justify-content-between mb-3">
+                  <label class="form-label align-self-center mb-0 w-50">Payment Method</label>
+                  <select class="form-select w-65" name="payrollPaymentMethod" id="payrollPaymentMethod" required>
+                    <?php foreach($listPayment as $data){ ?>
+                      <option value="<?= $data->id?>"><?= $data->name ?> <?= $data->number ?></option>
+                    <?php }?>
+                  </select>
+              </div>
+              <div class="d-flex justify-content-between mb-3">
+                <label for="allowanceDescription" class="form-label align-self-center mb-0 w-50">Comment</label>
+                <textarea class="form-control w-65" id="payrollComment" name="payrollComment" rows="5"></textarea>
+              </div>
             </div>
           </div>
         </div>
@@ -82,7 +82,7 @@
 </div>
 
 <div class="modal fade" id="deletePayroll" tabindex="-1" role="dialog" aria-labelledby="Modal Delete" aria-hidden="false">
-  <?php echo form_open(site_url('settings/payroll/delete'));?>
+  <?php echo form_open(site_url('payroll/delete'));?>
     <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">

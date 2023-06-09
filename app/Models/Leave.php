@@ -47,11 +47,7 @@ class Leave extends Model
         $this->db->table('leave')->insert($data);
     }
 
-    public function updateLeave($data, $id){
-        $this->db->table('leave')->update($data, array('id' => $id));
-    }
-
-    public function deleteLeave($id){
-        $this->db->table('leave')->delete(array('id' => $id));
+    public function approveLeave($id, $comment){
+        $this->db->table('leave')->update(array('id' => $id, 'comment'=> $comment, 'status'=> 'Decline'));
     }
 }

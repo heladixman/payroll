@@ -26,18 +26,22 @@ class PayrollController extends BaseController
         return view('Pages/admin/index', $Dashboard);
     }
 
-    public function insertSalary(){
+    public function insertPayroll(){
+        $reff_no = date('Y')."-".mt_rand(1,99999);
         $data = array(
-            'position_id'   => $this->request->getPost('salaryPositionId'),
-            'amount'        => $this->request->getPost('salaryAmount'),
-            'annual'        => $this->request->getPost('salaryAnnual')
+            'reff_no'           => $reff_no,
+            'date_from'         => $this->request->getPost('payrollDateFrom'),
+            'date_to'           => $this->request->getPost('payrollDateTo'),
+            'payment_method_id' => $this->request->getPost('payrollPaymentMethod'),
+            'comment'           => $this->request->getPost('payrollComment'),
+            'status'            => 'Pending',
         );
 
-        $this->salary->insertSalary($data);
+        $this->payroll->insertPayroll($data);
         session()->setFlashData('message', 'Data berhasil diinput');
         return redirect()->to(base_url().'settings');
     }
-    public function updateSalary(){
+    public function updatePayroll(){
         $id   = $this->request->getPost('salaryId');
         $data = array(
             'position_id'   => $this->request->getPost('salaryPositionId'),
@@ -45,14 +49,14 @@ class PayrollController extends BaseController
             'annual'        => $this->request->getPost('salaryAnnual')
         );
 
-        $this->salary->updateSalary($data, $id);
+        $this->payroll->updatePayroll($data, $id);
         session()->setFlashData('message', 'Data berhasil diperbarui');
         return redirect()->to(base_url().'settings');
     }
-    public function deleteSalary(){
+    public function deletePayroll(){
         $id   = $this->request->getPost('salaryId');
 
-        $this->salary->deleteSalary($id);
+        $this->payroll->deletePayroll($id);
         session()->setFlashData('message', 'Data berhasil dihapus');
         return redirect()->to(base_url().'settings');
     }

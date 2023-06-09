@@ -34,6 +34,10 @@ class Leave extends Migration
                 'type' => 'INT',
                 'default' => 1
             ],
+            'comment' => [
+                'type' => 'TEXT',
+                'null' => true
+            ],
             'status' => [
                 'type' => 'VARCHAR',
                 'constraint' => 100,
