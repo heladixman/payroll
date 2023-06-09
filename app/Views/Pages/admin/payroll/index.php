@@ -15,7 +15,6 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <?var_dump($payroll)?>
                   <?php
                     $no = 1;
                     foreach($payroll as $d) { 
@@ -25,28 +24,25 @@
                         <td><?= $d['reff_no'] ?></td>
                         <td><span><?= $d['date_from']?></span> - <span><?= $d['date_to']?></span></td>
                         <td><?= $d['status'] ?></td>
-                        <?php if($d['status'] == 'pending'): ?>
+                        <?php if($d['status'] == 'Pending'): ?>
                             <td>
-                            <button type="button" class='btn btn-icon btn-success updateSalary' data-bs-toggle="modal" data-bs-target="#editSalary" data-id="<?= $d['id']?>">
-                                    <i class="fa-solid fa-calculator"></i>
+                                <button type="button" class='btn btn-sixth calculatePayroll' data-id="<?= $d['id']?>" data-from="<?= $d['date_from']?>" data-to="<?= $d['date_to']?>">
+                                    <span class="align-items-center me-1"><i class="fa-solid fa-calculator"></i></span><span>Calculate</span>
                                 </button>
-                                <button type="button" class='btn btn-icon btn-success updateSalary' data-bs-toggle="modal" data-bs-target="#editSalary" data-id="<?= $d['id']?>">
-                                    <i class="fa-solid fa-pencil"></i>
+                                <button type="button" class='btn btn-second editPayroll' data-bs-toggle="modal" data-bs-target="#editPayroll" data-id="<?= $d['id']?>">
+                                    <span class="align-items-center me-1"><i class="fa-solid fa-pencil fa-xs"></i></span><span>Edit</span>
                                 </button>
-                                <button type="button" class="btn btn-icon btn-outline-danger deleteSalary" data-bs-toggle="modal" data-bs-target="#deleteSalary" data-id="<?= $d['id']?>">
-                                    <i class="fa-solid fa-trash"></i>
+                                <button type="button" class="btn btn-third deletePayroll" data-bs-toggle="modal" data-bs-target="#deletePayroll" data-id="<?= $d['id']?>">
+                                    <span class="align-items-center me-1"><i class="fa-solid fa-trash-can"></i></span><span>Delete</span>
                                 </button>
                             </td>
                         <?php else: ?>
                             <td>
-                                <button type="button" class='btn btn-icon btn-success updateSalary' data-bs-toggle="modal" data-bs-target="#editSalary" data-id="<?= $d['id']?>">
-                                    <i class="fa-solid fa-eye"></i>
+                                <button type="button" class='btn btn-sixth viewPayroll' data-id="<?= $d['id']?>">
+                                    <span class="align-items-center me-1"><i class="fa-solid fa-eye"></i></span><span>View</span>
                                 </button>
-                                <button type="button" class='btn btn-icon btn-success updateSalary' data-bs-toggle="modal" data-bs-target="#editSalary" data-id="<?= $d['id']?>">
-                                    <i class="fa-solid fa-pencil"></i>
-                                </button>
-                                <button type="button" class="btn btn-icon btn-outline-danger deleteSalary" data-bs-toggle="modal" data-bs-target="#deleteSalary" data-id="<?= $d['id']?>">
-                                    <i class="fa-solid fa-trash"></i>
+                                <button type="button" class="btn btn-third deletePayroll" data-bs-toggle="modal" data-bs-target="#deletePayroll" data-id="<?= $d['id']?>">
+                                    <span class="align-items-center me-1"><i class="fa-solid fa-trash-can"></i></span><span>Delete</span>
                                 </button>
                             </td>
                         <?php endif ?>
@@ -59,3 +55,30 @@
     </div>
 </section>
 <?php echo view('Pages/modals/payroll');?>
+<script>
+  $(document).ready(function(){
+    
+    $('#insertDataPayroll').submit(function(e){
+      e.preventDefault();
+      $.ajax({
+        url: '<?= site_url('payroll/data')?>',
+        method: 'POST',
+        success: function(hasil){
+          console.log(hasil)
+        }
+      })
+    })
+
+    $('.calculatePayroll').on('click', function(){
+      $.ajax({
+        url: '<?= site_url('payroll/calculate/')?>',
+        type: 'POST',
+        data:{id:$(this).attr('data-id'),dateFrom:$(this).attr('data-dateFrom'), dateTo:$(this).attr('data-id')},
+        success: function(hasil){
+            console.log(data)
+        }
+      })
+    })
+    
+  })
+</script>

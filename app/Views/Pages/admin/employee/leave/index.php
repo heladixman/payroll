@@ -11,7 +11,7 @@
                       <th>Employee Name</th>
                       <th>Leave Date</th>
                       <th>Reason</th>
-                      <th>Total Leave </th>
+                      <th>Total Leave</th>
                       <th>Status</th>
                       <th>Action</th>
                     </tr>
@@ -36,9 +36,11 @@
                         <?php if($d['status_leave'] === 'Pending'): ?>
                             <td> <span class="bg-forth p-1 px-2 rounded"><?= $d['status_leave'] ?></span></td>
                             <td>
-                                <button type="button" class='btn btn-sixth approveLeave' data-bs-toggle="modal" data-bs-target="#approveLeave" data-id="<?= $d['id']?>">
-                                    <span class="align-items-center me-1"></span><span>Prove</span>
-                                </button>
+                                <a href="<?= base_url().$d['prove']?>" target="_blank">
+                                    <button type="button" class='btn btn-sixth'>
+                                        <span class="align-items-center me-1"></span><span>Prove</span>
+                                    </button>                    
+                                </a>
                                 <button type="button" class='btn btn-second approveLeave' data-bs-toggle="modal" data-bs-target="#approveLeave" data-id="<?= $d['id']?>">
                                     <span class="align-items-center me-1"><i class="fa-solid fa-check"></i></span><span>Approve</span>
                                 </button>

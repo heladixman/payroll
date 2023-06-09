@@ -41,6 +41,7 @@ $routes->group('/', function ($routes) {
     $routes->group('payroll', static function ($routes) {
         $routes->get('', 'Admin\PayrollController::indexPayroll');
         $routes->post('add', 'Admin\PayrollController::insertPayroll');
+        $routes->post('calculate', 'Admin\PayrollController::calculatePayroll');
         $routes->post('update', 'Admin\PayrollController::updatePayroll');
         $routes->post('delete', 'Admin\PayrollController::deletePayroll');
     });

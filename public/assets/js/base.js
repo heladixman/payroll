@@ -6,13 +6,6 @@ function sidebar(){
     }, {once:true})
 };
 
-function annualCount() {
-    let amountInput = document.getElementById("salaryAmount").value;
-    
-    values = amountInput.value * 12
-    document.getElementById('salaryAnnual').value = values
-  }
-
   function profileDropdown(){
     var button1 = document.getElementById('profile-picture')
     var buttonDrop = document.getElementById('profile-dropdown')

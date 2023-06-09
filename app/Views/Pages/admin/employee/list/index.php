@@ -57,8 +57,10 @@
       $.ajax({
         url: '<?= site_url('employee/data/')?>'+ $id,
         type: 'GET',
+        dataType: 'JSON',
         success: function(hasil){
-          var data = $.parseJSON(hasil);
+          console.log(hasil)
+          var data = hasil.user;
             $('#userId').val(data.id);
             $('#userName').val(data.username);
             $('#userEmail').val(data.email);
@@ -81,6 +83,7 @@
         type: 'GET',
         dataType: 'JSON',
         success: function(hasil){
+          console.log(hasil)
           var data = hasil.user
             $('#iuserName').text(data.username);
             $('#iuserEmail').text(data.email);

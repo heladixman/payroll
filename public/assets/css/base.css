@@ -39,6 +39,9 @@
     box-sizing: border-box;
     box-shadow: 0 0 8px 1px rgba(0,123,255,.25)
   }
+  .w-22{
+    width: 22%!important;
+  }
 
   .m-20 {
     margin: 40px;

@@ -33,8 +33,8 @@
               <div class="d-flex justify-content-between mb-3">
                 <label class="form-label align-self-center mb-0 w-50">Role</label>
                 <select class="form-select w-65" name="userRole" id="userRole" required>
-                  <option value="user">User</option>
-                  <option value="admin">Admin</option>
+                  <option value="User">User</option>
+                  <option value="Admin">Admin</option>
                 </select>
               </div>
             </div>
@@ -42,7 +42,7 @@
               <label class="form-label align-self-center mb-2 w-50 fw-bold fs-5">Employee</label>
               <div class="d-flex justify-content-between mb-3">
                 <label class="form-label align-self-center mb-0 w-50">Number</label>
-                <input type="text" class="form-control w-65" name="userNumber" id="userNumber" disabled>
+                <input type="text" class="form-control w-65" name="userNumber" id="userNumber">
               </div>
               <div class="d-flex justify-content-between mb-3">
                 <label class="form-label align-self-center mb-0 w-50">Name</label>
@@ -55,8 +55,8 @@
               <div class="d-flex justify-content-between mb-3">
                 <label class="form-label align-self-center mb-0 w-50">Gender</label>
                 <select class="form-select w-65" name="userGender" id="userGender" required>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
                 </select>
               </div>
               <div class="d-flex justify-content-between mb-3">
@@ -119,8 +119,8 @@
               <div class="d-flex justify-content-between mb-3">
                 <label class="form-label align-self-center mb-0 w-50">Role</label>
                 <select class="form-select w-65" name="userRole" id="userRole" required>
-                  <option value="user">User</option>
-                  <option value="admin">Admin</option>
+                  <option value="User">User</option>
+                  <option value="Admin">Admin</option>
                 </select>
               </div>
             </div>
@@ -128,7 +128,7 @@
               <label class="form-label align-self-center mb-2 w-50 fw-bold fs-5">Employee</label>
               <div class="d-flex justify-content-between mb-3">
                 <label class="form-label align-self-center mb-0 w-50">Number</label>
-                <input type="text" class="form-control w-65" name="userNumber" id="userNumber">
+                <input type="text" class="form-control w-65" name="userNumber" id="userNumber" value="Auto Generate" disabled>
               </div>
               <div class="d-flex justify-content-between mb-3">
                 <label class="form-label align-self-center mb-0 w-50">Name</label>
@@ -141,8 +141,8 @@
               <div class="d-flex justify-content-between mb-3">
                 <label class="form-label align-self-center mb-0 w-50">Gender</label>
                 <select class="form-select w-65" name="userGender" id="userGender" required>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
                 </select>
               </div>
               <div class="d-flex justify-content-between mb-3">

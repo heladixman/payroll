@@ -49,6 +49,7 @@
         <div class="modal-body">
           <div class="row">
             <div class="col mb-3">
+              <input type="hidden" id="idPayroll" name="idPayroll">
               <div class="d-flex justify-content-between mb-3">
                 <label class="form-label align-self-center mb-0 w-50">Date From</label>
                 <input type="date" class="form-control w-65 salaryFormat" name="payrollDateFrom" id="payrollDateFrom">
