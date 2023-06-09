@@ -42,14 +42,13 @@ $routes->group('/', function ($routes) {
     $routes->group('payroll', static function ($routes) {
         $routes->get('', 'Admin\PayrollController::indexPayroll');
         $routes->post('add', 'Admin\PayrollController::insertPayroll');
-        $routes->post('calculate', 'Admin\PayrollController::calculatePayroll');
+        $routes->post('calculate/(:num)/(:any)/(:any)', 'Admin\PayrollController::calculatePayroll/$1/$2/$3');
         $routes->post('update', 'Admin\PayrollController::updatePayroll');
         $routes->post('delete', 'Admin\PayrollController::deletePayroll');
     });
     $routes->group('employee', function ($routes) {
         $routes->group('attendance', static function ($routes) {
             $routes->get('', 'Admin\AttendanceController::indexAttendance');
-            $routes->get('data/(:num)', 'Admin\AttendanceController::getAttendance/$1');
             $routes->post('add', 'Admin\AttendanceController::insertAttendance');
             $routes->post('update', 'Admin\AttendanceController::updateAttendance');
             $routes->post('delete', 'Admin\AttendanceController::deleteAttendance');

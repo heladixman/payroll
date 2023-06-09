@@ -49,7 +49,7 @@
                                 </button>
                             </td>
                         <?php elseif($d['status_leave'] === 'Decline'): ?>
-                            <td> <span class="bg-fifth p-1 px-2 rounded"><?= $d['status_leave'] ?></span></td>
+                            <td> <span class="bg-sixth p-1 px-2 rounded"><?= $d['status_leave'] ?></span></td>
                         <td>
                             <span>No Action</span>
                         </td>
