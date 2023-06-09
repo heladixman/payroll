@@ -26,7 +26,7 @@
                         <td><?= $d['status'] ?></td>
                         <?php if($d['status'] == 'Pending'): ?>
                             <td>
-                                <button type="button" class='btn btn-sixth calculatePayroll' data-id="<?= $d['id']?>" data-from="<?= $d['date_from']?>" data-to="<?= $d['date_to']?>">
+                                <button type="sumbit" class='btn btn-sixth calculatePayroll' data-id="<?= $d['id']?>" data-from="<?= $d['date_from']?>" data-to="<?= $d['date_to']?>">
                                     <span class="align-items-center me-1"><i class="fa-solid fa-calculator"></i></span><span>Calculate</span>
                                 </button>
                                 <button type="button" class='btn btn-second editPayroll' data-bs-toggle="modal" data-bs-target="#editPayroll" data-id="<?= $d['id']?>">
@@ -57,25 +57,18 @@
 <?php echo view('Pages/modals/payroll');?>
 <script>
   $(document).ready(function(){
-    
-    $('#insertDataPayroll').submit(function(e){
-      e.preventDefault();
-      $.ajax({
-        url: '<?= site_url('payroll/data')?>',
-        method: 'POST',
-        success: function(hasil){
-          console.log(hasil)
-        }
-      })
-    })
 
-    $('.calculatePayroll').on('click', function(){
+    $('.calculatePayroll').click(function(){
+      var id = $(this).attr('data-id');
+      var dateFrom = $(this).attr('data-from');
+      var dateTo = $(this).attr('data-to');
       $.ajax({
-        url: '<?= site_url('payroll/calculate/')?>',
-        type: 'POST',
-        data:{id:$(this).attr('data-id'),dateFrom:$(this).attr('data-dateFrom'), dateTo:$(this).attr('data-id')},
+        url: '<?= site_url('payroll/calculate/')?>' + id + '/' + dateFrom + '/' + dateTo,
+        method: 'POST',
+        data: {id: id, dateFrom: dateFrom, dateTo: dateTo},
+        // error:err=>console.log(err),
         success: function(hasil){
-            console.log(data)
+            console.log('data berhasil dikirim')
         }
       })
     })

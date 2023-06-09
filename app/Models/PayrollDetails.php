@@ -38,4 +38,8 @@ class PayrollDetails extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function insertPayrollDetail($data){
+        $this->db->table('payroll_details')->insert($data);
+    }
 }
