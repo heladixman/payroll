@@ -10,6 +10,7 @@ use App\Models\Attendance;
 use App\Models\UserDeduction;
 use App\Models\UserAllowance;
 use App\Models\UserBonus;
+use CodeIgniter\Database\RawSql;
 
 class PayrollController extends BaseController
 {
@@ -87,7 +88,10 @@ class PayrollController extends BaseController
 
         $attend = $this->attendance->select('*')->where("DATE(datetime_log) BETWEEN '{$dateFrom}' AND '{$dateTo}' ")->orderBy('UNIX_TIMESTAMP(datetime_log)', 'asc')->get();
 
-        while($row = $attend->getResultArray()){
+        $isAttend = 1;
+        while($isAttend){
+            // while($row = $attend->getResultArray()){
+            $row = $attend->getResultArray();
             foreach($row as $r){
                 $date = date("Y-m-d", strtotime($r['datetime_log']));
                 if($r['log_type'] == 1){
@@ -98,11 +102,26 @@ class PayrollController extends BaseController
                     $atten[$r['user_id'] . "_" . $date]['log'][$r['log_type']] = $r['datetime_log'];
                 }   
             }
+            $isAttend = 0;
         }
 
-        $deduction = $this->userdeduction->select('*')->where('type', 1)->orWhere(function ($builder) use ($payroll) {
-            $builder->where("DATE(effective_date) BETWEEN '" . $payroll['date_from'] . "' AND '" . $payroll['date_to'] . "'");
-        })->get();
+        // $deduction = $this->userdeduction->select('*')->join('payrolls', 'payrolls.id = '. $id)->where('type = 1 AND DATE(effective_date) BETWEEN payrolls.date_from AND payrolls.date_to')->get();
+
+        // Ini ada salah syntax
+        // $sqlDeduction = "SELECT * FROM user_deductions LEFT JOIN payrolls on payrolls.id = $id WHERE user_deductions.type = 1 AND DATE(effective_date) BETWEEN payrolls.date_from AND payrolls.date_to";
+        // $db      = \Config\Database::connect();
+        // $builder = $db->table('user_deductions');
+        // $deduction = $builder->select(new RawSql($sqlDeduction))->get();
+        
+        // $deduction = $this->userdeduction->select('*')->join('payrolls', 'payrolls.id = '. $id)->where('type = 1 AND DATE(effective_date) BETWEEN payrolls.date_from AND payrolls.date_to')->get();
+        $deduction = $this->db->select('*')->from('user_deductions')->join('payrolls', 'payrolls.id = '. $id)->where('user_deductions.type = 1 AND DATE(effective_date) BETWEEN payrolls.date_from AND payrolls.date_to')->get();
+
+        // $deduction = $this->userdeduction->select('*')->where('type', 1)->orWhere(function ($builder) use ($payroll) {
+        //     $builder->where("DATE(effective_date) BETWEEN '" . $payroll['date_from'] . "' AND '" . $payroll['date_to'] . "'");
+        // })->get();
+        var_dump($deduction);
+        var_dump('hello world');
+        exit;
 
         $allowance = $this->userallowance->select('*')->where('type', 1)->orWhere(function ($builder) use ($payroll) {
             $builder->where("DATE(effective_date) BETWEEN '" . $payroll['date_from'] . "' AND '" . $payroll['date_to'] . "'");
@@ -112,6 +131,8 @@ class PayrollController extends BaseController
             $builder->where("DATE(effective_date) BETWEEN '" . $payroll['date_from'] . "' AND '" . $payroll['date_to'] . "'");
         })->get();
 
+
+        
         $ded = array();
         while($row = $deduction->getRow()){
             $ded[$row['user_id']][] = array('did' => $row['deduction_id'], 'amount' => $row['amount']);
