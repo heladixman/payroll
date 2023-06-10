@@ -47,6 +47,13 @@ class Payroll extends Model
         $this->db->table('payrolls')->insert($data);
     }
 
+    public function insertStatus($id){
+        $data = [
+            'status' => 'Complete',
+        ];
+        $this->db->table('payrolls')->update($data, array('id' => $id));
+    }
+
     public function updatePayroll($data, $id){
         $this->db->table('payrolls')->update($data, array('id' => $id));
     }

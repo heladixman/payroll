@@ -39,10 +39,9 @@
                         <?php else: ?>
                             <td>
                                 <button type="button" class='btn btn-sixth viewPayroll' data-id="<?= $d['id']?>">
+                                  <a href="payroll/details/<?=$d['id']?>">
                                     <span class="align-items-center me-1"><i class="fa-solid fa-eye"></i></span><span>View</span>
-                                </button>
-                                <button type="button" class="btn btn-third deletePayroll" data-bs-toggle="modal" data-bs-target="#deletePayroll" data-id="<?= $d['id']?>">
-                                    <span class="align-items-center me-1"><i class="fa-solid fa-trash-can"></i></span><span>Delete</span>
+                                  </a>
                                 </button>
                             </td>
                         <?php endif ?>
