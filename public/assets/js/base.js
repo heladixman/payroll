@@ -25,6 +25,7 @@ $(document).ready(function () {
     $('#salary_table').DataTable();
     $('#webdata_table').DataTable();
     $('#attendance_table').DataTable();
+    $('#payslip_table').DataTable();
 
     // not fixed yet
     $('.updateUserAllowance').on('click', function(){

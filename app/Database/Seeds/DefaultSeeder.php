@@ -136,6 +136,10 @@ class DefaultSeeder extends Seeder
                 'name'          => 'USER_FIRST_PHONE_NUMBER',
                 'value'         => '+62'
             ],
+            [
+                'name'          => 'PAYROLL_FIRST_INISIAL',
+                'value'         => 'PS'
+            ],
         ];
         $this->db->table('webdatas')->insertBatch($Webdata);
 
@@ -154,7 +158,7 @@ class DefaultSeeder extends Seeder
                 'active'        => 1
             ],
             [
-                'position_id'   => 1,
+                'position_id'   => 2,
                 'user_number'   => 'PS0001',
                 'name'          => 'User',
                 'phone_number'  => '628',

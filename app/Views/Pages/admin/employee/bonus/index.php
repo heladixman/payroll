@@ -39,4 +39,4 @@
         </div>
     </div>
 </section>
-<?php echo view('Pages/modals/userbonus.php');?>
+<?php echo view('Pages/modals/userbonus');?>

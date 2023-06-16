@@ -10,6 +10,8 @@ use App\Models\Attendance;
 use App\Models\UserDeduction;
 use App\Models\UserAllowance;
 use App\Models\UserBonus;
+use App\Models\Leave;
+use App\Models\WebData;
 
 class PayrollController extends BaseController
 {
@@ -21,33 +23,51 @@ class PayrollController extends BaseController
         $this->userdeduction = new UserDeduction();
         $this->userallowance = new UserAllowance();
         $this->userbonus = new UserBonus();
-        $this->db = db_connect();
+        $this->leave = new Leave();
+        $this->webdata = new WebData();
     }
 
     public function indexPayroll()
     {
-        $uri            = 'payroll';
+        $uri                        = 'payroll';
 
         $Dashboard = [
-            'title'         => $uri,
-            'payroll' => $this->payroll->findAll(),
-            'listPayment'   => $this->payroll->listPayment()->getResult(),
-            'content'       => 'Pages/admin/'.$uri.'/index'
+            'title'                 => $uri,
+            'payroll'               => $this->payroll->findAll(),
+            'listPayment'           => $this->payroll->listPayment()->getResult(),
+            'content'               => 'Pages/admin/'.$uri.'/index'
         ];
 
         return view('Pages/admin/index', $Dashboard);
     }
 
-    public function indexPayrollDetail($id)
+    public function printPayroll($payroll_id, $id)
     {
-        $uri                = 'payroll';
-        $title              = 'Payroll Details';
+        $uri                        = 'payslip';
+        $payrolldetail              = $this->payrolldetail->select('users.name as user_name, payrolls.reff_no as reff_no, users.user_number as user_number, payroll_details.createAt as create_at, gross_salary, allowance_total, deduction_total, bonus_total, pph, net_salary')->join('users', 'payroll_details.user_id = users.id')->join('payrolls', 'payroll_details.payroll_id = payrolls.id')->where('payroll_details.id', $id)->findAll();
+        $data                       = $payrolldetail[0];
 
         $Dashboard = [
-            'title'               => $title,
-            'payrolldetail'       => $this->payrolldetail->where('payroll_id', $id)->findAll(),
-            'listPayment'   => $this->payroll->listPayment()->getResult(),
-            'content'       => 'Pages/admin/'.$uri.'/detail'
+            'title'                 => $uri,
+            'data'                  => $data,
+            'gross_salary'          => $data['gross_salary'] + $data['allowance_total'] + $data['bonus_total'] - $data['deduction_total'],
+            'content'               => 'Pages/user/'.$uri.'/print'
+            
+        ];
+
+        return view('Pages/user/index', $Dashboard);
+    }
+
+    public function indexPayrollDetail($id)
+    {
+        $uri                        = 'payroll';
+        $title                      = 'Payroll Details';
+
+        $Dashboard = [
+            'title'                 => $title,
+            'payrolldetail'         => $this->payrolldetail->where('payroll_id', $id)->findAll(),
+            'listPayment'           => $this->payroll->listPayment()->getResult(),
+            'content'               => 'Pages/admin/'.$uri.'/detail'
         ];
 
         return view('Pages/admin/index', $Dashboard);
@@ -55,11 +75,13 @@ class PayrollController extends BaseController
 
     public function insertPayroll(){
         $id = $this->request->getPost('idPayroll');
+        $getPayrollInisial = $this->webdata->select('value')->where('name','PAYROLL_FIRST_INISIAL')->get();
+        $payrollInisial = $getPayrollInisial->getRow()->value;
 
         if(empty($id)){
             $i = 1;
             while($i == 1) {
-                $reff_no = date('Y')."-".mt_rand(1,99999);
+                $reff_no = $payrollInisial. date('Ymd')."".mt_rand(1,99999);
                 $reff_check = $this->payroll->select('*')->where('reff_no', $reff_no)->countAllResults();
                 if($reff_check <= 0){
                     $i = 0;
@@ -155,16 +177,20 @@ class PayrollController extends BaseController
             // var_dump($row);
             foreach($row as $r){
                 $att            = $this->attendance->select('*')->join('payrolls', 'payrolls.id = '. $id, 'left')->where('log_type = 1 AND DATE(datetime_log) BETWEEN payrolls.date_from AND payrolls.date_to AND user_id = '. $r['id']);
-                $salary         = $r['user_salary'];
-                $daily_salary   = $salary / $totalDaysWork;
-                $present        = $att->countAll();
-                $absent         = 0;
-                $leave          = 0;
+                $svLeave        = $this->leave->selectSum('total_leave')->join('payrolls', 'payrolls.id =' .$id)->where('DATE(leave_start) BETWEEN payrolls.date_from AND payrolls.date_to AND user_id =' .$r['id'])->get();
+                $salary         = (float) $r['user_salary'];
+                $grossSalary    = 0;
+                $present        = $att->countAllResults();
+                $leave          = $svLeave->getRow()->total_leave ? $svLeave->getRow()->total_leave : '0';
+                $absent         = $present - $leave;
                 $allow_amount   = 0;
                 $ded_amount     = 0;
                 $bon_amount     = 0;
+                $getPPH         = $this->webdata->select('value')->where('name','PPH')->get();
+                $pphPercentage  = (int) $getPPH->getRow()->value;
                 $pph            = 0;
                 $net            = 0;
+                $net_salary     = 0;
                 $allow_arr      = array();
                 $deduc_arr      = array();
                 $bonus_arr      = array();
@@ -189,6 +215,20 @@ class PayrollController extends BaseController
                         $bon_amount += $brow['amount'];
                     };
                 }
+
+                $paysPerDay = $salary / $totalDaysWork;
+
+                // set salary based on days present
+                if($totalDaysWork == $present){
+                    $grossSalary = $salary;
+                } else {
+                    $grossSalary = $paysPerDay * $present;
+                }
+
+                // // salary before pph
+                $salaryNoPPH = $grossSalary + $allow_amount + $bon_amount - $ded_amount;
+                $pphAmount = $salaryNoPPH * $pphPercentage / 100;
+                $net_salary = $salaryNoPPH - $pphAmount;
                 
                 $idPayroll = $payroll->getResultArray();
                 // var_dump($idPayroll);
@@ -199,15 +239,15 @@ class PayrollController extends BaseController
                     "present"               => $present,
                     "absent"                => $absent,
                     "leave"                 => $leave,
-                    "gross_salary"          => $salary,
+                    "gross_salary"          => $grossSalary,
                     "allowances"            => json_encode($allow_arr),
                     "allowance_total"       => $allow_amount,
                     "deductions"            => json_encode($deduc_arr),
                     "deduction_total"       => $ded_amount,
                     "bonuses"               => json_encode($bonus_arr),
                     "bonus_total"           => $bon_amount,
-                    "pph"                   => $pph,
-                    "net_salary"            => $net
+                    "pph"                   => $pphAmount,
+                    "net_salary"            => $net_salary
                 );
 
                 

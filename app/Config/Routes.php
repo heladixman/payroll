@@ -41,6 +41,7 @@ $routes->group('/', function ($routes) {
     $routes->get('dashboard', 'Admin\DashboardController::index');
     $routes->group('payroll', static function ($routes) {
         $routes->get('', 'Admin\PayrollController::indexPayroll');
+        $routes->get('data/(:any)/(:any)', 'Admin\PayrollController::printPayroll/$1/$2');
         $routes->post('add', 'Admin\PayrollController::insertPayroll');
         $routes->get('details/(:num)', 'Admin\PayrollController::indexPayrollDetail/$1');
         $routes->post('calculate/(:num)/(:any)/(:any)', 'Admin\PayrollController::calculatePayroll/$1/$2/$3');
