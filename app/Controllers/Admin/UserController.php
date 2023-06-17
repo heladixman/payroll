@@ -27,6 +27,7 @@ class UserController extends BaseController
         
         $User = [
             'title'             => $uri,
+            'appName'           => $this->getAppName(),
             'parent'            => ['name' => $parent, 'url' => $base_url.$parent],
             'listposition'      => $this->list->listPosition()->getResult(),
             'phoneCode'         => $this->webData->select('value')->where('name', 'USER_FIRST_PHONE_NUMBER')->get()->getRow()->value,
@@ -57,7 +58,7 @@ class UserController extends BaseController
         );
 
         $this->list->insertUser($data);
-        session()->setFlashData('message', 'Data berhasil diinput');
+        session()->setFlashData('message', 'Data Successfully Inserted');
         return redirect()->to(base_url().'employee');
     }
     public function dataUser($id){
@@ -91,7 +92,7 @@ class UserController extends BaseController
         );
 
         $this->list->updateUser($data, $id);
-        session()->setFlashData('message', 'Data berhasil diperbarui');
+        session()->setFlashData('message', 'Data Successfully Renewed');
         return redirect()->to(base_url().'employee');
     }
 
@@ -99,7 +100,7 @@ class UserController extends BaseController
         $id = $this->request->getPost('userId');
 
         $this->list->deleteUser($id);
-        session()->setFlashData('message', 'Data berhasil dihapus');
+        session()->setFlashData('error', 'Data Successfully Deleted');
         return redirect()->to(base_url().'employee');
     }
 }

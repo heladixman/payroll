@@ -16,15 +16,15 @@ use App\Models\WebData;
 class PayrollController extends BaseController
 {
     public function __construct(){
-        $this->payroll = new Payroll();
-        $this->payrolldetail = new PayrollDetails();
-        $this->users = new Users();
-        $this->attendance = new Attendance();
-        $this->userdeduction = new UserDeduction();
-        $this->userallowance = new UserAllowance();
-        $this->userbonus = new UserBonus();
-        $this->leave = new Leave();
-        $this->webdata = new WebData();
+        $this->payroll              = new Payroll();
+        $this->payrolldetail        = new PayrollDetails();
+        $this->users                = new Users();
+        $this->attendance           = new Attendance();
+        $this->userdeduction        = new UserDeduction();
+        $this->userallowance        = new UserAllowance();
+        $this->userbonus            = new UserBonus();
+        $this->leave                = new Leave();
+        $this->webdata              = new WebData();
     }
 
     public function indexPayroll()
@@ -33,6 +33,7 @@ class PayrollController extends BaseController
 
         $Dashboard = [
             'title'                 => $uri,
+            'appName'               => $this->getAppName(),
             'payroll'               => $this->payroll->findAll(),
             'listPayment'           => $this->payroll->listPayment()->getResult(),
             'content'               => 'Pages/admin/'.$uri.'/index'
@@ -65,7 +66,8 @@ class PayrollController extends BaseController
 
         $Dashboard = [
             'title'                 => $title,
-            'payrolldetail'         => $this->payrolldetail->where('payroll_id', $id)->findAll(),
+            'appName'               => $this->getAppName(),
+            'payrolldetail'         => $this->payrolldetail->select('payrolls.reff_no as reff_no, payroll_details.createAt as dateCreate, payroll_details.id as id, net_salary, total_working_days, users.name as user_name, present, absent, leave, net_salary')->where('payroll_id', $id)->join('payrolls', 'payroll_details.payroll_id = payrolls.id')->join('users', 'payroll_details.user_id = users.id')->findAll(),
             'listPayment'           => $this->payroll->listPayment()->getResult(),
             'content'               => 'Pages/admin/'.$uri.'/detail'
         ];
@@ -74,9 +76,9 @@ class PayrollController extends BaseController
     }
 
     public function insertPayroll(){
-        $id = $this->request->getPost('idPayroll');
-        $getPayrollInisial = $this->webdata->select('value')->where('name','PAYROLL_FIRST_INISIAL')->get();
-        $payrollInisial = $getPayrollInisial->getRow()->value;
+        $id                         = $this->request->getPost('idPayroll');
+        $getPayrollInisial          = $this->webdata->select('value')->where('name','PAYROLL_FIRST_INISIAL')->get();
+        $payrollInisial             = $getPayrollInisial->getRow()->value;
 
         if(empty($id)){
             $i = 1;
@@ -90,28 +92,32 @@ class PayrollController extends BaseController
         }
 
         $data = array(
-            'reff_no'           => $reff_no,
-            'date_from'         => $this->request->getPost('payrollDateFrom'),
-            'date_to'           => $this->request->getPost('payrollDateTo'),
-            'payment_method_id' => $this->request->getPost('payrollPaymentMethod'),
-            'comment'           => $this->request->getPost('payrollComment'),
-            'status'            => 'Pending',
+            'reff_no'               => $reff_no,
+            'date_from'             => $this->request->getPost('payrollDateFrom'),
+            'date_to'               => $this->request->getPost('payrollDateTo'),
+            'payment_method_id'     => $this->request->getPost('payrollPaymentMethod'),
+            'comment'               => $this->request->getPost('payrollComment'),
+            'status'                => 'Pending',
         );
 
         $this->payroll->insertPayroll($data);
-        session()->setFlashData('message', 'Data berhasil diinput');
+        session()->setFlashData('message', 'Data Successfully Inserted');
         return redirect()->to(base_url().'payroll');
     }
 
-    public function calculatePayroll($id, $dateFrom, $dateTo){
-        $payroll        = $this->payroll->select('*')->where('id', $id)->get();
-        $users          = $this->users->select('users.id, salaries.amount as user_salary, users.name')->where('user_role', 'user')->join('salaries', 'users.position_id = salaries.position_id','left')->get();
-        $dayStart       = date_create($dateFrom);
-        $dayEnd         = date_create($dateTo);
-        $interval       = date_diff($dayStart, $dayEnd);
-        $totalDays      = $interval->days +1;
+    public function calculatePayroll(){
+        $id                         = $this->request->getPost('calPayrollId');
+        $dateFrom                   = $this->request->getPost('calPayrollDateFrom');
+        $dateTo                     = $this->request->getPost('calPayrollDateTo');
 
-        $sundayCount    = 0;
+        $payroll                    = $this->payroll->select('*')->where('id', $id)->get();
+        $users                      = $this->users->select('users.id, salaries.amount as user_salary, users.name')->where('user_role', 'user')->join('salaries', 'users.position_id = salaries.position_id','left')->get();
+        $dayStart                   = date_create($dateFrom);
+        $dayEnd                     = date_create($dateTo);
+        $interval                   = date_diff($dayStart, $dayEnd);
+        $totalDays                  = $interval->days +1;
+
+        $sundayCount = 0;
         for($i = 0; $i <$totalDays; $i++){
             $currentDay = date_create($dateFrom)->modify("+$i day");
             $dayOfWeek  = $currentDay->format('N');
@@ -140,9 +146,9 @@ class PayrollController extends BaseController
             $isAttend = 0;
         }
 
-        $deduction = $this->userdeduction->select('*')->join('payrolls', 'payrolls.id = '. $id)->where('type = 1 OR DATE(effective_date) BETWEEN payrolls.date_from AND payrolls.date_to')->get();
-        $allowance = $this->userallowance->select('*')->join('payrolls', 'payrolls.id = '. $id)->where('type = 1 OR DATE(effective_date) BETWEEN payrolls.date_from AND payrolls.date_to')->get();
-        $bonus = $this->userbonus->select('*')->join('payrolls', 'payrolls.id = '. $id)->where('DATE(effective_date) BETWEEN payrolls.date_from AND payrolls.date_to')->get();
+        $deduction                  = $this->userdeduction->select('*')->join('payrolls', 'payrolls.id = '. $id)->where('type = 1 OR DATE(effective_date) BETWEEN payrolls.date_from AND payrolls.date_to')->get();
+        $allowance                  = $this->userallowance->select('*')->join('payrolls', 'payrolls.id = '. $id)->where('type = 1 OR DATE(effective_date) BETWEEN payrolls.date_from AND payrolls.date_to')->get();
+        $bonus                      = $this->userbonus->select('*')->join('payrolls', 'payrolls.id = '. $id)->where('DATE(effective_date) BETWEEN payrolls.date_from AND payrolls.date_to')->get();
 
         $isDedyction = 1;
         while($isDedyction){
@@ -176,24 +182,24 @@ class PayrollController extends BaseController
             $row = $users->getResultArray();
             // var_dump($row);
             foreach($row as $r){
-                $att            = $this->attendance->select('*')->join('payrolls', 'payrolls.id = '. $id, 'left')->where('log_type = 1 AND DATE(datetime_log) BETWEEN payrolls.date_from AND payrolls.date_to AND user_id = '. $r['id']);
-                $svLeave        = $this->leave->selectSum('total_leave')->join('payrolls', 'payrolls.id =' .$id)->where('DATE(leave_start) BETWEEN payrolls.date_from AND payrolls.date_to AND user_id =' .$r['id'])->get();
-                $salary         = (float) $r['user_salary'];
-                $grossSalary    = 0;
-                $present        = $att->countAllResults();
-                $leave          = $svLeave->getRow()->total_leave ? $svLeave->getRow()->total_leave : '0';
-                $absent         = $present - $leave;
-                $allow_amount   = 0;
-                $ded_amount     = 0;
-                $bon_amount     = 0;
-                $getPPH         = $this->webdata->select('value')->where('name','PPH')->get();
-                $pphPercentage  = (int) $getPPH->getRow()->value;
-                $pph            = 0;
-                $net            = 0;
-                $net_salary     = 0;
-                $allow_arr      = array();
-                $deduc_arr      = array();
-                $bonus_arr      = array();
+                $att                = $this->attendance->select('*')->join('payrolls', 'payrolls.id = '. $id, 'left')->where('log_type = 1 AND DATE(datetime_log) BETWEEN payrolls.date_from AND payrolls.date_to AND user_id = '. $r['id']);
+                $svLeave            = $this->leave->selectSum('total_leave')->join('payrolls', 'payrolls.id =' .$id)->where('DATE(leave_start) BETWEEN payrolls.date_from AND payrolls.date_to AND user_id =' .$r['id'])->get();
+                $salary             = (float) $r['user_salary'];
+                $grossSalary        = 0;
+                $present            = $att->countAllResults();
+                $leave              = $svLeave->getRow()->total_leave ? $svLeave->getRow()->total_leave : '0';
+                $absent             = $totalDaysWork - ($present + $leave);
+                $allow_amount       = 0;
+                $ded_amount         = 0;
+                $bon_amount         = 0;
+                $getPPH             = $this->webdata->select('value')->where('name','PPH')->get();
+                $pphPercentage      = (int) $getPPH->getRow()->value;
+                $pph                = 0;
+                $net                = 0;
+                $net_salary         = 0;
+                $allow_arr          = array();
+                $deduc_arr          = array();
+                $bonus_arr          = array();
 
                 if(isset($allow[$r['id']])){
                     foreach($allow[$r['id']] as $arow){
@@ -248,12 +254,9 @@ class PayrollController extends BaseController
                     "bonus_total"           => $bon_amount,
                     "pph"                   => $pphAmount,
                     "net_salary"            => $net_salary
-                );
-
-                
+                ); 
             }
-            $isData = 0;
-            
+            $isData = 0; 
         }
 
         foreach ($data as $row) {
@@ -262,16 +265,29 @@ class PayrollController extends BaseController
         }
 
         $this->payroll->insertStatus($id);
+        session()->setFlashData('message', 'Data Successfully Renewed');
+        return redirect()->to(base_url().'payroll');
+    }
 
-        session()->setFlashData('message', 'Data berhasil diperbarui');
+    public function dataPayroll($id)
+    {
+        $result = $this->payroll->find($id);
+        return json_encode($result);
+    }
+
+    public function updatePayroll(){
+        $id   = $this->request->getPost('payrollId');
+
+        $this->payroll->updatePayroll($id);
+        session()->setFlashData('error', 'Data Successfully Deleted');
         return redirect()->to(base_url().'payroll');
     }
 
     public function deletePayroll(){
-        $id   = $this->request->getPost('salaryId');
+        $id   = $this->request->getPost('payrollId');
 
         $this->payroll->deletePayroll($id);
-        session()->setFlashData('message', 'Data berhasil dihapus');
+        session()->setFlashData('error', 'Data Successfully Deleted');
         return redirect()->to(base_url().'payroll');
     }
 

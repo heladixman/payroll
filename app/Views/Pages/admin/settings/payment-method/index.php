@@ -1,5 +1,6 @@
-<button type="button" class="btn btn-default w-25 my-3" data-bs-toggle="modal" data-bs-target="#insertPaymentMethod">New Payment Method</button>
+<button type="button" class="btn btn-default w-25 mt-3" data-bs-toggle="modal" data-bs-target="#insertPaymentMethod">New Payment Method</button>
 <section class="content mt-3">
+    <?= view('Pages\message\index')?>
     <div class="card">
     <div class="btn-first rounded-se w-100 p-2">Payment Method</div>
         <div class="card-body"> 

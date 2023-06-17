@@ -1,4 +1,5 @@
 <section class="content mt-3">
+    <?= view('Pages\message\index')?>
     <div class="card">
     <div class="btn-first rounded-se w-100 p-2">Web Data</div>
         <div class="card-body"> 

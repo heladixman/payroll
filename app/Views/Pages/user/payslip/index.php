@@ -25,7 +25,7 @@
                         <td><div>Rp<?= number_format($d['net_salary'], 0, '', '.') ?></div></td>
                         <td><div><?= $date ?></div></td>
                         <td>
-                            <a href="<?= site_url('payroll/data/'. $d['reff_no'] . '/' .$d['id'])?>" class="btn btn-sixth" data-id="<?= $d['id']?>">
+                            <a href="<?= site_url('payroll/data/'. $d['reff_no'] . '/' .$d['id'])?>" target="_blank" class="btn btn-sixth" data-id="<?= $d['id']?>">
                                 <span class="align-items-center me-1"><i class="fa-solid fa-print"></i></span><span>Print</span>
                             </a>
                         </td>

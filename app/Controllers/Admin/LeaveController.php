@@ -21,6 +21,7 @@ class LeaveController extends BaseController
         
         $UserLeave = [
             'title'             => $uri,
+            'appName'           => $this->getAppName(),
             'parent'            => ['name' => $parent, 'url' => $base_url.$parent],
             'listuser'          => $this->leave->listUser()->getResult(),
             'leave'             => $this->leave->select('leave.id as id, users.name as user_name, leave_start, leave_end, reason, prove, total_leave, leave.status as status_leave')->orderBy('leave.id', 'desc')->join('users', 'leave.user_id = users.id')->findAll(),
@@ -39,7 +40,7 @@ class LeaveController extends BaseController
 
         if($leave_prove){
             $targetDirectory    = 'assets/image/leave/';
-            $targetName = $leave_prove->getRandomName();
+            $targetName         = $leave_prove->getRandomName();
             $leave_prove->move($targetDirectory, $targetName);
         }
 
@@ -54,7 +55,7 @@ class LeaveController extends BaseController
         );
 
         $this->leave->insertLeave($data);
-        session()->setFlashData('message', 'Data berhasil diinput');
+        session()->setFlashData('message', 'Data Successfully Inserted');
         return redirect()->to(base_url().'employee/leave');
     }
 
@@ -62,7 +63,7 @@ class LeaveController extends BaseController
         $id                     = $this->request->getPost('approveidLeave');
 
         $this->leave->approveLeave($id);
-        session()->setFlashData('message', 'Data diterima');
+        session()->setFlashData('message', 'Data Has Been Approved');
         return redirect()->to(base_url().'employee/leave');
     }
 
@@ -76,7 +77,7 @@ class LeaveController extends BaseController
         );
 
         $this->leave->declineLeave($id, $data);
-        session()->setFlashData('message', 'Data dihapus');
+        session()->setFlashData('message', 'Data Has Been Declined');
         return redirect()->to(base_url().'employee/leave');
     }
 }

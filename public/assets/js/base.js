@@ -14,6 +14,16 @@ function sidebar(){
     }, {once: true})
   }
 
+  function buttonClose(){
+    var closed = document.getElementById('close-notification')
+    if(closed){
+        closed.addEventListener('click', function(){
+            closed.parentElement.classList.add('d-none')
+        })
+    }
+  }
+  buttonClose();
+
 $(document).ready(function () {
     // For datatables in settings
     $('#allowance_table').DataTable();

@@ -1,5 +1,6 @@
-<button type="button" class="btn btn-default w-25 my-3" data-bs-toggle="modal" data-bs-target="#insertPayroll">New Payroll</button>
+<button type="button" class="btn btn-default w-25 mt-3" data-bs-toggle="modal" data-bs-target="#insertPayroll">New Payroll</button>
 <section class="content mt-3">
+    <?= view('Pages\message\index')?>
     <div class="card">
     <div class="btn-first rounded-se w-100 p-2">Salary</div>
         <div class="card-body"> 
@@ -26,7 +27,7 @@
                         <td><?= $d['status'] ?></td>
                         <?php if($d['status'] == 'Pending'): ?>
                             <td>
-                                <button type="sumbit" class='btn btn-sixth calculatePayroll' data-id="<?= $d['id']?>" data-from="<?= $d['date_from']?>" data-to="<?= $d['date_to']?>">
+                                <button type="sumbit" class='btn btn-sixth calculatePayroll' data-bs-toggle="modal" data-bs-target="#calculatePayroll" data-id="<?= $d['id']?>" data-from="<?= $d['date_from']?>" data-to="<?= $d['date_to']?>">
                                     <span class="align-items-center me-1"><i class="fa-solid fa-calculator"></i></span><span>Calculate</span>
                                 </button>
                                 <button type="button" class='btn btn-second editPayroll' data-bs-toggle="modal" data-bs-target="#editPayroll" data-id="<?= $d['id']?>">
@@ -38,11 +39,11 @@
                             </td>
                         <?php else: ?>
                             <td>
+                              <a href="payroll/details/<?=$d['id']?>">
                                 <button type="button" class='btn btn-sixth viewPayroll' data-id="<?= $d['id']?>">
-                                  <a href="payroll/details/<?=$d['id']?>">
-                                    <span class="align-items-center me-1"><i class="fa-solid fa-eye"></i></span><span>View</span>
-                                  </a>
+                                  <span class="align-items-center me-1"><i class="fa-solid fa-eye"></i></span><span>View</span>
                                 </button>
+                              </a>
                             </td>
                         <?php endif ?>
                     </tr>
@@ -57,18 +58,34 @@
 <script>
   $(document).ready(function(){
 
-    $('.calculatePayroll').click(function(){
-      var id = $(this).attr('data-id');
-      var dateFrom = $(this).attr('data-from');
-      var dateTo = $(this).attr('data-to');
+    $('.calculatePayroll').on('click', function(){
+      var id        = $(this).attr('data-id');
+      var dateFrom  = $(this).attr('data-from');
+      var dateTo    = $(this).attr('data-to');
+      $('#calPayrollId').val(id);
+      $('#calPayrollDateFrom').val(dateFrom);
+      $('#calPayrollDateTo').val(dateTo);
+      console.log(id,dateFrom, dateTo)
+    })
+
+    $('.editPayroll').on('click', function(){
+      var ids       = $(this).attr('data-id');
       $.ajax({
-        url: '<?= site_url('payroll/calculate/')?>' + id + '/' + dateFrom + '/' + dateTo,
-        method: 'POST',
-        data: {id: id, dateFrom: dateFrom, dateTo: dateTo},
+        url: '<?= site_url('payroll/data/')?>' + ids,
+        method: 'GET',
         success: function(hasil){
-            console.log('data berhasil dikirim')
+          var data = hasil;
+          $('#upayrollDateFrom').val(data.date_from);
+          $('#upayrollDateTo').val(data.date_to);
+          $('#upayrollPaymentMethod').val(data.payment_method_id);
+          $('#upayrollComment').val(data.comment);
         }
       })
+    })
+
+    $('.deletePayroll').on('click', function(){
+      id = $(this).attr('data-id');
+      $('#payrollid').val(id);
     })
     
   })

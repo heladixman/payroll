@@ -47,6 +47,10 @@ class Attendance extends Model
         $this->db->table('attendances')->insert($data);
     }
 
+    public function attInsert($data){
+        $this->db->table('attendances')->insert($data);
+    }
+
     public function updateAttendance($data, $id){
         $this->db->table('attendances')->update($data, array('id' => $id));
     }

@@ -1,5 +1,6 @@
-<button type="button" class="btn btn-default w-25 my-3" data-bs-toggle="modal" data-bs-target="#insertAttendance">New Attendance</button>
+<button type="button" class="btn btn-default w-25 mt-3" data-bs-toggle="modal" data-bs-target="#insertAttendance">New Attendance</button>
 <section class="content mt-3">
+    <?= view('Pages\message\index')?>
     <div class="card">
     <div class="btn-first rounded-se w-100 p-2">Attendance</div>
         <div class="card-body"> 
@@ -10,7 +11,7 @@
                       <th>No</th>
                       <th>Date</th>
                       <th>User Number</th>
-                      <th>Name</th>
+                      <th>User Name</th>
                       <th>Time</th>
                       <th>Action</th>
                     </tr>

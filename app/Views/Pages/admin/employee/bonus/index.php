@@ -1,5 +1,6 @@
-<button type="button" class="btn btn-default w-25 my-3" data-bs-toggle="modal" data-bs-target="#insertUserBonus">New Bonus</button>
+<button type="button" class="btn btn-default w-25 mt-3" data-bs-toggle="modal" data-bs-target="#insertUserBonus">New Bonus</button>
 <section class="content mt-3">
+    <?= view('Pages\message\index')?>
     <div class="card">
     <div class="btn-first rounded-se w-100 p-2">Bonus</div>
         <div class="card-body"> 

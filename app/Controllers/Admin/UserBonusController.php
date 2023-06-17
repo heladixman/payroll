@@ -8,18 +8,18 @@ use App\Models\UserBonus;
 class UserBonusController extends BaseController
 {
     public function __construct(){
-        helper('form');
-        $this->userBonus = new UserBonus();
+        $this->userBonus    = new UserBonus();
     }
 
     public function indexBonus()
     {
-        $base_url   = base_url();
-        $uri        = 'bonus';
-        $parent     = 'employee';
+        $base_url           = base_url();
+        $uri                = 'bonus';
+        $parent             = 'employee';
         
         $Bonus = [
             'title'         => $uri,
+            'appName'       => $this->getAppName(),
             'parent'        => ['name' => $parent, 'url' => $base_url.$parent],
             'listuser'      => $this->userBonus->listUser()->getResult(),
             'listbonus'     => $this->userBonus->listBonus()->getResult(),
@@ -39,7 +39,7 @@ class UserBonusController extends BaseController
         );
 
         $this->userBonus->insertBonus($data);
-        session()->setFlashData('message', 'Data berhasil diinput');
+        session()->setFlashData('message', 'Data Successfully Inserted');
         return redirect()->to(base_url().'employee/bonus');
     }
     public function updateBonus(){
@@ -52,14 +52,14 @@ class UserBonusController extends BaseController
         );
 
         $this->userBonus->updateBonus($data, $id);
-        session()->setFlashData('message', 'Data berhasil diperbarui');
+        session()->setFlashData('message', 'Data Successfully Renewed');
         return redirect()->to(base_url().'employee/bonus');
     }
     public function deleteBonus(){
         $id = $this->request->getPost('bonusId');
 
         $this->userBonus->deleteBonus($id);
-        session()->setFlashData('message', 'Data berhasil dihapus');
+        session()->setFlashData('error', 'Data Successfully Deleted');
         return redirect()->to(base_url().'employee/bonus');
     }
 }

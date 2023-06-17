@@ -31,10 +31,10 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 
 $routes->group('/', function ($routes) {
-    $routes->get('', 'User\IndexController::indexUser');
+    $routes->get('', 'User\IndexController::index');
+    $routes->post('today/attendance', 'User\IndexController::insertAttendance');
     $routes->group('profile', static function ($routes) {
-        $routes->get('', 'User\IndexController::indexUser');
-        // $routes->get('', 'User\HomeController::index');
+        $routes->get('', 'User\IndexController::profileUser');
         $routes->get('profile', 'User\ProfileController::index');
         $routes->get('settings', 'User\SettingsController::index');
     });
@@ -42,9 +42,10 @@ $routes->group('/', function ($routes) {
     $routes->group('payroll', static function ($routes) {
         $routes->get('', 'Admin\PayrollController::indexPayroll');
         $routes->get('data/(:any)/(:any)', 'Admin\PayrollController::printPayroll/$1/$2');
+        $routes->get('data/(:any)', 'Admin\PayrollController::dataPayroll/$1');
         $routes->post('add', 'Admin\PayrollController::insertPayroll');
         $routes->get('details/(:num)', 'Admin\PayrollController::indexPayrollDetail/$1');
-        $routes->post('calculate/(:num)/(:any)/(:any)', 'Admin\PayrollController::calculatePayroll/$1/$2/$3');
+        $routes->post('calculate', 'Admin\PayrollController::calculatePayroll');
         $routes->post('update', 'Admin\PayrollController::updatePayroll');
         $routes->post('delete', 'Admin\PayrollController::deletePayroll');
     });

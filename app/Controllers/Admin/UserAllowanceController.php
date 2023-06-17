@@ -8,23 +8,23 @@ use App\Models\UserAllowance;
 class UserAllowanceController extends BaseController
 {
     public function __construct(){
-        helper('form');
         $this->userAllowance = new userAllowance();
     }
 
     public function indexAllowance()
     {
-        $base_url   = base_url();
-        $uri        = 'allowance';
-        $parent     = 'employee';
+        $base_url               = base_url();
+        $uri                    = 'allowance';
+        $parent                 = 'employee';
         
         $Attendance = [
-            'title'         => $uri,
-            'parent'        => ['name' => $parent, 'url' => $base_url.$parent],
-            'listuser'      => $this->userAllowance->listUser()->getResult(),
-            'listallowance' => $this->userAllowance->listAllowance()->getResult(),
-            'allowance'     => $this->userAllowance->select('user_allowances.id as id, allowances.name as allowance_name, users.name as user_name, type, effective_date, amount')->join('users', 'user_allowances.user_id = users.id')->join('allowances', 'user_allowances.allowance_id = allowances.id')->findAll(),
-            'content'       => 'Pages/admin/'.$parent.'/'.$uri.'/index'
+            'title'             => $uri,
+            'appName'           => $this->getAppName(),
+            'parent'            => ['name' => $parent, 'url' => $base_url.$parent],
+            'listuser'          => $this->userAllowance->listUser()->getResult(),
+            'listallowance'     => $this->userAllowance->listAllowance()->getResult(),
+            'allowance'         => $this->userAllowance->select('user_allowances.id as id, allowances.name as allowance_name, users.name as user_name, type, effective_date, amount')->join('users', 'user_allowances.user_id = users.id')->join('allowances', 'user_allowances.allowance_id = allowances.id')->findAll(),
+            'content'           => 'Pages/admin/'.$parent.'/'.$uri.'/index'
         ];
 
         return view('Pages/admin/index', $Attendance);
@@ -45,7 +45,7 @@ class UserAllowanceController extends BaseController
         );
 
         $this->userAllowance->insertAllowance($data);
-        session()->setFlashData('message', 'Data berhasil diinput');
+        session()->setFlashData('message', 'Data Successfully Inserted');
         return redirect()->to(base_url().'employee/allowance');
     }
     public function updateAllowance(){
@@ -59,14 +59,14 @@ class UserAllowanceController extends BaseController
         );
 
         $this->userAllowance->updateAllowance($data, $id);
-        session()->setFlashData('message', 'Data berhasil diperbarui');
+        session()->setFlashData('message', 'Data Successfully Renewed');
         return redirect()->to(base_url().'employee/allowance');
     }
     public function deleteAllowance(){
         $id = $this->request->getPost('allowanceId');
 
         $this->userAllowance->deleteAllowance($id);
-        session()->setFlashData('message', 'Data berhasil dihapus');
+        session()->setFlashData('error', 'Data Successfully Deleted');
         return redirect()->to(base_url().'employee/allowance');
     }
 }

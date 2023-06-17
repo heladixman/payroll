@@ -19,22 +19,23 @@ class SettingsController extends BaseController
         $base_url= base_url();
         $session = session();
 
-        $this->allowance = new Allowance();
-        $this->bonus = new Bonus();
-        $this->deduction = new Deduction();
-        $this->departments = new Departments();
-        $this->position = new Positions();
-        $this->paymentmethod = new PaymentMethod();
-        $this->salary = new Salaries();
-        $this->webdata = new WebData();
+        $this->allowance        = new Allowance();
+        $this->bonus            = new Bonus();
+        $this->deduction        = new Deduction();
+        $this->departments      = new Departments();
+        $this->position         = new Positions();
+        $this->paymentmethod    = new PaymentMethod();
+        $this->salary           = new Salaries();
+        $this->webdata          = new WebData();
     }
     
     public function index()
     {
-        $uri        = 'settings';
+        $uri                    = 'settings';
         
         $Settings = [
             'title'             => $uri,
+            'appName'           => $this->getAppName(),
             'allowance'         => $this->allowance->findAll(),
             'bonus'             => $this->bonus->findAll(),
             'deduction'         => $this->deduction->findAll(),
@@ -52,15 +53,13 @@ class SettingsController extends BaseController
     }
 
     // Function for Allowance
-
     public function insertAllowance(){
         $data = array(
-            'name'        => $this->request->getPost('allowanceName'),
-            'description' => $this->request->getPost('allowanceDescription')
+            'name'              => $this->request->getPost('allowanceName'),
+            'description'       => $this->request->getPost('allowanceDescription')
         );
-
         $this->allowance->insertAllowance($data);
-        session()->setFlashData('message', 'Data berhasil diinput');
+        session()->setFlashData('message', 'Data Successfully Inserted');
         return redirect()->to(base_url().'settings');
     }
     public function getAllowance($id){
@@ -68,36 +67,33 @@ class SettingsController extends BaseController
         return json_encode($result);
     }
     public function updateAllowance(){
-        
-        $id   = $this->request->getPost('allowanceId');
+        $id = $this->request->getPost('allowanceId');
         $data = array(
-            'name'        => $this->request->getPost('allowanceName'),
-            'description' => $this->request->getPost('allowanceDescription')
+            'name'              => $this->request->getPost('allowanceName'),
+            'description'       => $this->request->getPost('allowanceDescription')
         );
 
         $this->allowance->updateAllowance($data, $id);
-        session()->setFlashData('message', 'Data berhasil diperbarui');
+        session()->setFlashData('message', 'Data Successfully Renewed');
         return redirect()->to(base_url().'settings');
     }
     public function deleteAllowance(){
-        $id   = $this->request->getPost('allowanceId');
+        $id = $this->request->getPost('allowanceId');
 
         $this->allowance->deleteAllowance($id);
-        session()->setFlashData('message', 'Data berhasil dihapus');
+        session()->setFlashData('error', 'Data Successfully Deleted');
         return redirect()->to(base_url().'settings');
     }
 
-
     // Function for Bonus
-
     public function insertBonus(){
         $data = array(
-            'name'        => $this->request->getPost('bonusName'),
-            'description' => $this->request->getPost('bonusDescription')
+            'name'              => $this->request->getPost('bonusName'),
+            'description'       => $this->request->getPost('bonusDescription')
         );
 
         $this->bonus->insertBonus($data);
-        session()->setFlashData('message', 'Data berhasil diinput');
+        session()->setFlashData('message', 'Data Successfully Inserted');
         return redirect()->to(base_url().'settings');
     }
     public function getBonus($id){
@@ -107,33 +103,32 @@ class SettingsController extends BaseController
     public function updateBonus(){
         $id   = $this->request->getPost('bonusId');
         $data = array(
-            'name'        => $this->request->getPost('bonusName'),
-            'description' => $this->request->getPost('bonusDescription')
+            'name'              => $this->request->getPost('bonusName'),
+            'description'       => $this->request->getPost('bonusDescription')
         );
 
         $this->bonus->updateBonus($data, $id);
-        session()->setFlashData('message', 'Data berhasil diperbarui');
+        session()->setFlashData('message', 'Data Successfully Renewed');
         return redirect()->to(base_url().'settings');
     }
     public function deleteBonus(){
-        $id   = $this->request->getPost('bonusId');
+        $id = $this->request->getPost('bonusId');
 
         $this->bonus->deleteBonus($id);
-        session()->setFlashData('message', 'Data berhasil dihapus');
+        session()->setFlashData('error', 'Data Successfully Deleted');
         return redirect()->to(base_url().'settings');
     }
 
 
     // Function for Deduction
-
     public function insertDeduction(){
         $data = array(
-            'name'        => $this->request->getPost('deductionName'),
-            'description' => $this->request->getPost('deductionDescription')
+            'name'              => $this->request->getPost('deductionName'),
+            'description'       => $this->request->getPost('deductionDescription')
         );
 
         $this->deduction->insertDeduction($data);
-        session()->setFlashData('message', 'Data berhasil diinput');
+        session()->setFlashData('message', 'Data Successfully Inserted');
         return redirect()->to(base_url().'settings');
     }
     public function getDeduction($id){
@@ -143,34 +138,32 @@ class SettingsController extends BaseController
     public function updateDeduction(){
         $id   = $this->request->getPost('deductionId');
         $data = array(
-            'name'        => $this->request->getPost('deductionName'),
-            'description' => $this->request->getPost('deductionDescription')
+            'name'              => $this->request->getPost('deductionName'),
+            'description'       => $this->request->getPost('deductionDescription')
         );
 
         $this->deduction->updateDeduction($data, $id);
-        session()->setFlashData('message', 'Data berhasil diperbarui');
+        session()->setFlashData('message', 'Data Successfully Renewed');
         return redirect()->to(base_url().'settings');
     }
     public function deleteDeduction(){
         $id   = $this->request->getPost('deductionId');
 
         $this->deduction->deleteDeduction($id);
-        session()->setFlashData('message', 'Data berhasil dihapus');
+        session()->setFlashData('error', 'Data Successfully Deleted');
         return redirect()->to(base_url().'settings');
     }
 
     // Function for Department
-
     public function insertDepartment(){
         $data = array(
-            'name'        => $this->request->getPost('departmentName'),
-            'contact'     => $this->request->getPost('departmentContact'),
-            'vision'      => $this->request->getPost('departmentVision'),
-            'mission'     => $this->request->getPost('departmentMission')
+            'name'              => $this->request->getPost('departmentName'),
+            'contact'           => $this->request->getPost('departmentContact'),
+            'vision'            => $this->request->getPost('departmentVision'),
+            'mission'           => $this->request->getPost('departmentMission')
         );
-
         $this->departments->insertDepartment($data);
-        session()->setFlashData('message', 'Data berhasil diinput');
+        session()->setFlashData('message', 'Data Successfully Inserted');
         return redirect()->to(base_url().'settings');
     }
     public function getDepartment($id){
@@ -180,37 +173,35 @@ class SettingsController extends BaseController
     public function updateDepartment(){
         $id   = $this->request->getPost('departmentId');
         $data = array(
-            'name'        => $this->request->getPost('departmentName'),
-            'contact'     => $this->request->getPost('departmentContact'),
-            'vision'      => $this->request->getPost('departmentVision'),
-            'mission'     => $this->request->getPost('departmentMission')
+            'name'              => $this->request->getPost('departmentName'),
+            'contact'           => $this->request->getPost('departmentContact'),
+            'vision'            => $this->request->getPost('departmentVision'),
+            'mission'           => $this->request->getPost('departmentMission')
         );
 
         $this->departments->updateDepartment($data, $id);
-        session()->setFlashData('message', 'Data berhasil diperbarui');
+        session()->setFlashData('message', 'Data Successfully Renewed');
         return redirect()->to(base_url().'settings');
     }
     public function deleteDepartment(){
         $id   = $this->request->getPost('departmentId');
 
         $this->departments->deleteDepartment($id);
-        session()->setFlashData('message', 'Data berhasil dihapus');
+        session()->setFlashData('error', 'Data Successfully Deleted');
         return redirect()->to(base_url().'settings');
     }
 
     // Function for Position
-
     public function insertPosition(){
         $data = array(
-            'name'          => $this->request->getPost('positionName'),
-            'department_id' => $this->request->getPost('positionDepartment'),
-            'description'   => $this->request->getPost('positionDescription'),
-            'salary_start'  => $this->request->getPost('positionSalaryStart'),
-            'salary_end'    => $this->request->getPost('positionSalaryEnd')
+            'name'              => $this->request->getPost('positionName'),
+            'department_id'     => $this->request->getPost('positionDepartment'),
+            'description'       => $this->request->getPost('positionDescription'),
+            'salary_start'      => $this->request->getPost('positionSalaryStart'),
+            'salary_end'        => $this->request->getPost('positionSalaryEnd')
         );
-
         $this->position->insertPosition($data);
-        session()->setFlashData('message', 'Data berhasil diinput');
+        session()->setFlashData('message', 'Data Successfully Inserted');
         return redirect()->to(base_url().'settings');
     }
     public function getPosition($id){
@@ -220,37 +211,36 @@ class SettingsController extends BaseController
     public function updatePosition(){
         $id   = $this->request->getPost('positionId');
         $data = array(
-            'name'          => $this->request->getPost('positionName'),
-            'department_id' => $this->request->getPost('positionDepartment'),
-            'description'   => $this->request->getPost('positionDescription'),
-            'salary_start'  => $this->request->getPost('positionSalaryStart'),
-            'salary_end'    => $this->request->getPost('positionSalaryEnd')
+            'name'              => $this->request->getPost('positionName'),
+            'department_id'     => $this->request->getPost('positionDepartment'),
+            'description'       => $this->request->getPost('positionDescription'),
+            'salary_start'      => $this->request->getPost('positionSalaryStart'),
+            'salary_end'        => $this->request->getPost('positionSalaryEnd')
         );
 
         $this->position->updatePosition($data, $id);
-        session()->setFlashData('message', 'Data berhasil diperbarui');
+        session()->setFlashData('message', 'Data Successfully Renewed');
         return redirect()->to(base_url().'settings');
     }
     public function deletePosition(){
         $id   = $this->request->getPost('positionId');
 
         $this->position->deletePosition($id);
-        session()->setFlashData('message', 'Data berhasil dihapus');
+        session()->setFlashData('error', 'Data Successfully Deleted');
         return redirect()->to(base_url().'settings');
     }
 
 
     // Function for Payment Method
-
     public function insertPaymentMethod(){
         $data = array(
-            'name'        => $this->request->getPost('paymentMethodName'),
-            'number' => $this->request->getPost('paymentMethodNumber'),
-            'description' => $this->request->getPost('paymentMethodDescription')
+            'name'              => $this->request->getPost('paymentMethodName'),
+            'number'            => $this->request->getPost('paymentMethodNumber'),
+            'description'       => $this->request->getPost('paymentMethodDescription')
         );
 
         $this->paymentmethod->insertPaymentMethod($data);
-        session()->setFlashData('message', 'Data berhasil diinput');
+        session()->setFlashData('message', 'Data Successfully Inserted');
         return redirect()->to(base_url().'settings');
     }
     public function getPaymentMethod($id){
@@ -260,37 +250,35 @@ class SettingsController extends BaseController
     public function updatePaymentMethod(){
         $id   = $this->request->getPost('paymentMethodId');
         $data = array(
-            'name'        => $this->request->getPost('paymentMethodName'),
-            'number' => $this->request->getPost('paymentMethodNumber'),
-            'description' => $this->request->getPost('paymentMethodDescription')
+            'name'              => $this->request->getPost('paymentMethodName'),
+            'number'            => $this->request->getPost('paymentMethodNumber'),
+            'description'       => $this->request->getPost('paymentMethodDescription')
         );
 
         $this->paymentmethod->updatePaymentMethod($data, $id);
-        session()->setFlashData('message', 'Data berhasil diperbarui');
+        session()->setFlashData('message', 'Data Successfully Renewed');
         return redirect()->to(base_url().'settings');
     }
     public function deletePaymentMethod(){
         $id   = $this->request->getPost('paymentMethodId');
 
         $this->paymentmethod->deletePaymentMethod($id);
-        session()->setFlashData('message', 'Data berhasil dihapus');
+        session()->setFlashData('error', 'Data Successfully Deleted');
         return redirect()->to(base_url().'settings');
     }
 
 
     // Function for Salary
-
     public function insertSalary(){
         $amount = $this->request->getPost('salaryAmount');
 
         $data = array(
-            'position_id'   => $this->request->getPost('salaryPositionId'),
-            'amount'        => $amount,
-            'annual'        => $amount * 12
+            'position_id'       => $this->request->getPost('salaryPositionId'),
+            'amount'            => $amount,
+            'annual'            => $amount * 12
         );
-
         $this->salary->insertSalary($data);
-        session()->setFlashData('message', 'Data berhasil diinput');
+        session()->setFlashData('message', 'Data Successfully Inserted');
         return redirect()->to(base_url().'settings');
     }
     public function getSalary($id){
@@ -298,24 +286,24 @@ class SettingsController extends BaseController
         return json_encode($result);
     }
     public function updateSalary(){
-        $id   = $this->request->getPost('salaryId');
+        $id     = $this->request->getPost('salaryId');
         $amount = $this->request->getPost('salaryAmount');
 
         $data = array(
-            'position_id'   => $this->request->getPost('salaryPositionId'),
-            'amount'        => $amount,
-            'annual'        => $amount * 12
+            'position_id'       => $this->request->getPost('salaryPositionId'),
+            'amount'            => $amount,
+            'annual'            => $amount * 12
         );
 
         $this->salary->updateSalary($data, $id);
-        session()->setFlashData('message', 'Data berhasil diperbarui');
+        session()->setFlashData('message', 'Data Successfully Renewed');
         return redirect()->to(base_url().'settings');
     }
     public function deleteSalary(){
         $id   = $this->request->getPost('salaryId');
 
         $this->salary->deleteSalary($id);
-        session()->setFlashData('message', 'Data berhasil dihapus');
+        session()->setFlashData('error', 'Data berhasil dihapus');
         return redirect()->to(base_url().'settings');
     }
 
@@ -323,17 +311,13 @@ class SettingsController extends BaseController
     public function getWebData($id){
         $result = $this->webdata->find($id);
         return json_encode($result);
-
-        // // Method 2
-        // $result = $this->webdata->select('*')->where('id', $id)->get();
-        // return json_encode($result->getResultArray()[0]);
     }
     public function updateWebData(){
         $id    = $this->request->getPost('webdataId');
         $data  = $this->request->getPost('webdataValue');
 
         $this->webdata->updateWebData($data, $id);
-        session()->setFlashData('message', 'Data berhasil diperbarui');
+        session()->setFlashData('message', 'Data Successfully Renewed');
         return redirect()->to(base_url().'settings');
     }
 }
